@@ -1,69 +1,83 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html class="no-js" lang="ja">
 
-@section('content')
-<div class="container">
-  <div class="row">
-	<div class="col-md-8 col-md-offset-2">
-	  <div class="panel panel-default">
-		<div class="panel-heading">Login</div>
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title> 転倒予防教室 | Admin </title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<!-- Place favicon.ico in the root directory -->
+	<link rel="stylesheet" href="/backend/assets/css/vendor.css">
+	<link rel="stylesheet" href="/backend/assets/css/app.css">
+  </head>
 
-		<div class="panel-body">
-		  <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-			{{ csrf_field() }}
+  <body>
+	<div class="auth">
+	  <div class="auth-container">
+		<div class="card">
+		  <header class="auth-header">
+			<h1 class="auth-title">
+			  <div class="logo"> <span class="l l1"></span> <span class="l l2"></span> <span class="l l3"></span> <span class="l l4"></span> <span class="l l5"></span> </div>
+			  Admin
+			</h1>
+		  </header>
+		  <div class="auth-content">
+			<p class="text-xs-center">Login</p>
 
-			<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-			  <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+			<form id="login-form" class="form-horizontal" method="POST" action="{{ route('login') }}">
+			  {{ csrf_field() }}
 
-			  <div class="col-md-6">
-				<input id="name" type="text" class="form-control" name="name" value="{{ old('email') }}" required autofocus>
-
-				@if ($errors->has('email'))
+			  <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+				<label for="name">ユーザ名</label>
+				<input id="name" type="text" class="form-control underlined" name="name" value="{{ old('name') }}" required autofocus>
+				@if ($errors->has('name'))
 				<span class="help-block">
-				  <strong>{{ $errors->first('email') }}</strong>
+				  <strong>{{ $errors->first('name') }}</strong>
 				</span>
 				@endif
 			  </div>
-			</div>
 
-			<div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-			  <label for="password" class="col-md-4 control-label">Password</label>
-
-			  <div class="col-md-6">
-				<input id="password" type="password" class="form-control" name="password" required>
-
+			  <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+				<label for="password">パスワード</label>
+				<input type="password" class="form-control underlined" name="password" id="password" required>
 				@if ($errors->has('password'))
 				<span class="help-block">
 				  <strong>{{ $errors->first('password') }}</strong>
 				</span>
 				@endif
 			  </div>
-			</div>
 
-			<div class="form-group">
-			  <div class="col-md-6 col-md-offset-4">
-				<div class="checkbox">
-				  <label>
-					<input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-				  </label>
-				</div>
+			  <div class="form-group">
+				<label for="remember">
+				  <input class="checkbox" id="remember" name="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
+						 <span>ログイン情報を保持する</span>
+				</label>
 			  </div>
-			</div>
 
-			<div class="form-group">
-			  <div class="col-md-8 col-md-offset-4">
-				<button type="submit" class="btn btn-primary">
-				  Login
-				</button>
-
-				<a class="btn btn-link" href="{{ route('password.request') }}">
-				  Forgot Your Password?
-				</a>
+			  <div class="form-group">
+				<button type="submit" class="btn btn-block btn-primary">ログイン</button>
 			  </div>
-			</div>
-		  </form>
+
+			</form>
+
+		  </div>
 		</div>
+
+	  </div>
+	</div><!-- /.auth -->
+
+	<!-- Reference block for JS -->
+	<div class="ref" id="ref">
+	  <div class="color-primary"></div>
+	  <div class="chart">
+		<div class="color-primary"></div>
+		<div class="color-secondary"></div>
 	  </div>
 	</div>
-  </div>
-</div>
-@endsection
+	<script src="/backend/assets/js/vendor.js"></script>
+	<script src="/backend/assets/js/app.js"></script>
+  </body>
+
+</html>

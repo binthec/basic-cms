@@ -1,80 +1,116 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<!doctype html>
+<html class="no-js" lang="ja">
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title> {{ config('app.name') }} | Admin </title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<!-- Place favicon.ico in the root directory -->
+	<link rel="stylesheet" href="/backend/assets/css/vendor.css">
+	<link rel="stylesheet" href="/backend/assets/css/app.css">
   </head>
+
   <body>
-    <div id="app">
-	  <nav class="navbar navbar-default navbar-static-top">
-		<div class="container">
-		  <div class="navbar-header">
 
-			<!-- Collapsed Hamburger -->
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-			  <span class="sr-only">Toggle Navigation</span>
-			  <span class="icon-bar"></span>
-			  <span class="icon-bar"></span>
-			  <span class="icon-bar"></span>
+	<div class="main-wrapper">
+	  <div class="app" id="app">
+
+		<header class="header">
+		  <div class="header-block header-block-collapse hidden-lg-up"> <button class="collapse-btn" id="sidebar-collapse-btn">
+			  <i class="fa fa-bars"></i>
 			</button>
-
-			<!-- Branding Image -->
-			<a class="navbar-brand" href="{{ url('/') }}">
-			  {{ config('app.name', 'Laravel') }}
-			</a>
 		  </div>
-
-		  <div class="collapse navbar-collapse" id="app-navbar-collapse">
-			<!-- Left Side Of Navbar -->
-			<ul class="nav navbar-nav">
-			  &nbsp;
-			</ul>
-
-			<!-- Right Side Of Navbar -->
-			<ul class="nav navbar-nav navbar-right">
-			  <!-- Authentication Links -->
-			  @guest
-			  <li><a href="{{ route('login') }}">Login</a></li>
-			  <li><a href="{{ route('register') }}">Register</a></li>
-			  @else
-			  <li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-				  {{ Auth::user()->name }} <span class="caret"></span>
+		  <div class="header-block header-block-nav">
+			<ul class="nav-profile">
+			  <li class="profile dropdown">
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+				  <div class="img" style="background-image: url('https://avatars3.githubusercontent.com/u/3959008?v=3&s=40')"> </div> <span class="name">
+					{{ Auth::user()->name }}
+				  </span>
 				</a>
-
-				<ul class="dropdown-menu" role="menu">
-				  <li>
-					<a href="{{ route('logout') }}"
-					   onclick="event.preventDefault();
-							 document.getElementById('logout-form').submit();">
-					  Logout
-					</a>
-
-					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-					  {{ csrf_field() }}
-					</form>
-				  </li>
-				</ul>
+				<div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
+				  <a class="dropdown-item" href="#"><i class="fa fa-user icon"></i>設定</a>
+				  <div class="dropdown-divider"></div>
+				  <a class="dropdown-item" href="{{ route('logout') }}"
+					 onclick="event.preventDefault();
+						   document.getElementById('logout-form').submit();">
+					<i class="fa fa-power-off icon"></i>ログアウト</a>
+				  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+					{{ csrf_field() }}
+				  </form>
+				</div>
 			  </li>
-			  @endguest
 			</ul>
 		  </div>
+		</header>
+
+		<aside class="sidebar">
+		  <div class="sidebar-container">
+			<div class="sidebar-header">
+			  <div class="brand">
+				<div class="logo"> <span class="l l1"></span> <span class="l l2"></span> <span class="l l3"></span> <span class="l l4"></span> <span class="l l5"></span> </div> Admin </div>
+			</div>
+			<nav class="menu">
+			  <ul class="nav metismenu" id="sidebar-menu">
+				<li class="active"> <a href="index.html">
+					<i class="fa fa-home"></i> Dashboard
+				  </a> </li>
+				<li>
+				  <a href="">
+					<i class="fa fa-th-large"></i> トップ画像
+					<i class="fa arrow"></i>
+				  </a>
+				  <ul>
+					<li><a href="items-list.html">新規登録</a></li>
+					<li><a href="items-list.html">一覧表示・編集</a></li>
+				  </ul>
+				</li>
+
+				<li> <a href="">
+					<i class="fa fa-table"></i> 活動の様子
+					<i class="fa arrow"></i>
+				  </a>
+				  <ul>
+					<li> <a href="static-tables.html">新規登録</a></li>
+					<li> <a href="responsive-tables.html">一覧表示・編集</a></li>
+				  </ul>
+				</li>
+
+				<li> <a href="forms.html">
+					<i class="fa fa-pencil-square-o"></i> ユーザ管理</a>
+				</li>
+
+			  </ul>
+			</nav>
+		  </div>
+		</aside>
+
+
+		@yield('content')
+
+		<footer class="footer">
+		  <div class="footer-block buttons"></div>
+		  <div class="footer-block author">
+			<ul>
+			  <li> {{ config('app.name') }} </li>
+			</ul>
+		  </div>
+		</footer>
+	  </div><!-- /.app -->
+
+	  <!-- Reference block for JS -->
+	  <div class="ref" id="ref">
+		<div class="color-primary"></div>
+		<div class="chart">
+		  <div class="color-primary"></div>
+		  <div class="color-secondary"></div>
 		</div>
-	  </nav>
-
-	  @yield('content')
-    </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+	  </div>
+	  <script src="/backend/assets/js/vendor.js"></script>
+	  <script src="/backend/assets/js/app.js"></script>
   </body>
+
 </html>

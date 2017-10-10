@@ -18,4 +18,14 @@ class HomeController extends Controller
 		return view('frontend.home');
 	}
 
+	/**
+	 * 活動の様子
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function activity()
+	{
+		return view('frontend.activity');
+	}
+
 }

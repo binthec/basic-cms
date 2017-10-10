@@ -30,5 +30,8 @@ Route::domain(env('BACKEND_DOMAIN'))->group(function() {
  * フロント側
  */
 Route::domain(env('FRONTEND_DOMAIN'))->group(function() {
-	Route::get('/', 'Frontend\HomeController@index');
+	Route::get('/', 'Frontend\HomeController@index')->name('home');
+
+	//活動の様子
+	Route::get('/activity', 'Frontend\HomeController@activity');
 });

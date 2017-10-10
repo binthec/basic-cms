@@ -1,32 +1,6 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-<header id="header">
-  <nav id="main-menu" class="navbar navbar-default navbar-fixed-top top-nav-collapse" role="banner">
-	<div class="container">
-	  <div class="navbar-header">
-		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-		  <span class="sr-only">Toggle navigation</span>
-		  <span class="icon-bar"></span>
-		  <span class="icon-bar"></span>
-		  <span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand" href="index.html"><img src="/frontend/assets/images/logo.png" alt="logo"></a>
-	  </div>
-
-	  <div class="collapse navbar-collapse navbar-right">
-		<ul class="nav navbar-nav">
-		  <li class="scroll active"><a href="#home">ホーム </a></li>
-		  <li class="scroll"><a href="#services">活動の主旨と内容 </a></li>
-		  <li class="scroll"><a href="#blog">最近の活動の様子 </a></li>
-		  <li class="scroll"><a href="#testimonial">主催者 </a></li>
-		  <li class="scroll"><a href="#get-in-touch">問い合せ </a></li>
-		</ul>
-	  </div>
-	</div><!--/.container-->
-  </nav><!--/nav-->
-</header><!--/header-->
-
 <section id="main-slider">
   <div class="owl-carousel">
 	<div class="item" style="background-image: url(/frontend/assets/images/bg1.jpg);">
@@ -164,7 +138,7 @@
 
 			  <div class="entry-content">
 				<P>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</P>
-				<a class="btn btn-primary" href="#">BUY NOW</a>
+				<a class="btn btn-primary" href="/activity">BUY NOW</a>
 			  </div>
 
 
@@ -185,7 +159,7 @@
 
 			  <div class="entry-content">
 				<P>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</P>
-				<a class="btn btn-primary" href="#">BUY NOW</a>
+				<a class="btn btn-primary" href="/activity">BUY NOW</a>
 			  </div>
 
 
