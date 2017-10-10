@@ -28,16 +28,6 @@ use AuthenticatesUsers;
 	protected $redirectTo = '/dashboard';
 
 	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-//	public function __construct()
-//	{
-//		$this->middleware('guest')->except('logout');
-//	}
-
-	/**
 	 * ログインフォーム表示のパスを変更
 	 *
 	 * @return type

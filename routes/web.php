@@ -17,7 +17,6 @@ Route::domain(env('BACKEND_DOMAIN'))->group(function() {
 	Route::get('register', 'Backend\Auth\RegisterController@showRegistrationForm')->name('register');
 	Route::post('register', 'Backend\Auth\RegisterController@register');
 
-
 	/**
 	 * 認証の必要な画面
 	 */
