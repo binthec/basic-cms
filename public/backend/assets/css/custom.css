@@ -1,0 +1,21 @@
+/*
+ * BACKEND
+ */
+
+/*
+ * common
+ */
+.bg-primary{
+  background-color: #85CE36 !important;
+  color: #fff;
+}
+
+/* 選択中のメニューの表示 */
+.metismenu li.active ul{
+  display: block;
+}
+
+/* フォーム */
+.form-group label{
+  text-align: right;
+}

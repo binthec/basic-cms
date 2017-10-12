@@ -27,16 +27,16 @@ use RegistersUsers;
 	 *
 	 * @var string
 	 */
-	protected $redirectTo = '/home';
+	protected $redirectTo = '/user';
 
 	/**
-	 * Create a new controller instance.
+	 * ユーザ登録画面
 	 *
-	 * @return void
+	 * @return type
 	 */
-	public function __construct()
+	protected function showRegistrationForm()
 	{
-		$this->middleware('guest');
+		return view('backend.auth.register');
 	}
 
 	/**
@@ -49,7 +49,6 @@ use RegistersUsers;
 	{
 		return Validator::make($data, [
 					'name' => 'required|string|max:255',
-					'email' => 'required|string|email|max:255|unique:users',
 					'password' => 'required|string|min:6|confirmed',
 		]);
 	}
@@ -64,7 +63,6 @@ use RegistersUsers;
 	{
 		return User::create([
 					'name' => $data['name'],
-					'email' => $data['email'],
 					'password' => bcrypt($data['password']),
 		]);
 	}

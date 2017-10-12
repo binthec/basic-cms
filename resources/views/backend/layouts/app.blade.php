@@ -11,6 +11,7 @@
 	<!-- Place favicon.ico in the root directory -->
 	<link rel="stylesheet" href="/backend/assets/css/vendor.css">
 	<link rel="stylesheet" href="/backend/assets/css/app.css">
+	<link rel="stylesheet" href="/backend/assets/css/custom.css">
   </head>
 
   <body>
@@ -55,7 +56,7 @@
 			</div>
 			<nav class="menu">
 			  <ul class="nav metismenu" id="sidebar-menu">
-				<li class="active"> <a href="index.html">
+				<li class="{{ isActiveUrl('dashboard') }}"> <a href="{{ route('dashboard') }}">
 					<i class="fa fa-home"></i> Dashboard
 				  </a> </li>
 				<li>
@@ -70,8 +71,7 @@
 				</li>
 
 				<li> <a href="">
-					<i class="fa fa-table"></i> 活動の様子
-					<i class="fa arrow"></i>
+					<i class="fa fa-table"></i> 活動の様子<i class="fa arrow"></i>
 				  </a>
 				  <ul>
 					<li> <a href="static-tables.html">新規登録</a></li>
@@ -79,15 +79,20 @@
 				  </ul>
 				</li>
 
-				<li> <a href="forms.html">
-					<i class="fa fa-pencil-square-o"></i> ユーザ管理</a>
+				<li class="{{ isActiveUrl('user*') }}"> <a href="">
+					<i class="fa fa-table"></i> ユーザ管理<i class="fa arrow"></i>
+				  </a>
+				  <ul>
+					<li class="{{ isActiveUrl('register') }}"> <a href="{{ route('register') }}"> ユーザ新規登録</a></li>
+					<li class="{{ isActiveUrl('user') }}"> <a href="{{ route('user') }}">一覧表示・編集</a></li>
+				  </ul>
 				</li>
 
 			  </ul>
 			</nav>
 		  </div>
 		</aside>
-
+		<div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 		@yield('content')
 
