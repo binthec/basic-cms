@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File;
 use Validator;
 use App\Topimage;
 
@@ -46,7 +47,7 @@ class TopimageController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), Topimage::getValidationRules());
+        $validator = Validator::make($request->all(), Topimage::getValidationRules(true));
         if ($validator->fails()) {
             return redirect()
                 ->back()
@@ -106,10 +107,10 @@ class TopimageController extends Controller
 
         try {
 
-        $topimage->saveAll($request);
+            $topimage->saveAll($request);
 
             DB::commit();
-        return redirect('/topimage')->with('flashMsg', '登録が完了しました。');
+            return redirect('/topimage')->with('flashMsg', '登録が完了しました。');
 
         } catch (\Exception $e) {
 
@@ -128,7 +129,12 @@ class TopimageController extends Controller
      */
     public function destroy(Topimage $topimage)
     {
+        if (File::exists($topimage->uploadDir . $topimage->id)) {
+            File::deleteDirectory($topimage->uploadDir . $topimage->id);
+        }
+
         $topimage->delete();
+
         return redirect('/topimage')->with('flashMsg', '削除が完了しました。');
     }
 }

@@ -21,6 +21,13 @@ class Topimage extends Model
     ];
 
     /**
+     * アップロード先ディレクトリの絶対パス
+     *
+     * @var string
+     */
+    public $uploadDir = '';
+
+    /**
      * トップ画像を格納するディレクトリパス
      *
      * @var string
@@ -43,13 +50,33 @@ class Topimage extends Model
         //
     ];
 
-    static function getValidationRules()
+    /**
+     * Topimage constructor.
+     */
+    public function __construct()
     {
-        return [
+        $this->uploadDir = public_path() . $this->baseFilePath;
+    }
+
+    /**
+     * バリデーションルールを返すメソッド
+     *
+     * @param bool $storeFlg
+     * @return array
+     */
+    static function getValidationRules($storeFlg = false)
+    {
+        $rules = [
             'name' => 'required',
             'status' => 'required',
-//            'topimage' => 'required',
         ];
+
+        if($storeFlg === true){
+            $rules = array_merge($rules, ['topimage' => 'required']);
+        }
+
+        return $rules;
+
     }
 
     /**
@@ -73,7 +100,7 @@ class Topimage extends Model
         //ファイル処理
         if ($request->hasFile('topimage')) {
 
-            $uploadDir = public_path() . $this->baseFilePath . $this->id . '/';
+            $uploadDir = $this->uploadDir . $this->id . '/';
             $fileName = $this->baseFileName . '.' . $this->extention;
 
             //ディレクトリが空でなければ一旦空にする

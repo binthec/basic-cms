@@ -74,7 +74,7 @@
                                 @if($topimage->id !== null)
                                     <div class="uploaded-img">
                                         <p>※アップロード済み画像があります。変更する場合のみ、再度アップロードしてください。</p>
-                                        <img src="{{ $topimage->filePath . $topimage->id . '/h700.' . $topimage->extention }}">
+                                        <img src="{{ $topimage->baseFilePath . $topimage->id }}/{{ $topimage->baseFileName }}.{{ $topimage->extention }}">
                                     </div>
                                 @endif
                             </div>
