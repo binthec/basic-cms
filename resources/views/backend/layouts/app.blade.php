@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="/backend/assets/css/vendor.css">
     <link rel="stylesheet" href="/backend/assets/css/app.css">
     <link rel="stylesheet" href="/backend/assets/css/custom.css">
-    <link rel="stylesheet" href="/backend/vendor/lity/lity.min.css">
 
     @yield('css')
+
 </head>
 
 <body>
@@ -139,7 +139,6 @@
 <script src="/backend/assets/js/jquery.js"></script>
 <script src="/backend/assets/js/vendor.js"></script>
 <script src="/backend/assets/js/app.js"></script>
-<script src="/backend/vendor/lity/lity.min.js"></script>
 <script src="/backend/assets/js/custom.js"></script>
 
 @yield('js')
