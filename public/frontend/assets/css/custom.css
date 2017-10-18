@@ -32,3 +32,9 @@
   font-size: 0.7em;
   line-height: 10px;
 }
+
+/*スライド画像の横幅可変*/
+.top-slider img{
+  width: auto;
+  height: 600px;
+}

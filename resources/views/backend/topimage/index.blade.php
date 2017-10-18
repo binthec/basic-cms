@@ -33,41 +33,45 @@
                                             </label>
                                         </td>
                                         <td>
-                                            <img src="{{ $image->filePath . $image->id . '/h700.' . $image->extention }}" height="38px" data-lity
+                                            <img src="{{ $image->baseFilePath . $image->id . '/' . $image->baseFileName . '.' . $image->extention }}" height="38px" data-lity
                                                  class="cursor-zoomIn">
                                             {{ $image->name }}
                                         </td>
                                         <td><a class="btn btn-primary-outline" href="{{ route('topimage.edit', $image->id) }}">編集</a></td>
-                                        <td><a class="btn btn-danger-outline" data-toggle="modal" data-target="#destroy{{ $image->id }}">削除</a></td>
+                                        <td>
+                                            <a class="btn btn-danger-outline" data-toggle="modal" data-target="#destroy{{ $image->id }}">削除</a>
 
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="destroy{{ $image->id }}" tabindex="-1" role="dialog" aria-labelledby="modal">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header bg-danger">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                        <h4 class="modal-title" id="myModalLabel">削除実行してよろしいですか？</h4>
-                                                    </div>
-                                                    <div class="modal-body clearfix">
-                                                        <div>
-                                                            <p><i class="fa fa-image"></i> 選択したトップ画像：「{{ $image->name }}」</p>
-                                                            <img src="{{ $image->filePath . $image->id . '/h700.' . $image->extention }}" height="100px">
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="destroy{{ $image->id }}" tabindex="-1" role="dialog" aria-labelledby="modal">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header bg-danger">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            <h4 class="modal-title" id="myModalLabel">削除実行してよろしいですか？</h4>
                                                         </div>
-                                                        <div class="help-block pull-right">
-                                                            <p class="text-danger"><i class="fa fa-warning"></i>この処理は取り消せません。</p>
+                                                        <div class="modal-body clearfix">
+                                                            <div>
+                                                                <p><i class="fa fa-image"></i> 選択したトップ画像：「{{ $image->name }}」</p>
+                                                                <img src="{{ $image->baseFilePath . $image->id }}/{{ $image->baseFileName }}.{{ $image->extention }}" height="100px">
+                                                            </div>
+                                                            <div class="help-block pull-right">
+                                                                <p class="text-danger"><i class="fa fa-warning"></i>この処理は取り消せません。</p>
+                                                            </div>
                                                         </div>
+                                                        {!! Form::open(['method' => 'delete', 'route' => ['topimage.destroy', $image->id]]) !!}
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary-outline" data-dismiss="modal">キャンセル</button>
+                                                            <button type="submit" class="btn btn-danger">削除実行</button>
+                                                        </div>
+                                                        {!! Form::close() !!}
                                                     </div>
-                                                    {!! Form::open(['method' => 'delete', 'route' => ['topimage.destroy', $image->id]]) !!}
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-primary-outline" data-dismiss="modal">キャンセル</button>
-                                                        <button type="submit" class="btn btn-danger">削除実行</button>
-                                                    </div>
-                                                    {!! Form::close() !!}
                                                 </div>
-                                            </div>
-                                        </div><!-- /.modal -->
+                                            </div><!-- /.modal -->
+                                        </td>
+
+
 
                                     </tr>
                                 @endforeach

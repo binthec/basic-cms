@@ -1,41 +1,36 @@
 @extends('frontend.layouts.app')
 
+@section('css')
+    <link rel="stylesheet" href="/vendor/slick/slick.css"/>
+    <link rel="stylesheet" href="/vendor/slick/slick-theme.css"/>
+@endsection
+
+@section('js')
+    <script src="/vendor/slick/slick.min.js"></script>
+    <script>
+        $('.top-slider').slick({
+            dots: true,
+            infinite: true,
+            slidesToShow: 1,
+            centerMode: true,
+            variableWidth: true,
+            autoplay: true,
+            autoplaySpeed: 1000,
+        });
+    </script>
+@endsection
+
+
 @section('content')
     @if($topimages->count() > 0)
-        <section id="main-slider">
-            <div class="owl-carousel">
-
-                @foreach($topimages as $topimage)
-                    <div class="item" style="background-image: url({{ $topimage->filePath . $topimage->id . '/h700.' . $topimage->extention }});">
-                    </div><!--/.item-->
+        <section>
+            <div class="top-slider">
+                @foreach($topimages as $img)
+                    <div><img src="{{ $img->baseFilePath . $img->id }}/{{ $img->baseFileName }}.{{ $img->extention }}"></div>
                 @endforeach
-
-                <div class="item" style="background-image: url('/frontend/assets/images/bg1.jpg');">
-                </div><!--/.item-->
-
-                <div class="item" style="background-image: url('/frontend/assets/images/bg2.jpg');">
-                    <div class="slider-inner">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-12 text-center">
-                                    <div class="carousel-content">
-                                        <h2>Clean and Flexible Business Template</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br>
-
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-                                        <a class="btn btn-primary btn-lg" href="#">Find Out More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!--/.item-->
-
-            </div><!--/.owl-carousel-->
+            </div>
         </section><!--/#main-slider-->
     @endif
-
-
 
     <section id="services">
         <div class="container">

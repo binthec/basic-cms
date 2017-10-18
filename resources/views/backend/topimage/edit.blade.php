@@ -65,7 +65,7 @@
                             <div class="col-sm-9">
                                 {{ Form::file('topimage',['id' => 'topimage']) }}
                                 <span class="help-block">
-                                    <p class="text-warning">※高さ700px以上の画像を指定してください。</p>
+                                    <p class="text-warning">※高さ600px以上の画像推奨</p>
                                     @if($errors->has('topimage'))
                                         <strong class="text-danger">{{ $errors->first('topimage') }}</strong>
                                     @endif

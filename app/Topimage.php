@@ -25,12 +25,14 @@ class Topimage extends Model
      *
      * @var string
      */
-    public $filePath = '/files/topimage/';
+    public $baseFilePath = '/files/topimage/';
 
     /**
+     * トップ画像で使うファイル名
+     *
      * @var string
      */
-    public $h700FileName = 'h700';
+    public $baseFileName = 'original';
 
     /**
      * バリデーションメッセージ
@@ -71,8 +73,8 @@ class Topimage extends Model
         //ファイル処理
         if ($request->hasFile('topimage')) {
 
-            $uploadDir = public_path() . $this->filePath . $this->id . '/';
-            $fileName = 'original.' . $this->extention;
+            $uploadDir = public_path() . $this->baseFilePath . $this->id . '/';
+            $fileName = $this->baseFileName . '.' . $this->extention;
 
             //ディレクトリが空でなければ一旦空にする
             if (File::exists($uploadDir) && !empty(File::files($uploadDir))) {
@@ -85,8 +87,8 @@ class Topimage extends Model
             /**
              * リサイズ処理
              */
-            $image = Image::make($uploadDir . $fileName);
-            $image->crop(1600, 700)->save($uploadDir . 'h700.' . $this->extention);
+//            $image = Image::make($uploadDir . $fileName);
+//            $image->crop(750, 500)->save($uploadDir . 'h700.' . $this->extention);
         }
 
     }

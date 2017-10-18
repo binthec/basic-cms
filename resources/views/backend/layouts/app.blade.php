@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="ja">
 
 <head>
@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="/backend/assets/css/app.css">
     <link rel="stylesheet" href="/backend/assets/css/custom.css">
     <link rel="stylesheet" href="/backend/vendor/lity/lity.min.css">
+
+    @yield('css')
 </head>
 
 <body>
@@ -82,7 +84,8 @@
                             </a>
                             <ul>
                                 <li class="{{ isActiveUrl('topimage') }}"><a href="{{ route('topimage.index') }}"><i class="fa fa-list"></i> 一覧表示・編集</a></li>
-                                <li class="{{ isActiveUrl('topimage/create') }}"><a href="{{ route('topimage.create') }}"><i class="fa fa-edit"></i> 新規登録</a></li>
+                                <li class="{{ isActiveUrl('topimage/create') }}"><a href="{{ route('topimage.create') }}"><i class="fa fa-edit"></i> 新規登録</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -138,6 +141,8 @@
 <script src="/backend/assets/js/app.js"></script>
 <script src="/backend/vendor/lity/lity.min.js"></script>
 <script src="/backend/assets/js/custom.js"></script>
+
+@yield('js')
 
 </body>
 
