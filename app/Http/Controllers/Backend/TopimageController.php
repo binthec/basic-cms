@@ -14,7 +14,7 @@ class TopimageController extends Controller
     /**
      * １ページに表示する件数
      */
-    const PAGINATION = 10;
+    const PAGINATION = 20;
 
     /**
      * 一覧画面
@@ -85,6 +85,13 @@ class TopimageController extends Controller
         return view('backend.topimage.edit', compact('topimage'));
     }
 
+    /**
+     * 編集実行
+     *
+     * @param Request $request
+     * @param Topimage $topimage
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, Topimage $topimage)
     {
         $validator = Validator::make($request->all(), Topimage::getValidationRules());
@@ -95,21 +102,33 @@ class TopimageController extends Controller
                 ->withInput();
         }
 
-//        DB::beginTransaction();
-//
-//        try {
+        DB::beginTransaction();
 
-            $topimage->saveAll($request);
+        try {
 
-//            DB::commit();
-            return redirect('/topimage')->with('flashMsg', '登録が完了しました。');
+        $topimage->saveAll($request);
 
-//        } catch (\Exception $e) {
-//
-//            Log::error($e->getMessage());
-//            DB::rollback();
-//            return redirect()->back()->with('flashErrMsg', '登録に失敗しました。');
-//
-//        }
+            DB::commit();
+        return redirect('/topimage')->with('flashMsg', '登録が完了しました。');
+
+        } catch (\Exception $e) {
+
+            Log::error($e->getMessage());
+            DB::rollback();
+            return redirect()->back()->with('flashErrMsg', '登録に失敗しました。');
+
+        }
+    }
+
+    /**
+     * 削除実行
+     *
+     * @param Topimage $topimage
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Topimage $topimage)
+    {
+        $topimage->delete();
+        return redirect('/topimage')->with('flashMsg', '削除が完了しました。');
     }
 }

@@ -21,6 +21,13 @@
 <div class="main-wrapper">
     <div class="app" id="app">
 
+        {{-- フラッシュメッセージの表示 --}}
+        @if (Session::has('flashMsg'))
+            <div class="flash-msg">{{ Session::get('flashMsg') }}</div>
+        @elseif(Session::has('flashErrMsg'))
+            <div class="flash-msg err">{{ Session::get('flashErrMsg') }}</div>
+        @endif
+
         <header class="header">
             <div class="header-block header-block-collapse hidden-lg-up">
                 <button class="collapse-btn" id="sidebar-collapse-btn">
@@ -70,12 +77,12 @@
                             </a></li>
                         <li class="{{ isActiveUrl('topimage*') }}">
                             <a href="">
-                                <i class="fa fa-th-large"></i> トップ画像
+                                <i class="fa fa-image"></i> トップ画像
                                 <i class="fa arrow"></i>
                             </a>
                             <ul>
-                                <li class="{{ isActiveUrl('topimage/create') }}"><a href="{{ route('topimage.create') }}">新規登録</a></li>
-                                <li class="{{ isActiveUrl('topimage') }}"><a href="{{ route('topimage.index') }}">一覧表示・編集</a></li>
+                                <li class="{{ isActiveUrl('topimage') }}"><a href="{{ route('topimage.index') }}"><i class="fa fa-list"></i> 一覧表示・編集</a></li>
+                                <li class="{{ isActiveUrl('topimage/create') }}"><a href="{{ route('topimage.create') }}"><i class="fa fa-edit"></i> 新規登録</a></li>
                             </ul>
                         </li>
 
@@ -130,6 +137,7 @@
 <script src="/backend/assets/js/vendor.js"></script>
 <script src="/backend/assets/js/app.js"></script>
 <script src="/backend/vendor/lity/lity.min.js"></script>
+<script src="/backend/assets/js/custom.js"></script>
 
 </body>
 

@@ -37,7 +37,7 @@ input[type=file]{
   color: red;
 }
 .uploaded-img img{
-  width: 150px;
+  height: 180px;
 }
 
 /* title要素 */
@@ -53,6 +53,11 @@ table.with-btn > tbody > tr > td {
   text-align: center;
 }
 
+/* card */
+.card-footer .pagination{
+  margin-bottom: 0;
+}
+
 /* label */
 .label-lg{
   font-size: 100%;
@@ -61,4 +66,32 @@ table.with-btn > tbody > tr > td {
 /* カーソル */
 .cursor-zoomIn{
   cursor: zoom-in;
+}
+
+/* フラッシュメッセージ */
+.flash-msg {
+  display: none;
+  position: absolute;
+  top: 35%;
+  left: 25%;
+  right: 0;
+  width: 50%;
+  z-index: 99999;
+  color: #FFF;
+  background-color: #000;
+  text-align: center;
+  padding: 100px 10px;
+  font-size: 1.4em;
+}
+.err{
+  background-color: red !important;
+}
+
+/* Modal */
+.modal-body .help-block{
+  margin-top: 15px;
+}
+.modal-body .help-block,
+.modal-body .help-block p{
+  margin-bottom: 0;
 }

@@ -28,6 +28,11 @@ class Topimage extends Model
     public $filePath = '/files/topimage/';
 
     /**
+     * @var string
+     */
+    public $h700FileName = 'h700';
+
+    /**
      * バリデーションメッセージ
      *
      * @var array
@@ -63,7 +68,6 @@ class Topimage extends Model
 
         $this->save(); //IDが欲しいので一旦保存
 
-
         //ファイル処理
         if ($request->hasFile('topimage')) {
 
@@ -71,17 +75,18 @@ class Topimage extends Model
             $fileName = 'original.' . $this->extention;
 
             //ディレクトリが空でなければ一旦空にする
-            if(File::exists($uploadDir) && !empty(File::files($uploadDir))){
+            if (File::exists($uploadDir) && !empty(File::files($uploadDir))) {
                 File::cleanDirectory($uploadDir);
             }
 
+            //公開ディレクトリに移動、保存
             $request->file('topimage')->move($uploadDir, $fileName);
 
             /**
              * リサイズ処理
              */
-//          $image = Image::make($uploadPath . $fileName);
-//          $image->save($uploadPath . $fileName);
+            $image = Image::make($uploadDir . $fileName);
+            $image->crop(1600, 700)->save($uploadDir . 'h700.' . $this->extention);
         }
 
     }

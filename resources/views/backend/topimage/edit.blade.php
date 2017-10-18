@@ -22,10 +22,6 @@
                         @endif
                         {{ csrf_field() }}
 
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-sm-3 control-label">名前 <span class="text-danger">*</span></label>
                             <div class="col-sm-9">
@@ -68,16 +64,17 @@
                                    class="col-sm-3 control-label">画像{!! ($topimage->id === null)? ' <span class="text-danger">*</span>' : '' !!}</label>
                             <div class="col-sm-9">
                                 {{ Form::file('topimage',['id' => 'topimage']) }}
-                                @if($errors->has('topimage'))
-                                    <span class="help-block">
-							            <strong class="text-danger">{{ $errors->first('topimage') }}</strong>
-						            </span>
-                                @endif
+                                <span class="help-block">
+                                    <p class="text-warning">※高さ700px以上の画像を指定してください。</p>
+                                    @if($errors->has('topimage'))
+                                        <strong class="text-danger">{{ $errors->first('topimage') }}</strong>
+                                    @endif
+                                </span>
 
                                 @if($topimage->id !== null)
                                     <div class="uploaded-img">
                                         <p>※アップロード済み画像があります。変更する場合のみ、再度アップロードしてください。</p>
-                                        <img src="{{ $topimage->filePath . $topimage->id . '/original.' . $topimage->extention }}">
+                                        <img src="{{ $topimage->filePath . $topimage->id . '/h700.' . $topimage->extention }}">
                                     </div>
                                 @endif
                             </div>
