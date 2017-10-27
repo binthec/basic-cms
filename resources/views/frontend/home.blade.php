@@ -1,26 +1,5 @@
 @extends('frontend.layouts.app')
 
-@section('css')
-    <link rel="stylesheet" href="/vendor/slick/slick.css"/>
-    <link rel="stylesheet" href="/vendor/slick/slick-theme.css"/>
-@endsection
-
-@section('js')
-    <script src="/vendor/slick/slick.min.js"></script>
-    <script>
-        $('.top-slider').slick({
-            dots: true,
-            infinite: true,
-            slidesToShow: 1,
-            centerMode: true,
-            variableWidth: true,
-            autoplay: true,
-            autoplaySpeed: 1000,
-        });
-    </script>
-@endsection
-
-
 @section('content')
     @if($topimages->count() > 0)
         <section>
@@ -92,22 +71,24 @@
         </div><!--/.container-->
     </section><!--/#services-->
 
+
     <section id="animated-number">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title text-center wow fadeInDown">Special Thanks!!</h2>
                 <p class="text-center wow fadeInDown">
-                    私達○○は、○○○○の資金提供を受けて活動を行っています。
+                    私達「大分県体力づくり研究会」は、○○○○の資金提供を受けて活動を行っています。<br>
                     皆様のご協力に感謝致します。
                 </p>
             </div>
         </div>
     </section><!--/#animated-number-->
 
+
     <section id="blog">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title text-center wow fadeInDown">最近の活動の様子</h2>
+                <h2 class="section-title text-center wow fadeInDown">活動の様子</h2>
                 <p class="text-center wow fadeInDown">
                     最近の活動の内容をご紹介します。
                 </p>
@@ -349,7 +330,6 @@
     </section> <!--/#testimonial-->
 
 
-
     <section id="get-in-touch">
         <div class="container">
             <div class="section-header">
@@ -382,10 +362,28 @@
                     </form>
                 </div>
 
-
             </div>
-
 
         </div>
     </section><!--/#get-in-touch-->
+@endsection
+
+@section('css')
+    <link rel="stylesheet" href="/vendor/slick/slick.css"/>
+    <link rel="stylesheet" href="/vendor/slick/slick-theme.css"/>
+@endsection
+
+@section('js')
+    <script src="/vendor/slick/slick.min.js"></script>
+    <script>
+        $('.top-slider').slick({
+            dots: true,
+            infinite: true,
+            slidesToShow: 1,
+            centerMode: true,
+            variableWidth: true,
+            autoplay: true,
+            autoplaySpeed: 1000,
+        });
+    </script>
 @endsection

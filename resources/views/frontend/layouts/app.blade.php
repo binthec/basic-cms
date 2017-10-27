@@ -13,14 +13,14 @@
     <link href="/frontend/assets/css/owl.carousel.css" rel="stylesheet">
     <link href="/frontend/assets/css/owl.transitions.css" rel="stylesheet">
     <link href="/frontend/assets/css/main.css" rel="stylesheet">
+
+    @yield('css')
+
     <link href="/frontend/assets/css/custom.css" rel="stylesheet">
     <!--[if lt IE 9]-->
     <script src="/frontend/assets/js/html5shiv.js"></script>
     <script src="/frontend/assets/js/respond.min.js"></script>
     <!--[endif]-->
-
-    @yield('css')
-
 </head><!--/head-->
 
 <body>

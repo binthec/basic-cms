@@ -28,4 +28,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * ユーザ名のIDをkey、nameを値にした配列を返すメソッド
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    static function getUserNames()
+    {
+        return User::all()->pluck('name', 'id');
+    }
 }

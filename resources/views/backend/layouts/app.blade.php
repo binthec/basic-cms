@@ -7,15 +7,17 @@
     <title> {{ config('app.name') }} | Admin </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
     <link rel="stylesheet" href="/backend/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/backend/assets/css/vendor.css">
     <link rel="stylesheet" href="/backend/assets/css/app.css">
-    <link rel="stylesheet" href="/backend/assets/css/custom.css">
+    <link rel="stylesheet" href="/vendor/select2/select2.css">
+    <link rel="stylesheet" href="/vendor/jquery-ui/jquery-ui.css">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" >
 
     @yield('css')
 
+    <link rel="stylesheet" href="/backend/assets/css/custom.css">
 </head>
 
 <body>
@@ -74,9 +76,9 @@
                 </div>
                 <nav class="menu">
                     <ul class="nav metismenu" id="sidebar-menu">
-                        <li class="{{ isActiveUrl('dashboard') }}"><a href="{{ route('dashboard') }}">
-                                <i class="fa fa-home"></i> Dashboard
-                            </a></li>
+                        <li class="{{ isActiveUrl('dashboard') }}">
+                            <a href="{{ route('dashboard') }}"><i class="fa fa-home"></i> Dashboard</a>
+                        </li>
                         <li class="{{ isActiveUrl('topimage*') }}">
                             <a href="">
                                 <i class="fa fa-image"></i> トップ画像
@@ -93,8 +95,8 @@
                                 <i class="fa fa-table"></i> 活動の様子<i class="fa arrow"></i>
                             </a>
                             <ul>
-                                <li><a href="static-tables.html">新規登録</a></li>
-                                <li><a href="responsive-tables.html">一覧表示・編集</a></li>
+                                <li><a href="{{ route('activity.create') }}">新規登録</a></li>
+                                <li><a href="{{ route('activity.index') }}">一覧表示・編集</a></li>
                             </ul>
                         </li>
 
@@ -106,6 +108,10 @@
                                 </li>
                                 <li class="{{ isActiveUrl('user') }}"><a href="{{ route('user') }}">一覧表示・編集</a></li>
                             </ul>
+                        </li>
+
+                        <li class="{{ isActiveUrl('actionlog*') }}">
+                            <a href="{{ route('actionlog.index') }}"><i class="fa fa-list"></i> 操作ログ閲覧</a>
                         </li>
 
                     </ul>
@@ -139,9 +145,14 @@
 <script src="/backend/assets/js/jquery.js"></script>
 <script src="/backend/assets/js/vendor.js"></script>
 <script src="/backend/assets/js/app.js"></script>
-<script src="/backend/assets/js/custom.js"></script>
+{{--<script src="/backend/assets/js/bootstrap.min.js"></script>--}}
+<script src="/vendor/select2/select2.js"></script>
+<script src="/vendor/jquery-ui/jquery-ui.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 
 @yield('js')
+
+<script src="/backend/assets/js/custom.js"></script>
 
 </body>
 

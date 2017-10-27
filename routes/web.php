@@ -33,7 +33,14 @@ Route::domain(env('BACKEND_DOMAIN'))->group(function() {
 		Route::get('register', 'Backend\Auth\RegisterController@showRegistrationForm')->name('register');
 		Route::post('register', 'Backend\Auth\RegisterController@register');
 
+		//トップ画像
 		Route::resource('topimage', 'Backend\TopimageController');
+
+		//アクションログ
+        Route::resource('actionlog', 'Backend\ActionLogController');
+
+        //活動報告
+        Route::resource('activity', 'Backend\ActivityController');
 	});
 });
 

@@ -20,7 +20,7 @@ class ActionLogs
     {
         $response = $next($request);
 
-        if (!$request->isMethod('get') || !empty($request->all())) {
+        if (!$request->isMethod('GET') && !empty($request->all())) {
             $actionLog = new ActionLog();
             $actionLog->user_id = ($request->user()) ? $request->user()->id : null;
             $actionLog->remote_address = $request->ip();

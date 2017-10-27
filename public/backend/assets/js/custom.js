@@ -7,4 +7,9 @@ $(function () {
     $(".flash-msg, body").on("click", function () {
         $(".flash-msg").hide();
     });
+
+    //データピッカー
+    $('.use-calendar').datepicker({
+        dateFormat: 'yy年mm月dd日',
+    });
 });
