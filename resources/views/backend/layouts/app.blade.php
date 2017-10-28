@@ -95,8 +95,8 @@
                                 <i class="fa fa-table"></i> 活動の様子<i class="fa arrow"></i>
                             </a>
                             <ul>
-                                <li><a href="{{ route('activity.create') }}">新規登録</a></li>
                                 <li><a href="{{ route('activity.index') }}">一覧表示・編集</a></li>
+                                <li><a href="{{ route('activity.create') }}">新規登録</a></li>
                             </ul>
                         </li>
 
@@ -143,9 +143,11 @@
 </div>
 
 <script src="/backend/assets/js/jquery.js"></script>
-<script src="/backend/assets/js/vendor.js"></script>
+
+{{--<script src="/backend/assets/js/vendor.js"></script>--}}
+
+<script src="/backend/assets/js/bootstrap.min.js"></script>
 <script src="/backend/assets/js/app.js"></script>
-{{--<script src="/backend/assets/js/bootstrap.min.js"></script>--}}
 <script src="/vendor/select2/select2.js"></script>
 <script src="/vendor/jquery-ui/jquery-ui.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>

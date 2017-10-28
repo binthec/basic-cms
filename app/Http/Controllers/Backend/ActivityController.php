@@ -25,7 +25,7 @@ class ActivityController extends Controller
     public function index()
     {
         $activities = Activity::paginate(self::PAGINATION);
-        return view('backend.activitiy.index', compact('activities'));
+        return view('backend.activity.index', compact('activities'));
     }
 
     /**
@@ -35,8 +35,8 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        $activitiy = new Activity;
-        return view('backend.topimage.edit', compact('activitiy'));
+        $activity = new Activity;
+        return view('backend.activity.edit', compact('activity'));
     }
 
     /**
@@ -59,11 +59,11 @@ class ActivityController extends Controller
 
         try {
 
-            $activitiy = new Activity;
-            $activitiy->saveAll($request);
+            $activity = new Activity;
+            $activity->saveAll($request);
 
             DB::commit();
-            return redirect('/activitiy')->with('flashMsg', '登録が完了しました。');
+            return redirect('/activity')->with('flashMsg', '登録が完了しました。');
 
         } catch (\Exception $e) {
 
@@ -78,22 +78,22 @@ class ActivityController extends Controller
     /**
      * 編集画面表示
      *
-     * @param Activity $activitiy
+     * @param Activity $activity
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(Activity $activitiy)
+    public function edit(Activity $activity)
     {
-        return view('backend.activitiy.edit', compact('activitiy'));
+        return view('backend.activity.edit', compact('activity'));
     }
 
     /**
      * 編集実行
      *
      * @param Request $request
-     * @param Activity $activitiy
+     * @param Activity $activity
      * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Activity $activitiy)
+    public function update(Request $request, Activity $activity)
     {
         $validator = Validator::make($request->all(), Activity::getValidationRules());
         if ($validator->fails()) {
@@ -107,10 +107,10 @@ class ActivityController extends Controller
 
         try {
 
-            $activitiy->saveAll($request);
+            $activity->saveAll($request);
 
             DB::commit();
-            return redirect('/activitiy')->with('flashMsg', '登録が完了しました。');
+            return redirect('/activity')->with('flashMsg', '登録が完了しました。');
 
         } catch (\Exception $e) {
 
@@ -124,17 +124,17 @@ class ActivityController extends Controller
     /**
      * 削除実行
      *
-     * @param Activity $activitiy
+     * @param Activity $activity
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Activity $activitiy)
+    public function destroy(Activity $activity)
     {
-        if (File::exists($activitiy->uploadDir . $activitiy->id)) {
-            File::deleteDirectory($activitiy->uploadDir . $activitiy->id);
+        if (File::exists($activity->uploadDir . $activity->id)) {
+            File::deleteDirectory($activity->uploadDir . $activity->id);
         }
 
-        $activitiy->delete();
+        $activity->delete();
 
-        return redirect('/activitiy')->with('flashMsg', '削除が完了しました。');
+        return redirect('/activity')->with('flashMsg', '削除が完了しました。');
     }
 }

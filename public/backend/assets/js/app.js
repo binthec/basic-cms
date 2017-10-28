@@ -130,7 +130,7 @@ function setSameHeights($container) {
 			var excludedStr = $(this).data('exclude') || '';
 			var excluded = excludedStr.split(',');
 
-			// Set height of element if it's not excluded on 
+			// Set height of element if it's not excluded on
 			if (excluded.indexOf(viewport) === -1) {
 				$(this).innerHeight(maxHeight);
 			}

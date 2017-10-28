@@ -32,6 +32,21 @@ class CreateAllTables extends Migration
             $table->datetime('updated_at');
         });
 
+        Schema::create('activities', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->tinyInteger('status');
+            $table->timestamps();
+        });
+
+        Schema::create('images', function(Blueprint $table){
+           $table->increments('id');
+           $table->string('title')->nullable();
+           $table->integer('order');
+           $table->integer('imaginable_id')->unsigned();
+           $table->string('imaginable_type');
+        });
+
         //パーティショニングのため、SQL直書き
         DB::statement("
 			ALTER TABLE action_logs
@@ -79,5 +94,7 @@ class CreateAllTables extends Migration
     {
         Schema::dropIfExists('topimages');
         Schema::dropIfExists('action_logs');
+        Schema::dropIfExists('activities');
+        Schema::dropIfExists('images');
     }
 }
