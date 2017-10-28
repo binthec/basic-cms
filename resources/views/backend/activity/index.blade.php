@@ -9,16 +9,21 @@
 @endsection
 
 @section('content')
-    <article class="content">
-        <div class="title-block">
-            <h3 class="title"> 活動の様子一覧 </h3>
-            <p class="title-description"> トップ画面の「活動の様子」に表示される記事の一覧です。</p>
-        </div>
+    <div class="content-wrapper">
 
-        <section class="section">
+        <section class="content-header">
+            <h1>活動の様子一覧</h1>
+            <small>
+                <i class="fa fa-info-circle"></i> 「活動の様子」一覧です。
+            </small>
+        </section>
+
+        <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card card-block sameheight-item">
+                    <div class="box box-primary">
+
+                        <div class="box-body">
 
                         @if($activities->count() > 0)
                             <table class="table table-bordered with-btn">
@@ -90,9 +95,20 @@
                             </div>
                         @endif
 
-                    </div><!-- /.card -->
-                </div><!-- /.col-md-12 -->
+                        </div><!-- /.box-body -->
+
+                        @if($activities->count() > 0)
+                            <div class="box-footer text-center">
+                                {{ $activities->links() }}
+                            </div>
+                        @endif
+
+                    </div><!-- /.box -->
+
+                </div><!-- /.col -->
             </div><!-- /.row -->
+
         </section>
-    </article>
+
+    </div><!-- ./content-wrapper -->
 @endsection
