@@ -6,7 +6,9 @@
 
         <section class="content-header">
             <h1>活動の様子{{ ($activity->id === null)? '新規登録' : '編集' }}</h1>
-            <small>「活動の様子」に表示される記事を{{ ($activity->id === null)? '新規登録' : '編集' }}します。</small>
+            <p class="content-description">
+                <i class="fa fa-info-circle"></i> 「活動の様子」に表示される記事を{{ ($activity->id === null)? '新規登録' : '編集' }}します。
+            </p>
         </section>
 
         <section class="content">
@@ -20,7 +22,7 @@
                     @endif
                     {{ csrf_field() }}
 
-                    <div class="box box-primary">
+                    <div class="box box-info">
 
                         <div class="box-header with-border">
                             <h3 class="box-title"><i class="fa fa-edit"></i> 入力してください </h3>

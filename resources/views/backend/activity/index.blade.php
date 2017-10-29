@@ -13,9 +13,9 @@
 
         <section class="content-header">
             <h1>活動の様子一覧</h1>
-            <small>
+            <p class="content-description">
                 <i class="fa fa-info-circle"></i> 「活動の様子」一覧です。
-            </small>
+            </p>
         </section>
 
         <section class="content">

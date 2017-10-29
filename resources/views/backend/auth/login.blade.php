@@ -1,83 +1,93 @@
 <!DOCTYPE html>
-<html class="no-js" lang="ja">
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ config('app.name') }} | Log in</title>
 
-  <head>
-	<meta charset="utf-8">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title> 転倒予防教室 | Admin </title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="apple-touch-icon" href="apple-touch-icon.png">
-	<!-- Place favicon.ico in the root directory -->
-	<link rel="stylesheet" href="/backend/assets/css/vendor.css">
-	<link rel="stylesheet" href="/backend/assets/css/app.css">
-  </head>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-  <body>
-	<div class="auth">
-	  <div class="auth-container">
-		<div class="card">
-		  <header class="auth-header">
-			<h1 class="auth-title">
-			  <div class="logo"> <span class="l l1"></span> <span class="l l2"></span> <span class="l l3"></span> <span class="l l4"></span> <span class="l l5"></span> </div>
-			  Admin
-			</h1>
-		  </header>
-		  <div class="auth-content">
-			<p class="text-xs-center">Login</p>
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/vendor/AdminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="/vendor/iCheck/all.css">
 
-			<form id="login-form" class="form-horizontal" method="POST" action="{{ route('login') }}">
-			  {{ csrf_field() }}
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-			  <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-				<label for="name">ユーザ名</label>
-				<input id="name" type="text" class="form-control underlined" name="name" value="{{ old('name') }}" required autofocus>
-				@if ($errors->has('name'))
-				<span class="help-block">
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        <b>{{ config('app.name') }}</b>Admin
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">ログインしてください</p>
+
+        {!! Form::open(['method' => 'POST', 'url' => route('login')]) !!}
+        {{ csrf_field() }}
+
+        <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
+            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="ユーザ名" required autofocus>
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            @if ($errors->has('name'))
+                <span class="help-block">
 				  <strong>{{ $errors->first('name') }}</strong>
 				</span>
-				@endif
-			  </div>
+            @endif
+        </div>
 
-			  <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-				<label for="password">パスワード</label>
-				<input type="password" class="form-control underlined" name="password" id="password" required>
-				@if ($errors->has('password'))
-				<span class="help-block">
+        <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
+            <input type="password" class="form-control" name="password" id="password" placeholder="パスワード" required>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            @if ($errors->has('password'))
+                <span class="help-block">
 				  <strong>{{ $errors->first('password') }}</strong>
 				</span>
-				@endif
-			  </div>
+            @endif
+        </div>
 
-			  <div class="form-group">
-				<label for="remember">
-				  <input class="checkbox" id="remember" name="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
-						 <span>ログイン情報を保持する</span>
-				</label>
-			  </div>
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="checkbox icheck">
+                    <label>
+                        <input class="checkbox" id="remember" name="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
+                        ログイン状態を維持する
+                    </label>
+                </div>
+            </div><!-- /.col -->
 
-			  <div class="form-group">
-				<button type="submit" class="btn btn-block btn-primary">ログイン</button>
-			  </div>
+            <div class="col-xs-4">
+                <button type="submit" class="btn btn-primary btn-block btn-flat">ログイン</button>
+            </div>
+        </div><!-- /.row -->
 
-			</form>
+        {!! Form::close() !!}
 
-		  </div>
-		</div>
+        {{--<a href="#">パスワードを忘れました</a><br>--}}
 
-	  </div>
-	</div><!-- /.auth -->
+    </div><!-- /.login-box-body -->
+</div><!-- /.login-box -->
 
-	<!-- Reference block for JS -->
-	<div class="ref" id="ref">
-	  <div class="color-primary"></div>
-	  <div class="chart">
-		<div class="color-primary"></div>
-		<div class="color-secondary"></div>
-	  </div>
-	</div>
-	<script src="/backend/assets/js/vendor.js"></script>
-	<script src="/backend/assets/js/app.js"></script>
-  </body>
+<script src="/vendor/jquery/jquery.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/vendor/iCheck/icheck.js"></script>
 
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    });
+</script>
+</body>
 </html>

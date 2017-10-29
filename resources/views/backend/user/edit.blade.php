@@ -4,8 +4,10 @@
     <div class="content-wrapper">
 
         <section class="content-header">
-            <h1>ユーザ{{ ($topimage->id === null)? '新規登録' : '編集' }}</h1>
-            <small>管理者としてログイン出来るユーザを{{ ($topimage->id === null)? '新規登録' : '編集' }}します。</small>
+            <h1>ユーザ{{ ($user->id === null)? '新規登録' : '編集' }}</h1>
+            <p class="content-description">
+                <i class="fa fa-info-circle"></i> 管理者としてログイン出来るユーザを{{ ($user->id === null)? '新規登録' : '編集' }}します。
+            </p>
         </section>
 
         <section class="content">

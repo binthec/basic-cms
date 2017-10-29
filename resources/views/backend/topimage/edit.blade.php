@@ -5,7 +5,9 @@
 
         <section class="content-header">
             <h1>トップ画像{{ ($topimage->id === null)? '新規登録' : '編集' }}</h1>
-            <small>トップページのスライダーに表示する画像を{{ ($topimage->id === null)? '新規登録' : '編集' }}します。</small>
+            <p class="content-description">
+                <i class="fa fa-info-circle"></i> トップページのスライダーに表示する画像を{{ ($topimage->id === null)? '新規登録' : '編集' }}します。
+            </p>
         </section>
 
         <section class="content">
@@ -19,7 +21,7 @@
                     @endif
                     {{ csrf_field() }}
 
-                    <div class="box box-primary">
+                    <div class="box box-info">
 
                         <div class="box-header with-border">
                             <h3 class="box-title"><i class="fa fa-edit"></i> 入力してください </h3>

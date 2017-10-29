@@ -19,8 +19,9 @@
     <link rel="stylesheet" href="/vendor/select2/select2.css">
     <link rel="stylesheet" href="/vendor/Ionicons/css/ionicons.css">
     <link rel="stylesheet" href="/vendor/iCheck/all.css">
-    <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-    <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="/vendor/bootstrap-datepicker/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+    {{--<link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">--}}
 
     @yield('css')
 
@@ -43,10 +44,8 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
+        <a href="{{ route('dashboard') }}" class="logo">
             <span class="logo-mini"><b>Y</b></span>
-            <!-- logo for regular state and mobile devices -->
             <span class="logo-lg"><b>Yobo</b>Admin</span>
         </a>
 
@@ -65,10 +64,7 @@
                         <ul class="dropdown-menu">
                             <li class="user-header">
                                 <img src="/backend/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                                <p>
-                                    {{ Auth::user()->name }}
-                                    {{--<small></small>--}}
-                                </p>
+                                <p>{{ Auth::user()->name }}</p>
                             </li>
 
                             <li class="user-footer">
@@ -96,7 +92,7 @@
         <section class="sidebar">
 
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">MAIN NAVIGATION</li>
+                <li class="header">メインメニュー</li>
 
                 <li class="{{ isActiveUrl('dashboard') }}">
                     <a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
@@ -124,7 +120,7 @@
                     </ul>
                 </li>
 
-                <li class="header">Admin Manage</li>
+                <li class="header">管理メニュー</li>
 
                 <li class="treeview {{ isActiveUrl('user*') }}">
                     <a href="#">
@@ -162,7 +158,7 @@
 </div><!-- ./wrapper -->
 
 <script src="/vendor/jquery/jquery.js"></script><!-- jQuery 3 -->
-<script src="/vendor/jquery-ui/jquery-ui.js"></script><!-- jQuery UI 1.11.4 -->
+{{--<script src="/vendor/jquery-ui/jquery-ui.js"></script><!-- jQuery UI 1.11.4 -->--}}
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
@@ -172,9 +168,12 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="/vendor/bootstrap/js/bootstrap.js"></script>
 <script src="/vendor/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+<script src="/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 <script src="/vendor/select2/select2.js"></script>
 <script src="/vendor/iCheck/icheck.js"></script>
 <script src="/vendor/ckeditor/ckeditor.js"></script>
+<script src="/vendor/moment/moment.js"></script>
+
 <!-- Sparkline -->
 {{--<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>--}}
 <!-- jvectormap -->

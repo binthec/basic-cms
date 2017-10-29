@@ -2,53 +2,19 @@
  * BACKEND
  */
 
-/*
- * common
- */
-/*.bg-primary{*/
-/*background-color: #85CE36 !important;*/
-/*color: #fff;*/
-/*}*/
-
-/* 選択中のメニューの表示 */
-/*.metismenu li.active ul{*/
-/*display: block;*/
-/*}*/
-
-/* フォーム */
-/*.form-control{*/
-/*height: 37px;*/
-/*}*/
-/*.form-group:last-child{*/
-/*margin-bottom: 0;*/
-/*}*/
-/*input[type=file]{*/
-/*height: 37px;*/
-/*}*/
-
-/* title要素 */
-/*.title-description{*/
-/*margin-top: 5px;*/
-/*}*/
-
-/* card */
-/*.card-footer .pagination{*/
-/*margin-bottom: 0;*/
-/*}*/
-
-/* Modal */
-/*.modal-body .help-block{*/
-/*margin-top: 15px;*/
-/*}*/
-/*.modal-body .help-block,*/
-/*.modal-body .help-block p{*/
-/*margin-bottom: 0;*/
-/*}*/
-
+/* box */
+.content-description {
+    font-size: 12px;
+    margin: 5px 0 0 5px;
+    color: #666;
+}
 
 /* table */
 table.with-btn > tbody > tr > td {
     line-height: 34px;
+}
+table.with-btn-sm > tbody > tr > td {
+    line-height: 30px;
 }
 
 .text-center th {
@@ -73,12 +39,23 @@ table.with-btn > tbody > tr > td {
     color: red;
 }
 
-.form-group label.radio-inline:first-child{
+.form-group label.radio-inline:first-child {
     padding-left: 0;
 }
 
-.modal-body{
+.modal-body {
     padding-bottom: 0;
+}
+
+/* select2 */
+.select2-container--default
+.select2-selection--single{
+    height: 34px;
+}
+.select2-container--default
+.select2-selection--single
+.select2-selection__arrow{
+    height: 32px;
 }
 
 /* label */
@@ -111,3 +88,8 @@ table.with-btn > tbody > tr > td {
     background-color: red !important;
 }
 
+/* menu */
+.main-sidebar .sidebar-menu li.header {
+    color: #3c8dbc;
+    font-weight: bold;
+}
