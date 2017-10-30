@@ -44,8 +44,49 @@ table.with-btn-sm > tbody > tr > td {
 }
 
 .modal-body {
-    padding-bottom: 0;
+    /*padding-bottom: 0;*/
 }
+
+input[type=file]{
+    height: 34px;
+}
+
+/* dropzone */
+
+.image-add-box{
+    display: block;
+    /*width: 100px;*/
+    width: 100%;
+    height: 400px;
+    line-height: 100px;
+    text-align: center;
+
+    border: 2px solid #ccc;
+    border-radius: 5px;
+
+    background-color: #fff;
+    color: #ccc;
+    font-size: 20px;
+}
+
+.image-add-box:hover{
+/*.dropzone-target:hover{*/
+    color: #3c8dbc;
+    border-color: #3c8dbc;
+}
+
+/*#dropzone-target{*/
+    /*display: block;*/
+    /*margin: 10px;*/
+    /*height: 200px;*/
+    /*line-height: 200px;*/
+    /*text-align: center;*/
+    /*font-size: 16px;*/
+    /*color: #aaa;*/
+    /*border: 3px dashed #ccc;*/
+    /*border-radius: 10px;*/
+    /*!*background-color: #ccc;*!*/
+/*}*/
 
 /* select2 */
 .select2-container--default

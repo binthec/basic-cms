@@ -18,11 +18,13 @@ $(function () {
 
     //データピッカー
     $('.use-datepicker').datepicker({
-        dateFormat: 'yy年mm月dd日',
+        language: 'ja',
     });
 
     //データタイムピッカー
-    $('.use-datetimepicker').datetimepicker();
+    $('.use-datetimepicker').datetimepicker({
+        locale: 'ja',
+    });
 
     //予測検索出来るselect2を利用
     $(function () {

@@ -42,7 +42,7 @@
 
                             <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
 
-                                <label for="topimage" class="col-sm-3 control-label">ステータス <span class="text-danger">*</span></label>
+                                <label for="topimage" class="col-sm-3 control-label">公開ステータス <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
 
                                     <label class="radio-inline">

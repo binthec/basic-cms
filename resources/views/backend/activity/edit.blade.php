@@ -31,9 +31,9 @@
                         <div class="box-body">
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label for="name" class="col-sm-3 control-label">名前 <span class="text-danger">*</span></label>
+                                <label for="name" class="col-sm-3 control-label">記事の名前</label>
                                 <div class="col-sm-9">
-                                    {{ Form::text('name', ($activity->id !== null)? $activity->name: '', ['id' => 'name', 'class' => 'form-control']) }}
+                                    {{ Form::text('name', ($activity->id !== null)? $activity->name: '', ['id' => 'name', 'class' => 'form-control', 'placeholder' => '記事の見分けがつく任意の名前。なんでもよいです']) }}
 
                                     @if($errors->has('name'))
                                         <span class="help-block">
@@ -43,56 +43,87 @@
                                 </div>
                             </div><!-- form-group -->
 
-                            <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
-                                <label for="content" class="col-sm-3 control-label">内容 <span class="text-danger">*</span></label>
-                                <div class="col-sm-9">
-                                    {!! Form::textarea('content', '', ['class' => 'form-control', 'id' => 'use-ckeditor']) !!}
+                            <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
+                                <label for="date" class="col-sm-3 control-label">開催日 <span class="text-danger">*</span></label>
+                                <div class="col-sm-3">
+                                    {!! Form::text('date', ($activity->id !== null)? $activity->date: '', ['class' => 'form-control use-datepicker', 'placeholder' => 'yyyy/mm/dd']) !!}
 
-                                    @if($errors->has('content'))
+                                    @if($errors->has('date'))
                                         <span class="help-block">
-							            <strong class="text-danger">{{ $errors->first('content') }}</strong>
+							            <strong class="text-danger">{{ $errors->first('date') }}</strong>
+						            </span>
+                                    @endif
+                                </div>
+                            </div><!-- form-group -->
+
+                            <div class="form-group{{ $errors->has('place') ? ' has-error' : '' }}">
+                                <label for="place" class="col-sm-3 control-label">開催場所 <span class="text-danger">*</span></label>
+                                <div class="col-sm-9">
+                                    {{ Form::text('place', ($activity->id !== null)? $activity->place: '', ['id' => 'place', 'class' => 'form-control', 'placeholder' => '開催した場所や地域名、会場名など']) }}
+
+                                    @if($errors->has('place'))
+                                        <span class="help-block">
+							            <strong class="text-danger">{{ $errors->first('place') }}</strong>
+						            </span>
+                                    @endif
+                                </div>
+                            </div><!-- form-group -->
+
+                            <div class="form-group{{ $errors->has('detail') ? ' has-error' : '' }}">
+                                <label for="detail" class="col-sm-3 control-label">内容</label>
+                                <div class="col-sm-9">
+                                    {!! Form::textarea('detail', ($activity->id !== null)? $activity->detail: '', ['class' => 'form-control', 'id' => 'use-ckeditor']) !!}
+
+                                    @if($errors->has('detail'))
+                                        <span class="help-block">
+							            <strong class="text-danger">{{ $errors->first('detail') }}</strong>
 						            </span>
                                     @endif
                                 </div>
                             </div><!-- form-group -->
 
                             <div class="form-group{{ $errors->has('activity') ? ' has-error' : '' }}">
-                                <label for="activity" class="col-sm-3 control-label">
-                                    画像{!! ($activity->id === null)? ' <span class="text-danger">*</span>' : '' !!}
-                                </label>
+                                <label for="photo1" class="col-sm-3 control-label">画像</label>
                                 <div class="col-sm-9">
 
-                                    <span class="help-block">
-                                    <p class="text-warning">※高さ600px以上の画像推奨</p>
-                                        @if($errors->has('activity'))
-                                            <strong class="text-danger">{{ $errors->first('activity') }}</strong>
-                                        @endif
-                                </span>
+                                    <div class="image-add-box">
+                                        {{--<button type="button" class="image-add-box" data-toggle="modal" data-target="#dropzone-modal">--}}
+                                        <i class="fa fa-plus"></i>
+                                    </div>
 
-                                    @if($activity->id !== null)
-                                        <div class="uploaded-img">
-                                            <p>※アップロード済み画像があります。変更する場合のみ、再度アップロードしてください。</p>
-                                            <img src="{{ $activity->baseFilePath . $activity->id }}/{{ $activity->baseFileName }}.{{ $activity->extention }}">
-                                        </div>
+                                    {!! Form::file('photo') !!}
+
+                                    @if($errors->has('activity'))
+                                        <span class="help-block">
+                                            <strong class="text-danger">{{ $errors->first('activity') }}</strong>
+                                        </span>
                                     @endif
+
+                                    {{--@if($activity->id !== null)--}}
+                                        {{--<div class="uploaded-img">--}}
+                                            {{--<p>※アップロード済み画像があります。変更する場合のみ、再度アップロードしてください。</p>--}}
+                                            {{--<img src="{{ $activity->baseFilePath . $activity->id }}/{{ $activity->baseFileName }}.{{ $activity->extention }}">--}}
+                                        {{--</div>--}}
+                                    {{--@endif--}}
+
                                 </div><!-- /.col-sm-9 -->
                             </div><!-- form-group -->
-                            <!-- radio -->
+
+                            <hr>
 
                             <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                                <label for="activity" class="col-sm-3 control-label">ステータス <span class="text-danger">*</span></label>
+                                <label for="status" class="col-sm-3 control-label">公開ステータス <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
 
                                     <label class="radio-inline">
-                                        @if($activity->id === null || $activity->status === \App\Activity::OPEN)
+                                        @if($activity->id !== null && $activity->status === \App\Activity::OPEN)
                                             {{ Form::radio('status', \App\Activity::OPEN, true, ['class' => 'flat-blue']) }} 公開
                                         @else
                                             {{ Form::radio('status', \App\Activity::OPEN, '', ['class' => 'flat-blue']) }} 公開
                                         @endif
                                     </label>
-
                                     <label class="radio-inline">
-                                        @if($activity->id !== null && $activity->status === \App\Activity::CLOSE)
+                                        @if($activity->id === null || $activity->status === \App\Activity::CLOSE)
                                             {{ Form::radio('status', \App\Activity::CLOSE, true, ['class' => 'flat-blue']) }} 非公開
                                         @else
                                             {{ Form::radio('status', \App\Activity::CLOSE, '', ['class' => 'flat-blue']) }} 非公開
@@ -107,15 +138,13 @@
                                 </div>
                             </div><!-- form-group -->
 
-                            <hr>
-
-                            <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-9">
-                                    <button type="submit" class="btn btn-success">登　録</button>
-                                </div>
-                            </div><!-- form-group -->
-
                         </div><!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" class="btn btn-primary">登　録</button>
+                            </div>
+                        </div>
 
                     </div><!-- /.box -->
 
@@ -128,39 +157,6 @@
 
     </div><!-- ./content-wrapper -->
 
-    <div class="modal fade" id="modal-media">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title">画像のアップロード</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="modal-tab-content">
-                        <div class="" id="upload">
-                            <div class="upload-container">
-                                <div id="dropzone">
-                                    <form action="/" method="POST" enctype="multipart/form-data" class="dropzone needsclick dz-clickable"
-                                          id="demo-upload">
-                                        <div class="dz-message-block">
-                                            <div class="dz-message needsclick"> ファイルをドロップするか、ここをクリックしてファイルを選択してください</div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                    <button type="button" class="btn btn-primary">選択した画像を追加</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
 
     {{-- 削除確認 Modal --}}
     <div class="modal fade" id="confirm-modal">
@@ -182,15 +178,15 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
-    <div class="box-footer">
-        <div class="col-sm-offset-3 col-sm-9">
-            <button type="submit" class="btn btn-primary">登　録</button>
-        </div>
-    </div><!-- /.box-footer -->
-
 @endsection
 
 @section('js')
     <script src="/backend/js/use-ckeditor.js"></script>
+    <script>
+        $(function () {
+            $("div#dropzone-target").dropzone({url: "/activity"});
+            $(".image-add-box").dropzone({url: "/activity"});
+//            $("#dz-needle").dropzone({url: "/activity"});
+        });
+    </script>
 @endsection

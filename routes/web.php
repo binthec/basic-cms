@@ -11,8 +11,8 @@ Route::domain(env('BACKEND_DOMAIN'))->group(function() {
 		Route::get('/', 'Backend\Auth\LoginController@showLoginForm');
 
 		//認証系
-		Route::get('login', 'Backend\Auth\LoginController@showLoginForm')->name('login');
-		Route::post('login', 'Backend\Auth\LoginController@login');
+		Route::get('login', 'Backend\Auth\LoginController@showLoginForm');
+		Route::post('login', 'Backend\Auth\LoginController@login')->name('login');
 //		Route::post('password/email', 'Backend\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 //		Route::get('password/reset', 'Backend\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 //		Route::post('password/reset', 'Backend\Auth\ForgotPasswordController@reset');

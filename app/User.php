@@ -34,7 +34,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Support\Collection
      */
-    static function getUserNames()
+    public static function getUserNames()
     {
         return User::all()->pluck('name', 'id');
     }

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/vendor/iCheck/all.css">
     <link rel="stylesheet" href="/vendor/bootstrap-datepicker/bootstrap-datepicker.css">
     <link rel="stylesheet" href="/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/vendor/dropzone/dropzone.css">
     {{--<link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">--}}
 
     @yield('css')
@@ -161,18 +162,21 @@
 {{--<script src="/vendor/jquery-ui/jquery-ui.js"></script><!-- jQuery UI 1.11.4 -->--}}
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-    $.widget.bridge('uibutton', $.ui.button);
-</script>
+{{--<script>--}}
+    {{--$.widget.bridge('uibutton', $.ui.button);--}}
+{{--</script>--}}
 
-<!-- Bootstrap 3.3.7 -->
+<!-- Tools JS -->
 <script src="/vendor/bootstrap/js/bootstrap.js"></script>
-<script src="/vendor/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-<script src="/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 <script src="/vendor/select2/select2.js"></script>
 <script src="/vendor/iCheck/icheck.js"></script>
 <script src="/vendor/ckeditor/ckeditor.js"></script>
 <script src="/vendor/moment/moment.js"></script>
+<script src="/vendor/moment/locale/ja.js"></script>
+<script src="/vendor/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+<script src="/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.ja.min.js"></script>
+<script src="/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="/vendor/dropzone/dropzone.js"></script>
 
 <!-- Sparkline -->
 {{--<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>--}}
@@ -189,12 +193,7 @@
 <!-- FastClick -->
 {{--<script src="bower_components/fastclick/lib/fastclick.js"></script>--}}
 
-<!-- AdminLTE App -->
 <script src="/vendor/AdminLTE/js/adminlte.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/vendor/AdminLTE/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
 
 @yield('js')
 

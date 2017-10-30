@@ -13,7 +13,7 @@ class CreateAllTables extends Migration
      */
     public function up()
     {
-        Schema::create('topimages', function(Blueprint $table){
+        Schema::create('topimages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->tinyInteger('status');
@@ -25,7 +25,7 @@ class CreateAllTables extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
             $table->string('remote_address');
-            $table->string('route');
+            $table->string('route_name')->nullable();
             $table->string('method');
             $table->text('request');
             $table->datetime('created_at');
@@ -34,17 +34,21 @@ class CreateAllTables extends Migration
 
         Schema::create('activities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->string('name');
+            $table->string('date');
+            $table->string('place');
+            $table->text('detail')->nullable();
             $table->tinyInteger('status');
             $table->timestamps();
         });
 
-        Schema::create('images', function(Blueprint $table){
-           $table->increments('id');
-           $table->string('title')->nullable();
-           $table->integer('order');
-           $table->integer('imaginable_id')->unsigned();
-           $table->string('imaginable_type');
+        Schema::create('pictures', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable();
+            $table->string('extention');
+            $table->integer('order');
+            $table->integer('picturable_id')->unsigned();
+            $table->string('picturable_type');
         });
 
         //パーティショニングのため、SQL直書き
@@ -95,6 +99,6 @@ class CreateAllTables extends Migration
         Schema::dropIfExists('topimages');
         Schema::dropIfExists('action_logs');
         Schema::dropIfExists('activities');
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('pictuires');
     }
 }

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class ActionLog extends Model
 {
@@ -40,21 +41,33 @@ class ActionLog extends Model
 //        if (!empty($data['start_date'])) {
 //            $query->where('email', 'like', '%' . $data['email'] . '%');
 //        }
+
         //ユーザIDで検索
-        if (!empty($data['user_name'])) {
-            $query->where('id', $data['user_name']);
+        if (!empty($data['user_id'])) {
+            $query->where('user_id', $data['user_id']);
         }
 
         //ログの日時で検索
         if (!empty($data['date_start'])) {
-            $query->where('created_at', '>=', getStdDate($data['date_start']) . ' 00:00:00');
+            $query->where('created_at', '>=', getStdDateTimeFromNormal($data['date_start']));
         }
         if (!empty($data['date_end'])) {
-            $query->where('created_at', '<=', getStdDate($data['date_end']) . ' 23:59:59');
+            $query->where('created_at', '<=', getStdDateTimeFromNormal($data['date_end']));
         }
 
-//        dd($query);
-
         return $query;
+    }
+
+    /**
+     * ユーザIDに対応するユーザ名を返すメソッド
+     *
+     * @return mixed|string
+     */
+    public function getUserName()
+    {
+        if ($this->user_id !== null) {
+            return User::getUserNames()[$this->user_id];
+        }
+        return 'ー';
     }
 }

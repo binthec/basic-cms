@@ -37,16 +37,16 @@
                             </div><!-- form-group -->
 
                             <div class="form-group">
-                                <label for="user-name" class="col-sm-2 control-label">操作したユーザ</label>
+                                <label for="user-id" class="col-sm-2 control-label">操作したユーザ</label>
                                 <div class="col-sm-4">
-                                    {!! Form::select('user_name', \App\User::getUserNames(), null, ['class' => 'form-control use-select2', 'placeholder' => '選択してください']) !!}
+                                    {!! Form::select('user_id', \App\User::getUserNames(), null, ['class' => 'form-control use-select2', 'placeholder' => '選択してください']) !!}
                                 </div>
                             </div><!-- form-group -->
 
                             <div class="form-group{{ $errors->has('date_start') || $errors->has('date_end') ? ' has-error' : '' }}">
                                 <label for="name" class="col-sm-2 control-label">操作日時</label>
                                 <div class="col-sm-10 form-inline">
-                                    {!! Form::text('date_start', old('date_start'), ['id' => 'date_start', 'class' => 'form-control use-datetimepicker']) !!}
+                                    {!! Form::text('date_start', '', ['id' => 'date_start', 'class' => 'form-control use-datetimepicker']) !!}
                                     〜
                                     {!! Form::text('date_end', old('date_end'), ['id' => 'date_end', 'class' => 'form-control use-datetimepicker']) !!}
                                 </div>
@@ -70,7 +70,7 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="box">
+                    <div class="box box-primary">
 
                         <div class="box-body">
 
@@ -78,7 +78,6 @@
                                 <table class="table table-bordered with-btn-sm">
                                     <thead>
                                     <tr class="bg-primary text-center">
-                                        <th width="5%">ID</th>
                                         <th>機能名</th>
                                         <th>操作内容</th>
                                         <th>操作したユーザ</th>
@@ -89,14 +88,13 @@
                                     <tbody>
                                     @foreach($logs as $log)
                                         <tr class="text-center">
-                                            <td>{{ $log->id }}</td>
-                                            <td>{{ $log->route }}</td>
+                                            <td>{{ $log->route_name }}</td>
                                             <td class="text-center">
                                                 <label class="label {{ \App\ActionLog::$labelColor[$log->method] }}">
                                                     {{ \App\ActionLog::$actionLabels[$log->method] }}
                                                 </label>
                                             </td>
-                                            <td>{{ $userNames[$log->user_id] }}</td>
+                                            <td>{{ $log->getUserName() }}</td>
                                             <td>{{ $log->created_at }}</td>
                                             <td>
                                                 <a href="#" class="btn btn-sm btn-info">詳細</a>
@@ -120,4 +118,21 @@
         </section>
     </div><!-- /.content-wrapper -->
 
+@endsection
+
+@section('js')
+    <script>
+        $(function(){
+            $('#date_start').datetimepicker();
+            $('#date_end').datetimepicker({
+                useCurrent: false,
+            });
+           $("#date_start").on("dp.change", function (e) {
+               $('#date_end').data("DateTimePicker").minDate(e.date);
+           });
+            $("#date_end").on("dp.change", function (e) {
+                $('#date_start').data("DateTimePicker").maxDate(e.date);
+            });
+        });
+    </script>
 @endsection

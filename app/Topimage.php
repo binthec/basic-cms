@@ -86,7 +86,6 @@ class Topimage extends Model
      */
     public function saveAll(Request $request)
     {
-        //IDが欲しいので一旦保存
         $this->name = $request->name;
         $this->status = $request->status;
 
@@ -114,7 +113,7 @@ class Topimage extends Model
             /**
              * リサイズ処理
              */
-//            $image = Image::make($uploadDir . $fileName);
+//            $image = Picture::make($uploadDir . $fileName);
 //            $image->crop(750, 500)->save($uploadDir . 'h700.' . $this->extention);
         }
 

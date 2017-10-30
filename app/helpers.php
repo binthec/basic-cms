@@ -16,7 +16,7 @@ use Carbon\Carbon;
  */
 function isActiveUrl($url, $string = 'active')
 {
-	return \Illuminate\Support\Facades\Request::is($url) ? $string : '';
+    return \Illuminate\Support\Facades\Request::is($url) ? $string : '';
 }
 
 /**
@@ -41,9 +41,31 @@ function getTodayDate($bool = true)
  * @param $date
  * @return string
  */
-function getStdDate($date)
+function getStdDateFromJa($date)
 {
     return Carbon::createFromFormat('Y年m月d日', $date)->toDateString();
+}
+
+/**
+ * 'Y/m/d'の形式のデータを'Y-m-d'に変換するメソッド
+ *
+ * @param $date
+ * @return string
+ */
+function getStdDate($date)
+{
+    return Carbon::createFromFormat('Y/m/d', $date)->toDateString();
+}
+
+/**
+ * 'Y/m/d H:i'の形式のデータを'Y-m-d H:i'に変換するメソッド
+ *
+ * @param $date
+ * @return string
+ */
+function getStdDateTimeFromNormal($date)
+{
+    return Carbon::createFromFormat('Y/m/d H:i', $date)->toDateTimeString();
 }
 
 /**

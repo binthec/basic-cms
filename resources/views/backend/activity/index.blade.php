@@ -31,26 +31,28 @@
                                 <tr class="bg-primary text-center">
                                     <th width="5%">ID</th>
                                     <th width="10%">ステータス</th>
-                                    <th>サムネイルと名前</th>
+                                    <th>名前</th>
+                                    <th>開催日</th>
+                                    <th>開催場所</th>
                                     <th width="5%">編集</th>
                                     <th width="5%">削除</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($activities as $activity)
-                                    <tr>
-                                        <td class="text-center">{{ $activity->id }}</td>
-                                        <td class="text-center">
+                                    <tr class="text-center">
+                                        <td>{{ $activity->id }}</td>
+                                        <td>
                                             <label class="label label-lg {{ ($activity->status === 1)? 'label-info' : 'label-danger' }}">
-                                                {{ \App\Topimage::$statusList[$activity->status] }}
+                                                {{ \App\Activity::$statusList[$activity->status] }}
                                             </label>
                                         </td>
+                                        <td>{{ $activity->name }}</td>
+                                        <td>{{ getJaDate($activity->date) }}</td>
+                                        <td>{{ $activity->place }}</td>
+                                        <td><a class="btn btn-primary" href="{{ route('activity.edit', $activity->id) }}">編集</a></td>
                                         <td>
-                                            {{ $activity->name }}
-                                        </td>
-                                        <td><a class="btn btn-primary-outline" href="{{ route('topimage.edit', $activity->id) }}">編集</a></td>
-                                        <td>
-                                            <a class="btn btn-danger-outline" data-toggle="modal" data-target="#destroy{{ $activity->id }}">削除</a>
+                                            <a class="btn btn-danger" data-toggle="modal" data-target="#destroy{{ $activity->id }}">削除</a>
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="destroy{{ $activity->id }}" tabindex="-1" role="dialog" aria-labelledby="modal">
@@ -70,7 +72,7 @@
                                                                 <p class="text-danger"><i class="fa fa-warning"></i>この処理は取り消せません。</p>
                                                             </div>
                                                         </div>
-                                                        {!! Form::open(['method' => 'delete', 'route' => ['topimage.destroy', $activity->id]]) !!}
+                                                        {!! Form::open(['method' => 'delete', 'route' => ['activity.destroy', $activity->id]]) !!}
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-primary-outline" data-dismiss="modal">キャンセル</button>
                                                             <button type="submit" class="btn btn-danger">削除実行</button>
