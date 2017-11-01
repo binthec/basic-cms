@@ -78,3 +78,14 @@ function getJaDate($date)
 {
     return date('Y年m月d日', strtotime($date));
 }
+
+/**
+ * 'Y-m-d'の形式のデータを'Y/m/d/'に変換するメソッド
+ *
+ * @param $date
+ * @return string
+ */
+function getNormalDateFromStd($date)
+{
+    return date('Y/m/d', strtotime($date));
+}

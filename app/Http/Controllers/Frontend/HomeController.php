@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Topimage;
+use App\Activity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,18 +17,9 @@ class HomeController extends Controller
 	 */
 	public function index()
 	{
-	    $topimages = Topimage::where('status', Topimage::OPEN)->get();
-		return view('frontend.home', compact('topimages'));
-	}
-
-	/**
-	 * 活動の様子
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function activity()
-	{
-		return view('frontend.activity');
+	    $topimages = Topimage::open()->get();
+	    $activities = Activity::open()->take(4)->get();
+		return view('frontend.home', compact('topimages', 'activities'));
 	}
 
 }

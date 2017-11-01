@@ -51,11 +51,23 @@ class Topimage extends Model
     ];
 
     /**
-     * Topimage constructor.
+     * コンストラクタ
      */
     public function __construct()
     {
+        parent::__construct();
         $this->uploadDir = public_path() . $this->baseFilePath;
+    }
+
+    /**
+     * 公開ステータスのものだけ取得する場合のローカルスコープ
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopeOpen($query)
+    {
+        return $query->where('status', self::OPEN);
     }
 
     /**
@@ -71,7 +83,8 @@ class Topimage extends Model
             'status' => 'required',
         ];
 
-        if($storeFlg === true){
+        //新規作成の場合のみ、画像を必須に
+        if ($storeFlg === true) {
             $rules = array_merge($rules, ['topimage' => 'required']);
         }
 

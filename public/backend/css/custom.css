@@ -52,18 +52,15 @@ input[type=file]{
 }
 
 /* dropzone */
-
 .image-add-box{
     display: block;
-    /*width: 100px;*/
-    width: 100%;
-    height: 400px;
+    width: 100px;
+    /*width: 100%;*/
+    /*height: 400px;*/
     line-height: 100px;
     text-align: center;
-
     border: 2px solid #ccc;
     border-radius: 5px;
-
     background-color: #fff;
     color: #ccc;
     font-size: 20px;

@@ -48,6 +48,8 @@ class ActivityController extends Controller
     public function store(Request $request)
     {
 
+        $request->file('file')->move(public_path('images'), 'test1.jpg');
+
         $validator = Validator::make($request->all(), Activity::getValidationRules(true));
         if ($validator->fails()) {
             return redirect()
@@ -58,12 +60,10 @@ class ActivityController extends Controller
 
         DB::beginTransaction();
 
-        $activity = new Activity;
-        $activity->saveAll($request);
-
         try {
 
-
+            $activity = new Activity;
+            $activity->saveAll($request);
 
             DB::commit();
             return redirect('/activity')->with('flashMsg', '登録が完了しました。');

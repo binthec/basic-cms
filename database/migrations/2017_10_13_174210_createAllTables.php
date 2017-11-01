@@ -34,12 +34,13 @@ class CreateAllTables extends Migration
 
         Schema::create('activities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('title');
             $table->string('date');
             $table->string('place');
             $table->text('detail')->nullable();
             $table->tinyInteger('status');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('pictures', function (Blueprint $table) {
@@ -99,6 +100,6 @@ class CreateAllTables extends Migration
         Schema::dropIfExists('topimages');
         Schema::dropIfExists('action_logs');
         Schema::dropIfExists('activities');
-        Schema::dropIfExists('pictuires');
+        Schema::dropIfExists('pictures');
     }
 }

@@ -30,14 +30,14 @@
 
                         <div class="box-body">
 
-                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label for="name" class="col-sm-3 control-label">記事の名前</label>
+                            <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                                <label for="title" class="col-sm-3 control-label">記事の名前 <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    {{ Form::text('name', ($activity->id !== null)? $activity->name: '', ['id' => 'name', 'class' => 'form-control', 'placeholder' => '記事の見分けがつく任意の名前。なんでもよいです']) }}
+                                    {{ Form::text('title', ($activity->id !== null)? $activity->title: '', ['id' => 'name', 'class' => 'form-control', 'placeholder' => '記事のタイトル']) }}
 
-                                    @if($errors->has('name'))
+                                    @if($errors->has('title'))
                                         <span class="help-block">
-							            <strong class="text-danger">{{ $errors->first('name') }}</strong>
+							            <strong class="text-danger">{{ $errors->first('title') }}</strong>
 						            </span>
                                     @endif
                                 </div>
@@ -46,7 +46,7 @@
                             <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
                                 <label for="date" class="col-sm-3 control-label">開催日 <span class="text-danger">*</span></label>
                                 <div class="col-sm-3">
-                                    {!! Form::text('date', ($activity->id !== null)? $activity->date: '', ['class' => 'form-control use-datepicker', 'placeholder' => 'yyyy/mm/dd']) !!}
+                                    {!! Form::text('date', ($activity->id !== null)? getNormalDateFromStd($activity->date) : '', ['class' => 'form-control use-datepicker', 'placeholder' => 'yyyy/mm/dd']) !!}
 
                                     @if($errors->has('date'))
                                         <span class="help-block">
@@ -86,12 +86,9 @@
                                 <label for="photo1" class="col-sm-3 control-label">画像</label>
                                 <div class="col-sm-9">
 
-                                    <div class="image-add-box">
-                                        {{--<button type="button" class="image-add-box" data-toggle="modal" data-target="#dropzone-modal">--}}
+                                    <div class="image-add-box" id="imageUpload">
                                         <i class="fa fa-plus"></i>
                                     </div>
-
-                                    {!! Form::file('photo') !!}
 
                                     @if($errors->has('activity'))
                                         <span class="help-block">
@@ -100,10 +97,10 @@
                                     @endif
 
                                     {{--@if($activity->id !== null)--}}
-                                        {{--<div class="uploaded-img">--}}
-                                            {{--<p>※アップロード済み画像があります。変更する場合のみ、再度アップロードしてください。</p>--}}
-                                            {{--<img src="{{ $activity->baseFilePath . $activity->id }}/{{ $activity->baseFileName }}.{{ $activity->extention }}">--}}
-                                        {{--</div>--}}
+                                    {{--<div class="uploaded-img">--}}
+                                    {{--<p>※アップロード済み画像があります。変更する場合のみ、再度アップロードしてください。</p>--}}
+                                    {{--<img src="{{ $activity->baseFilePath . $activity->id }}/{{ $activity->baseFileName }}.{{ $activity->extention }}">--}}
+                                    {{--</div>--}}
                                     {{--@endif--}}
 
                                 </div><!-- /.col-sm-9 -->
@@ -154,7 +151,6 @@
             </div><!-- /.row -->
 
         </section><!-- /.content -->
-
     </div><!-- ./content-wrapper -->
 
 
@@ -184,9 +180,24 @@
     <script src="/backend/js/use-ckeditor.js"></script>
     <script>
         $(function () {
-            $("div#dropzone-target").dropzone({url: "/activity"});
-            $(".image-add-box").dropzone({url: "/activity"});
-//            $("#dz-needle").dropzone({url: "/activity"});
+            $("#imageUpload").dropzone({url: "{{ route('activity.store') }}"});
+
+            Dropzone.options.imageUpload = {
+                dictDefaultMessage: 'アップロードするファイルをここへドロップしてください',
+                acceptedFiles: '.jpg, .jpeg, .gif, .png',
+                maxFilesize: 5, // 5MBまで
+                method: 'POST',
+//                accept: function(file, done) {
+//                    if (file.name == "justinbieber.jpg") {
+//                        done(file.name);
+//                        console.log(file.name);
+//                    }
+//                    else {
+//                        done(file.name);
+//                        console.log(file.name);
+//                    }
+//                }
+            }
         });
     </script>
 @endsection

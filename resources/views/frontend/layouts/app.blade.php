@@ -23,7 +23,7 @@
     <!--[endif]-->
 </head><!--/head-->
 
-<body>
+<body id="@yield('bodyId')">
 
 <header id="header">
     <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner">
@@ -41,8 +41,8 @@
             <div class="collapse navbar-collapse navbar-right">
                 <ul class="nav navbar-nav">
                     <li class="scroll"><a href="/">ホーム </a></li>
-                    <li class="scroll"><a href="/#services">活動の主旨と内容 </a></li>
-                    <li class="scroll"><a href="/#blog">最近の活動の様子 </a></li>
+                    <li class="scroll"><a href="{{ route('home') }}/#services">活動の主旨と内容 </a></li>
+                    <li class="scroll"><a href="/#act">活動の様子 </a></li>
                     <li class="scroll"><a href="/#testimonial">主催者 </a></li>
                     <li class="scroll"><a href="/#get-in-touch">問い合せ </a></li>
                 </ul>
@@ -72,19 +72,6 @@
 <script src="/frontend/assets/js/wow.min.js"></script>
 <script src="/frontend/assets/js/main.js"></script>
 <script src="/frontend/assets/js/scrolling-nav.js"></script>
-
-<script>
-    $(document).ready(function ($) {
-        $("#owl-example").owlCarousel();
-    });
-
-//    $("body").data("page", "frontpage");
-
-    $("#owl-example").owlCarousel({
-        items: 3,
-    })
-
-</script>
 
 @yield('js')
 

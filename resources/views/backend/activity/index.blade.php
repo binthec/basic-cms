@@ -29,11 +29,10 @@
                             <table class="table table-bordered with-btn">
                                 <thead>
                                 <tr class="bg-primary text-center">
-                                    <th width="5%">ID</th>
                                     <th width="10%">ステータス</th>
                                     <th>名前</th>
-                                    <th>開催日</th>
                                     <th>開催場所</th>
+                                    <th>開催日</th>
                                     <th width="5%">編集</th>
                                     <th width="5%">削除</th>
                                 </tr>
@@ -41,14 +40,13 @@
                                 <tbody>
                                 @foreach($activities as $activity)
                                     <tr class="text-center">
-                                        <td>{{ $activity->id }}</td>
                                         <td>
                                             <label class="label label-lg {{ ($activity->status === 1)? 'label-info' : 'label-danger' }}">
                                                 {{ \App\Activity::$statusList[$activity->status] }}
                                             </label>
                                         </td>
-                                        <td>{{ $activity->name }}</td>
                                         <td>{{ getJaDate($activity->date) }}</td>
+                                        <td class="text-left">{{ $activity->title }}</td>
                                         <td>{{ $activity->place }}</td>
                                         <td><a class="btn btn-primary" href="{{ route('activity.edit', $activity->id) }}">編集</a></td>
                                         <td>
@@ -89,12 +87,6 @@
                             </table>
                         @else
                             <i class="fa fa-warning"></i> 活動の様子が存在しません。
-                        @endif
-
-                        @if($activities->hasMorePages())
-                            <div class="card-footer text-center">
-                                {{ $activities->links() }}
-                            </div>
                         @endif
 
                         </div><!-- /.box-body -->

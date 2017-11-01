@@ -1,6 +1,10 @@
 @extends('frontend.layouts.app')
 
+@section('bodyId', 'home')
+
 @section('content')
+
+    {{-- トップ画像のスライダー --}}
     @if($topimages->count() > 0)
         <section>
             <div class="top-slider">
@@ -8,7 +12,7 @@
                     <div><img src="{{ $img->baseFilePath . $img->id }}/{{ $img->baseFileName }}.{{ $img->extention }}"></div>
                 @endforeach
             </div>
-        </section><!--/#main-slider-->
+        </section>
     @endif
 
     <section id="services">
@@ -85,224 +89,54 @@
     </section><!--/#animated-number-->
 
 
-    <section id="blog">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title text-center wow fadeInDown">活動の様子</h2>
-                <p class="text-center wow fadeInDown">
-                    最近の活動の内容をご紹介します。
-                </p>
-            </div>
-
-            <div class="row">
-                <div id="owl-example" class="owl-carousel">
-                    <div class="text-center item">
-                        <div class="blog-post blog-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
-                            <article>
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail">
-                                        <img src="/frontend/assets/images/blog1.jpg" alt="">
-
-                                    </div>
-                                    <div class="entry-date">25 November 2014</div>
-                                    <h2 class="entry-title"><a href="#">Lorem ipsum dolor sit amet</a></h2>
-                                </header>
-
-                                <div class="entry-content">
-                                    <P>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua.</P>
-                                    <a class="btn btn-primary" href="/activity">BUY NOW</a>
-                                </div>
-
-
-                            </article>
-                        </div>
-                    </div>
-                    <div class="text-center item">
-                        <div class="blog-post blog-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
-                            <article>
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail">
-                                        <img src="/frontend/assets/images/blog2.jpg" alt="">
-
-                                    </div>
-                                    <div class="entry-date">25 November 2014</div>
-                                    <h2 class="entry-title"><a href="#">Lorem ipsum dolor sit amet</a></h2>
-                                </header>
-
-                                <div class="entry-content">
-                                    <P>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua.</P>
-                                    <a class="btn btn-primary" href="/activity">BUY NOW</a>
-                                </div>
-
-
-                            </article>
-                        </div>
-                    </div>
-                    <div class="text-center item">
-                        <div class="blog-post blog-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
-                            <article>
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail">
-                                        <img src="/frontend/assets/images/blog3.jpg" alt="">
-
-                                    </div>
-                                    <div class="entry-date">25 November 2014</div>
-                                    <h2 class="entry-title"><a href="#">Lorem ipsum dolor sit amet</a></h2>
-                                </header>
-
-                                <div class="entry-content">
-                                    <P>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua.</P>
-                                    <a class="btn btn-primary" href="#">BUY NOW</a>
-                                </div>
-
-
-                            </article>
-                        </div>
-                    </div>
-
-                    <div class="text-center item">
-                        <div class="blog-post blog-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
-                            <article>
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail">
-                                        <img src="/frontend/assets/images/blog1.jpg" alt="">
-
-                                    </div>
-                                    <div class="entry-date">25 November 2014</div>
-                                    <h2 class="entry-title"><a href="#">Lorem ipsum dolor sit amet</a></h2>
-                                </header>
-
-                                <div class="entry-content">
-                                    <P>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua.</P>
-                                    <a class="btn btn-primary" href="#">BUY NOW</a>
-                                </div>
-
-
-                            </article>
-                        </div>
-                    </div>
-                    <div class="text-center item">
-                        <div class="blog-post blog-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
-                            <article>
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail">
-                                        <img src="/frontend/assets/images/blog2.jpg" alt="">
-
-                                    </div>
-                                    <div class="entry-date">25 November 2014</div>
-                                    <h2 class="entry-title"><a href="#">Lorem ipsum dolor sit amet</a></h2>
-                                </header>
-
-                                <div class="entry-content">
-                                    <P>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua.</P>
-                                    <a class="btn btn-primary" href="#">BUY NOW</a>
-                                </div>
-
-
-                            </article>
-                        </div>
-                    </div>
-                    <div class="text-center item">
-                        <div class="blog-post blog-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
-                            <article>
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail">
-                                        <img src="/frontend/assets/images/blog3.jpg" alt="">
-
-                                    </div>
-                                    <div class="entry-date">25 November 2014</div>
-                                    <h2 class="entry-title"><a href="#">Lorem ipsum dolor sit amet</a></h2>
-                                </header>
-
-                                <div class="entry-content">
-                                    <P>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua.</P>
-                                    <a class="btn btn-primary" href="#">BUY NOW</a>
-                                </div>
-
-
-                            </article>
-                        </div>
-                    </div>
-
-                    <div class="text-center item">
-                        <div class="blog-post blog-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
-                            <article>
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail">
-                                        <img src="/frontend/assets/images/blog1.jpg" alt="">
-
-                                    </div>
-                                    <div class="entry-date">25 November 2014</div>
-                                    <h2 class="entry-title"><a href="#">Lorem ipsum dolor sit amet</a></h2>
-                                </header>
-
-                                <div class="entry-content">
-                                    <P>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua.</P>
-                                    <a class="btn btn-primary" href="#">BUY NOW</a>
-                                </div>
-
-
-                            </article>
-                        </div>
-                    </div>
-                    <div class="text-center item">
-                        <div class="blog-post blog-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
-                            <article>
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail">
-                                        <img src="/frontend/assets/images/blog2.jpg" alt="">
-
-                                    </div>
-                                    <div class="entry-date">25 November 2014</div>
-                                    <h2 class="entry-title"><a href="#">Lorem ipsum dolor sit amet</a></h2>
-                                </header>
-
-                                <div class="entry-content">
-                                    <P>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua.</P>
-                                    <a class="btn btn-primary" href="#">BUY NOW</a>
-                                </div>
-
-
-                            </article>
-                        </div>
-                    </div>
-                    <div class="text-center item">
-                        <div class="blog-post blog-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
-                            <article>
-                                <header class="entry-header">
-                                    <div class="entry-thumbnail">
-                                        <img src="/frontend/assets/images/blog3.jpg" alt="">
-
-                                    </div>
-                                    <div class="entry-date">25 November 2014</div>
-                                    <h2 class="entry-title"><a href="#">Lorem ipsum dolor sit amet</a></h2>
-                                </header>
-
-                                <div class="entry-content">
-                                    <P>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua.</P>
-                                    <a class="btn btn-primary" href="#">BUY NOW</a>
-                                </div>
-
-
-                            </article>
-                        </div>
-                    </div>
-
-
+    @if($activities->count() > 0)
+        <section id="act">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title text-center wow fadeInDown">活動の様子</h2>
+                    <p class="text-center wow fadeInDown">
+                        最近の活動の内容をご紹介します。
+                    </p>
                 </div>
-            </div>
 
-        </div>
-    </section><!--/#blog-->
+                <div class="row">
+                    <div id="owl-box" class="owl-carousel">
+
+                        @foreach($activities as $act)
+                            <div class="text-center item">
+                                <div class="act-post act-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
+                                    <article>
+                                        <header class="entry-header">
+                                            <div class="entry-thumbnail">
+                                                <img src="/frontend/assets/images/blog1.jpg" alt="">
+                                            </div>
+                                            <h2 class="entry-title">{{ $act->title }}</h2>
+                                            <p>
+                                                <span class="entry-date">{{ getJaDate($act->date) }}</span>
+                                                <span class="entry-place">{{ $act->place }}</span>
+                                            </p>
+                                        </header>
+                                        <div class="entry-content">
+                                            {{--<P></P>--}}
+                                            <a class="btn btn-primary" href="{{ route('front.act.detail', $act->id) }}">読む</a>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div><!-- /.owl-box -->
+                </div><!-- /.row -->
+
+                <div class="section-footer">
+                    <div class="wow fadeInLeft">
+                        <a href="{{ route('front.act.index') }}" class="btn btn-primary">もっと見る</a>
+                    </div>
+                </div><!-- /.section-footer -->
+
+            </div><!-- /.container -->
+        </section><!--/#act-->
+    @endif
 
 
     <section id="testimonial">
@@ -376,6 +210,7 @@
 @section('js')
     <script src="/vendor/slick/slick.min.js"></script>
     <script>
+        //Top Slider
         $('.top-slider').slick({
             dots: true,
             infinite: true,
@@ -385,5 +220,16 @@
             autoplay: true,
             autoplaySpeed: 1000,
         });
+
+        //OWL for Activity
+        $(document).ready(function ($) {
+            $("#owl-box").owlCarousel();
+        });
+        $("#owl-box").owlCarousel({
+            items: 4,
+        })
+
+        //    $("body").data("page", "frontpage");
+
     </script>
 @endsection

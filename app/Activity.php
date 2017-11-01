@@ -3,7 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Picture;
 use Illuminate\Support\Facades\File;
 
@@ -11,11 +13,9 @@ class Activity extends Model
 {
 
     /**
-     * 日時を表現するカラム
-     *
-     * @var array
+     * ソフトデリートを使う
      */
-    protected $dates = ['date'];
+    use SoftDeletes;
 
     /**
      * ステータス
@@ -60,11 +60,38 @@ class Activity extends Model
     ];
 
     /**
-     * Topimage constructor.
+     * モデルの「初期起動」メソッド
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        //グローバルスコープ追加。活動の様子は基本的に開催日の新しい順に並べる
+        static::addGlobalScope('date', function (Builder $builder) {
+            $builder->orderBy('date', 'desc');
+        });
+    }
+
+    /**
+     * コンストラクタ。ちゃんと親を呼び出しましょう。
      */
     public function __construct()
     {
+        parent::__construct();
         $this->uploadDir = public_path() . $this->baseFilePath;
+    }
+
+    /**
+     * 公開ステータスのものだけ取得する場合のローカルスコープ
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopeOpen($query)
+    {
+        return $query->where('status', self::OPEN);
     }
 
     /**
@@ -86,6 +113,7 @@ class Activity extends Model
     static function getValidationRules($storeFlg = false)
     {
         $rules = [
+            'title' => 'required',
             'date' => 'required',
             'place' => 'required',
             'status' => 'required',
@@ -108,7 +136,7 @@ class Activity extends Model
     {
 
 
-        $this->name = ($request->name !== null) ? $request->name : null;
+        $this->title = ($request->title !== null) ? $request->title : null;
         $this->date = getStdDate($request->date); //必須項目
         $this->place = $request->place; //必須項目
         $this->detail = ($request->detail !== null) ? $request->detail : null;

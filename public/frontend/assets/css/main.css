@@ -828,21 +828,19 @@ ul.nostyle i {
 
 #get-in-touch .btn.btn-primary{font-family: 'Roboto-medium'; font-size:22px; padding:8px 40px;}
 
-#blog {
+#home #act {
   padding: 87px 0 87px 0; background:#f6f6f6; overflow:hidden;
 }
 
-#blog .blog-post {
+#home #act .act-post {
   padding: 15px; background:#fff;
 }
-#blog .blog-post .item {
+#home #act .act-post .item {
   height: 200px; }
 
-#owl-example .item{ margin:15px;}
+#owl-box .item{ margin:15px;}
 
-
-
-#blog .blog-post .post-format {
+#home #act .act-post .post-format {
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -853,13 +851,13 @@ ul.nostyle i {
   border: 3px solid #fff;
   border-radius: 100px;
 }
-#blog .blog-post.blog-large .entry-thumbnail {
+#home #act .act-post.act-large .entry-thumbnail {
   margin: -15px -15px 15px;
   position: relative;
 }
-#blog .blog-post.blog-large .entry-thumbnail img{ max-width:100%;}
+#home #act .act-post.act-large .entry-thumbnail img{ max-width:100%;}
 
-#blog .blog-post.blog-large .post-format {
+#home #act .act-post.act-large .post-format {
   width: 66px;
   height: 66px;
   line-height: 60px;
@@ -867,76 +865,86 @@ ul.nostyle i {
   right: 20px;
   bottom: -33px;
 }
-#blog .blog-post.blog-large .post-format > i {
+#home #act .act-post.act-large .post-format > i {
   font-size: 20px;
 }
-#blog .blog-post.blog-large .entry-date {
-  font-size: 12px;font-family: 'Roboto-regular';
+#home #act .act-post.act-large .entry-date,
+#act .small-post .post-text .date{
+  font-size: 12px;
+  line-height: 12px;
   display: block;
-  margin-bottom: 5px; text-align:center;
+  margin-top: 15px;
+  text-align:center;
   text-transform: uppercase;
   color: #45aed6;
 }
-#blog .blog-post.blog-large .entry-title {
+#home #act .act-post.act-large .entry-place {
+  font-size: 12px;
+  line-height: 12px;
+  margin-bottom: 5px;
+  text-align:center;
+  text-transform: uppercase;
+}
+#home #act .act-post.act-large .entry-title {
   margin-top: 0;
   font-size: 18px;
-  line-height: 1;
-  margin-bottom: 15px;
+  line-height: 1.3em;
+  margin-bottom: 10px;
 }
-#blog .blog-post.blog-large .entry-title a {
+#home #act .act-post.act-large .entry-title a {
   color: #64686d; font-size:18px; text-transform:uppercase; font-weight:normal; font-family: 'Roboto-medium';
 }
-#blog .blog-post.blog-large .entry-title a:hover {
+#home #act .act-post.act-large .entry-title a:hover {
   color: #45aed6;
 }
-#blog .blog-post.blog-media {
+#home #act .act-post.act-media {
   margin-bottom: 30px;
 }
-#blog .blog-post.blog-media .entry-thumbnail {
+#home #act .act-post.act-media .entry-thumbnail {
   margin: -15px 15px -15px -15px;
   position: relative;
 }
-#blog .blog-post.blog-media .post-format {
+#home #act .act-post.act-media .post-format {
   position: absolute;
   top: 20px;
   right: -10px;
 }
-#blog .blog-post.blog-media .entry-date {
+#home #act .act-post.act-media .entry-date {
   font-size: 12px;
   display: block;
   margin-bottom: 5px;
   text-transform: uppercase;
   color: #45aed6;
 }
-#blog .blog-post.blog-media .entry-title {
+#home #act .act-post.act-media .entry-title {
   margin-top: 0;
   font-size: 18px;
   line-height: 1;
   margin-bottom: 15px;
 }
-#blog .blog-post.blog-media .entry-title a {
+#home #act .act-post.act-media .entry-title a {
   color: #64686d;
 }
-#blog .blog-post.blog-media .entry-title a:hover {
+#home #act .act-post.act-media .entry-title a:hover {
   color: #45aed6;
 }
-#blog .blog-post .entry-meta {
+#home #act .act-post .entry-meta {
   margin-top: 20px;
   border-top: 1px solid #eee;
   padding-top: 15px;
 }
-#blog .blog-post .entry-meta > span {
+#home #act .act-post .entry-meta > span {
   display: inline-block;
   margin-right: 10px;
   color: #999;
 }
-#blog .blog-post .entry-meta > span > a {
+#home #act .act-post .entry-meta > span > a {
   color: #999;
 }
-#blog .blog-post .entry-meta > span > a:hover {
+#home #act .act-post .entry-meta > span > a:hover {
   color: #45aed6;
 }
-#blog .btn.btn-primary{ font-family: 'Roboto-regular'; font-size:15px; margin-top:20px; padding:10px 30px;}
+#home #act .btn.btn-primary{ font-family: 'Roboto-regular'; font-size:15px; margin-top:20px; padding:10px 30px;}
 #contact {
   position: relative;
   overflow: hidden;
@@ -1003,13 +1011,13 @@ ul.nostyle i {
   #meet-team .team-member{ margin-bottom:25px;}
   #meet-team .team-member .team-img, #meet-team .team-member .team-info h3 { text-align:center;}
   #meet-team .team-member .team-info span { text-align:center; display:block;}
-  #blog .blog-post{ margin-bottom:20px;}
+  #home #act .act-post{ margin-bottom:20px;}
 
 }
 
 @media (max-width:500px){
-  #blog .blog-post.blog-large .entry-thumbnail img, .team-img img{ width:100%;}
+  #home #act .act-post.act-large .entry-thumbnail img, .team-img img{ width:100%;}
   .animated-number{ height:130px; width:130px; line-height:130px; font-size:22px;}
   #animated-number strong{ font-size:17px;}
-  #blog .blog-post.blog-large .entry-thumbnail{ padding-top:0px;}
+  #home #act .act-post.act-large .entry-thumbnail{ padding-top:0px;}
 }

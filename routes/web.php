@@ -52,5 +52,6 @@ Route::domain(env('FRONTEND_DOMAIN'))->group(function() {
 	Route::get('/', 'Frontend\HomeController@index')->name('home');
 
 	//活動の様子
-	Route::get('/activity', 'Frontend\HomeController@activity');
+	Route::get('/activity', 'Frontend\ActivityController@index')->name('front.act.index');
+    Route::get('/activity/{id}', 'Frontend\ActivityController@detail')->name('front.act.detail');
 });
