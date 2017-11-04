@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Picture;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,13 @@ class ActivityController extends Controller
      * １ページに表示する件数
      */
     const PAGINATION = 20;
+
+    /**
+     * 画像アップロードの際のkey名
+     *
+     * @var string
+     */
+    protected $pictParamName = 'file';
 
     /**
      * 一覧画面
@@ -48,7 +56,7 @@ class ActivityController extends Controller
     public function store(Request $request)
     {
 
-        $request->file('file')->move(public_path('images'), 'test1.jpg');
+        dd($request);
 
         $validator = Validator::make($request->all(), Activity::getValidationRules(true));
         if ($validator->fails()) {
@@ -140,4 +148,22 @@ class ActivityController extends Controller
 
         return redirect('/activity')->with('flashMsg', '削除が完了しました。');
     }
+
+    /**
+     * Dropzone.jsからXHRで渡された画像を一時ディレクトリに保存するメソッド
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function pictStore(Request $request)
+    {
+        //画像名生成。YmdHis + 画像の元の拡張子
+        $pictTmpName = date('YmdHis') . '.' . $request->file($this->pictParamName)->getClientOriginalExtension();
+
+        //画像をstorageの一時ファイルに保存
+        $request->file($this->pictParamName)->move(storage_path('app/public/act-pict-tmp'), $pictTmpName);
+
+        return response()->json(['code' => '200', 'pictTmpName' => $pictTmpName]);
+    }
+
 }

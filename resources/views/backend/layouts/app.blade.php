@@ -21,8 +21,11 @@
     <link rel="stylesheet" href="/vendor/iCheck/all.css">
     <link rel="stylesheet" href="/vendor/bootstrap-datepicker/bootstrap-datepicker.css">
     <link rel="stylesheet" href="/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="/vendor/dropzone/dropzone.css">
+    <link rel="stylesheet" href="/vendor/dropzone/dropzone-custom.css">
+    {{--<link rel="stylesheet" href="/vendor/dropzone/dropzone.css">--}}
+
     {{--<link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">--}}
+
 
     @yield('css')
 
@@ -176,6 +179,7 @@
 <script src="/vendor/bootstrap-datepicker/bootstrap-datepicker.js"></script>
 <script src="/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.ja.min.js"></script>
 <script src="/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+{{--<script src="/vendor/dropzone/dropzone.js"></script>--}}
 <script src="/vendor/dropzone/dropzone.js"></script>
 
 <!-- Sparkline -->

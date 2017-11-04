@@ -16,7 +16,7 @@
                 <div class="col-md-12">
 
                     @if($activity->id === null)
-                        {!! Form::open(['method' => 'post', 'route' => 'activity.store','enctype'=> 'multipart/form-data','class' => 'form-horizontal']) !!}
+                        {!! Form::open(['method' => 'post', 'route' => 'activity.store','enctype'=> 'multipart/form-data','class' => 'form-horizontal dropzone']) !!}
                     @else
                         {!! Form::open(['method' => 'put', 'route' => ['activity.update', $activity],'enctype'=> 'multipart/form-data','class' => 'form-horizontal']) !!}
                     @endif
@@ -83,12 +83,14 @@
                             </div><!-- form-group -->
 
                             <div class="form-group{{ $errors->has('activity') ? ' has-error' : '' }}">
-                                <label for="photo1" class="col-sm-3 control-label">画像</label>
+                                <label for="act-pict-tmp" class="col-sm-3 control-label">画像</label>
                                 <div class="col-sm-9">
 
-                                    <div class="image-add-box" id="imageUpload">
-                                        <i class="fa fa-plus"></i>
+                                    <div class="pict-add-box" id="pictUpload" data-num=0>
+                                        <i class="fa fa-image"> ファイルをドロップするか、ここをクリックしてください</i>
                                     </div>
+
+                                    <div id="pict-preview-box"></div>
 
                                     @if($errors->has('activity'))
                                         <span class="help-block">
@@ -96,12 +98,13 @@
                                         </span>
                                     @endif
 
-                                    {{--@if($activity->id !== null)--}}
-                                    {{--<div class="uploaded-img">--}}
-                                    {{--<p>※アップロード済み画像があります。変更する場合のみ、再度アップロードしてください。</p>--}}
-                                    {{--<img src="{{ $activity->baseFilePath . $activity->id }}/{{ $activity->baseFileName }}.{{ $activity->extention }}">--}}
-                                    {{--</div>--}}
-                                    {{--@endif--}}
+                                    <div id="pict-input-box">
+                                        {{--@if($activity->id !== null)--}}
+                                            {{--<div class="uploaded-img">--}}
+                                                {{--<img src="{{ $activity->baseFilePath . $activity->id }}/{{ $activity->baseFileName }}.{{ $activity->extention }}">--}}
+                                            {{--</div>--}}
+                                        {{--@endif--}}
+                                    </div>
 
                                 </div><!-- /.col-sm-9 -->
                             </div><!-- form-group -->
@@ -153,50 +156,52 @@
         </section><!-- /.content -->
     </div><!-- ./content-wrapper -->
 
-
-    {{-- 削除確認 Modal --}}
-    <div class="modal fade" id="confirm-modal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-danger">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title"><i class="fa fa-warning"></i> Alert</h4>
-                </div>
-                <div class="modal-body">
-                    <p>削除してもよろしいですか？</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-                    <button type="button" class="btn btn-danger">削除する</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
 @endsection
 
 @section('js')
     <script src="/backend/js/use-ckeditor.js"></script>
     <script>
         $(function () {
-            $("#imageUpload").dropzone({url: "{{ route('activity.store') }}"});
 
-            Dropzone.options.imageUpload = {
-                dictDefaultMessage: 'アップロードするファイルをここへドロップしてください',
-                acceptedFiles: '.jpg, .jpeg, .gif, .png',
-                maxFilesize: 5, // 5MBまで
+            // Disabling autoDiscover, otherwise Dropzone will try to attach twice. だそうな。
+            Dropzone.autoDiscover = false;
+
+            //新しくいDropzoneインスタンスを生成
+            var actPict = new Dropzone('#pictUpload', {
+                url: "{{ route('activity.store.pict') }}", //送信先
                 method: 'POST',
-//                accept: function(file, done) {
-//                    if (file.name == "justinbieber.jpg") {
-//                        done(file.name);
-//                        console.log(file.name);
-//                    }
-//                    else {
-//                        done(file.name);
-//                        console.log(file.name);
-//                    }
-//                }
+                uploadMultiple: false, //複数アップロードを許可するか
+                acceptedFiles: '.jpg, .jpeg, .gif, .png',
+                maxFilesize: 8, // 8MBまで
+//                previewTemplateContainer: document.querySelector('#preview-template').innerHTML,
+            });
+
+            var order = 0; //写真の並び順
+
+            //アップロードに成功した時の処理
+            actPict.on("success", function (file, res) {
+
+                //プレビューエリアにプレビューを追加
+                $('#pict-preview-box').append(file.previewTemplate);
+
+                //順番をインクリメントして、セット
+                var order = getOrder();
+                order++;
+                setOrder(order);
+
+                //フォームを追加
+                $("#pict-input-box")
+                    .append("<input type=hidden name='pictureName[" + order + "]' value='" + res.pictTmpName + "'>");
+            });
+
+            //順番のセッタ
+            function setOrder(tmpOrder) {
+                order = tmpOrder;
+            }
+
+            //順番のゲッタ
+            function getOrder() {
+                return order;
             }
         });
     </script>

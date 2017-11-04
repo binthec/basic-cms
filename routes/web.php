@@ -40,6 +40,8 @@ Route::domain(env('BACKEND_DOMAIN'))->group(function() {
         Route::resource('actionlog', 'Backend\ActionLogController');
 
         //活動報告
+        Route::post('activity/pictStore', 'Backend\ActivityController@pictStore')->name('activity.store.pict'); //XHRでの画像アップロード
+        Route::post('activity/getTmpPict/{pictTmpName}', 'Backend\ActivityController@getTmpPict');
         Route::resource('activity', 'Backend\ActivityController');
 	});
 });

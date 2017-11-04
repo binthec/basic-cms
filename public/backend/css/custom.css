@@ -13,6 +13,7 @@
 table.with-btn > tbody > tr > td {
     line-height: 34px;
 }
+
 table.with-btn-sm > tbody > tr > td {
     line-height: 30px;
 }
@@ -47,52 +48,48 @@ table.with-btn-sm > tbody > tr > td {
     /*padding-bottom: 0;*/
 }
 
-input[type=file]{
+input[type=file] {
     height: 34px;
 }
 
-/* dropzone */
-.image-add-box{
+/**
+ * Dropzone
+ */
+.pict-add-box {
     display: block;
-    width: 100px;
-    /*width: 100%;*/
-    /*height: 400px;*/
-    line-height: 100px;
+    width: 100%;
     text-align: center;
     border: 2px solid #ccc;
-    border-radius: 5px;
+    border-radius: 20px;
     background-color: #fff;
     color: #ccc;
     font-size: 20px;
+    margin-top: 10px;
+    line-height: 100px;
 }
 
-.image-add-box:hover{
-/*.dropzone-target:hover{*/
+.pict-add-box:hover {
     color: #3c8dbc;
     border-color: #3c8dbc;
 }
 
-/*#dropzone-target{*/
-    /*display: block;*/
-    /*margin: 10px;*/
-    /*height: 200px;*/
-    /*line-height: 200px;*/
-    /*text-align: center;*/
-    /*font-size: 16px;*/
-    /*color: #aaa;*/
-    /*border: 3px dashed #ccc;*/
-    /*border-radius: 10px;*/
-    /*!*background-color: #ccc;*!*/
-/*}*/
+#pict-preview-box {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+}
 
-/* select2 */
+/**
+ * select2
+ */
 .select2-container--default
-.select2-selection--single{
+.select2-selection--single {
     height: 34px;
 }
+
 .select2-container--default
 .select2-selection--single
-.select2-selection__arrow{
+.select2-selection__arrow {
     height: 32px;
 }
 

@@ -1,2 +1,4 @@
 *
 !.gitignore
+!act-pict-tmp/
+!act-pict-tmp/.gitkeep
