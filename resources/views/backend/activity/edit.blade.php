@@ -191,7 +191,7 @@
 
                 //フォームを追加
                 $("#pict-input-box")
-                    .append("<input type=hidden name='pictureName[" + order + "]' value='" + res.pictTmpName + "'>");
+                    .append("<input type=hidden name='pictures[" + order + "]' value='" + res.pictTmpName + "'>");
             });
 
             //順番のセッタ

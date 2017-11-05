@@ -56,8 +56,6 @@ class ActivityController extends Controller
     public function store(Request $request)
     {
 
-        dd($request);
-
         $validator = Validator::make($request->all(), Activity::getValidationRules(true));
         if ($validator->fails()) {
             return redirect()
@@ -158,10 +156,10 @@ class ActivityController extends Controller
     public function pictStore(Request $request)
     {
         //画像名生成。YmdHis + 画像の元の拡張子
-        $pictTmpName = date('YmdHis') . '.' . $request->file($this->pictParamName)->getClientOriginalExtension();
+        $pictTmpName = md5(uniqid(rand())) . '.' . Activity::getPictExt($request->file($this->pictParamName));
 
         //画像をstorageの一時ファイルに保存
-        $request->file($this->pictParamName)->move(storage_path('app/public/act-pict-tmp'), $pictTmpName);
+        $request->file($this->pictParamName)->move(storage_path(Activity::$tmpFilePath), $pictTmpName);
 
         return response()->json(['code' => '200', 'pictTmpName' => $pictTmpName]);
     }

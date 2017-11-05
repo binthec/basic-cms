@@ -46,7 +46,6 @@ class CreateAllTables extends Migration
         Schema::create('pictures', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
-            $table->string('extention');
             $table->integer('order');
             $table->integer('picturable_id')->unsigned();
             $table->string('picturable_type');
