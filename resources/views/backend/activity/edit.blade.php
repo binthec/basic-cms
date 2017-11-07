@@ -90,7 +90,16 @@
                                         <i class="fa fa-image"> ファイルをドロップするか、ここをクリックしてください</i>
                                     </div>
 
-                                    <div id="pict-preview-box"></div>
+                                    <div id="pict-preview-box">
+                                        @if($activity->id !== null)
+                                            @forelse($activity->pictures as $pict)
+                                                <div class="uploaded-img">
+                                                    <img src="{{ \App\Activity::$baseFilePath . $activity->id }}/{{ $pict->name }}">
+                                                </div>
+                                            @empty
+                                            @endforelse
+                                        @endif
+                                    </div>
 
                                     @if($errors->has('activity'))
                                         <span class="help-block">
@@ -99,11 +108,12 @@
                                     @endif
 
                                     <div id="pict-input-box">
-                                        {{--@if($activity->id !== null)--}}
-                                            {{--<div class="uploaded-img">--}}
-                                                {{--<img src="{{ $activity->baseFilePath . $activity->id }}/{{ $activity->baseFileName }}.{{ $activity->extention }}">--}}
-                                            {{--</div>--}}
-                                        {{--@endif--}}
+                                        @if($activity->id !== null)
+                                            @forelse($activity->pictures as $pict)
+                                                {{ Form::hidden('pictures[' . $pict->order . ']', $pict->name, ['data-num' => $pict->order]) }}
+                                            @empty
+                                            @endforelse
+                                        @endif
                                     </div>
 
                                 </div><!-- /.col-sm-9 -->
@@ -166,43 +176,38 @@
             // Disabling autoDiscover, otherwise Dropzone will try to attach twice. だそうな。
             Dropzone.autoDiscover = false;
 
-            //新しくいDropzoneインスタンスを生成
-            var actPict = new Dropzone('#pictUpload', {
+            //順番の設定
+            var order = 0;
+            if($('#pict-input-box input:last-child').attr('data-num') !== undefined){
+                var order = $('#pict-input-box input:last-child').attr('data-num');
+            }
+
+            console.log(order);
+
+            var actPict = new Dropzone('#pictUpload', { //Dropzoneインスタンスを生成
                 url: "{{ route('activity.store.pict') }}", //送信先
                 method: 'POST',
                 uploadMultiple: false, //複数アップロードを許可するか
                 acceptedFiles: '.jpg, .jpeg, .gif, .png',
                 maxFilesize: 8, // 8MBまで
 //                previewTemplateContainer: document.querySelector('#preview-template').innerHTML,
+
+                init: function () {
+                    this.on("success", function (file, res) {
+
+                        order++; //順番をインクリメント
+
+                        //プレビューエリアにプレビューを追加
+                        $('#pict-preview-box').append(file.previewTemplate);
+
+                        //フォームを追加
+                        $("#pict-input-box")
+                            .append("<input type=hidden name='pictures[" + order + "]' value='" + res.pictTmpName + "' data-num='" + order + "'>");
+                    });
+                }
+
             });
-
-            var order = 0; //写真の並び順
-
-            //アップロードに成功した時の処理
-            actPict.on("success", function (file, res) {
-
-                //プレビューエリアにプレビューを追加
-                $('#pict-preview-box').append(file.previewTemplate);
-
-                //順番をインクリメントして、セット
-                var order = getOrder();
-                order++;
-                setOrder(order);
-
-                //フォームを追加
-                $("#pict-input-box")
-                    .append("<input type=hidden name='pictures[" + order + "]' value='" + res.pictTmpName + "'>");
-            });
-
-            //順番のセッタ
-            function setOrder(tmpOrder) {
-                order = tmpOrder;
-            }
-
-            //順番のゲッタ
-            function getOrder() {
-                return order;
-            }
-        });
+        })
+        ;
     </script>
 @endsection

@@ -109,9 +109,9 @@ class Activity extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function images()
+    public function pictures()
     {
-        return $this->morphMany('App\Picture', 'picturable');
+        return $this->morphMany(Picture::class, 'target');
     }
 
     /**
@@ -158,26 +158,27 @@ class Activity extends Model
             $uploadDir = $this->uploadDir . $this->id . '/'; //最終的な保存先
 
             //保存先が空でなければ一旦空にする（容量節約のため…）
-            if (File::exists($uploadDir) && !empty(File::files($uploadDir))) {
-                File::cleanDirectory($uploadDir);
-            }
+//            if (File::exists($uploadDir) && !empty(File::files($uploadDir))) {
+//                File::cleanDirectory($uploadDir);
+//            }
+
+            //picturesテーブルから紐付いているものは一旦全削除
+            $this->pictures()->delete();
 
             //それぞれの画像に対して処理
             foreach ($request->pictures as $key => $pict) {
 
-                $picture = new Picture;
-                $picture->name = $pict;
-                $picture->order = $key;
-                $picture->picturable_id = $this->id;
-                $picture->picturable_type = 'Activity';
-                $picture->save();
+                $this->pictures()->create(['name' => $pict, 'order' => $key]);
 
                 if (!File::exists($uploadDir)) { //保存先ディレクトリが無い場合は作成
                     File::makeDirectory($uploadDir);
                 }
 
-                //保存先ディレクトリに移動
-                File::move($this->tmpDir . $pict, $uploadDir . $pict);
+                //保存先に画像が無ければ（＝新しい画像の場合）、一時ディレクトリから移動
+                if(!File::exists($uploadDir . $pict)){
+                    File::move($this->tmpDir . $pict, $uploadDir . $pict);
+                }
+
             }
 
             /**

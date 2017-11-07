@@ -45,10 +45,10 @@ class CreateAllTables extends Migration
 
         Schema::create('pictures', function (Blueprint $table) {
             $table->increments('id');
+            $table->morphs('target');
             $table->string('name')->nullable();
             $table->integer('order');
-            $table->integer('picturable_id')->unsigned();
-            $table->string('picturable_type');
+            $table->timestamps();
         });
 
         //パーティショニングのため、SQL直書き
