@@ -60,6 +60,13 @@ class Activity extends Model
     public static $baseFilePath = '/files/activity/';
 
     /**
+     * 画像アップロードの際のkey名
+     *
+     * @var string
+     */
+    public static $paramName = 'file';
+
+    /**
      * バリデーションメッセージ
      *
      * @var array
@@ -102,7 +109,6 @@ class Activity extends Model
     {
         return $this->morphMany(Picture::class, 'target');
     }
-
 
     /**
      * 公開ステータスのものだけ取得する場合のローカルスコープ
@@ -189,35 +195,6 @@ class Activity extends Model
 //            $image->crop(750, 500)->save($uploadDir . 'h700.' . $this->extention);
         }
 
-    }
-
-    /**
-     * mimeTypeを見て、拡張子を統一させる処理
-     *
-     * @param $file
-     * @return string
-     */
-    public static function getPictExt($file)
-    {
-
-        $ext = 'jpg';
-
-        switch ($file->getMimeType()) {
-            case 'image/jpeg':
-            case 'image/jpg':
-                $ext = "jpg";
-                break;
-
-            case 'image/png':
-                $ext = "png";
-                break;
-
-            case 'image/gif':
-                $ext = "gif";
-                break;
-        }
-
-        return $ext;
     }
 
     /**

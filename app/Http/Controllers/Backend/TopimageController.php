@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Picture;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -136,5 +137,27 @@ class TopimageController extends Controller
         $topimage->delete();
 
         return redirect('/topimage')->with('flashMsg', '削除が完了しました。');
+    }
+
+    /**
+     * Dropzone.jsからXHRで渡された画像を一時ディレクトリに保存するメソッド。Pictureモデルを呼び出す
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function pictStore(Request $request)
+    {
+        return Picture::pictStore($request, Topimage::class);
+    }
+
+    /**
+     * Dropzone.js から削除ボタンを押された時に呼び出されるメソッド。Picureモデルを呼び出す
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function pictDelete(Request $request)
+    {
+        return Picture::pictDelete($request, Topimage::class);
     }
 }

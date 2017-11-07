@@ -48,8 +48,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <img src="{{ $image->baseFilePath . $image->id . '/' . $image->baseFileName . '.' . $image->extention }}"
-                                                     height="38px" data-lity class="cursor-zoomIn">
+                                                <img src="{{ $image->getPictPath() }}" height="38px" data-lity class="cursor-zoomIn">
                                                 {{ $image->name }}
                                             </td>
                                             <td><a class="btn btn-primary" href="{{ route('topimage.edit', $image->id) }}">編集</a></td>

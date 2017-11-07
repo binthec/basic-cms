@@ -34,6 +34,8 @@ Route::domain(env('BACKEND_DOMAIN'))->group(function() {
 		Route::post('register', 'Backend\Auth\RegisterController@register');
 
 		//トップ画像
+        Route::post('topimage/pict/store', 'Backend\TopimageController@pictStore')->name('topimage.pict.store'); //XHRでの画像アップロード
+        Route::post('topimage/pict/delete', 'Backend\TopimageController@pictDelete')->name('topimage.pict.delete'); //ajaxでの画像削除
 		Route::resource('topimage', 'Backend\TopimageController');
 
 		//アクションログ

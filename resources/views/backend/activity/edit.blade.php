@@ -101,12 +101,6 @@
                                         @endif
                                     </div>
 
-                                    @if($errors->has('activity'))
-                                        <span class="help-block">
-                                            <strong class="text-danger">{{ $errors->first('activity') }}</strong>
-                                        </span>
-                                    @endif
-
                                     <div id="pict-input-box">
                                         @if($activity->id !== null)
                                             @forelse($activity->pictures as $pict)
@@ -116,6 +110,11 @@
                                         @endif
                                     </div>
 
+                                    @if($errors->has('activity'))
+                                        <span class="help-block">
+                                            <strong class="text-danger">{{ $errors->first('activity') }}</strong>
+                                        </span>
+                                    @endif
                                 </div><!-- /.col-sm-9 -->
                             </div><!-- form-group -->
 
@@ -189,8 +188,7 @@
                 acceptedFiles: '.jpg, .jpeg, .gif, .png',
                 maxFilesize: 8, // 8MBまで
                 addRemoveLinks: true,
-                dictRemoveFile: 'Remove',
-                renameFile: 'test',
+                dictRemoveFile: '削除',
 //                previewTemplateContainer: document.querySelector('#preview-template').innerHTML,
 
                 init: function () {
@@ -209,6 +207,8 @@
                         order++; //順番をインクリメント
                         file.serverFileName = res.fileName; //サーバに保存してあるファイル名（拡張子付）
                         file.order = order;
+
+                        console.log(file.serverFileName);
 
                         //フォームを追加
                         $("#pict-input-box")

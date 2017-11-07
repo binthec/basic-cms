@@ -20,6 +20,21 @@ class Topimage extends Model
         self::CLOSE => '非公開',
     ];
 
+
+    /**
+     * Dropzone.jsで上げた画像を一時的に保存するディレクトリの絶対パス
+     *
+     * @var string
+     */
+    public $tmpDir = '';
+
+    /**
+     * 一時的にファイルを保存するディレクトリのパス
+     *
+     * @var string
+     */
+    public static $tmpFilePath = '/app/public/topimage-tmp/';
+
     /**
      * アップロード先ディレクトリの絶対パス
      *
@@ -32,14 +47,14 @@ class Topimage extends Model
      *
      * @var string
      */
-    public $baseFilePath = '/files/topimage/';
+    public static $baseFilePath = '/files/topimage/';
 
     /**
-     * トップ画像で使うファイル名
+     * 画像アップロードの際のkey名
      *
      * @var string
      */
-    public $baseFileName = 'original';
+    public static $paramName = 'file';
 
     /**
      * バリデーションメッセージ
@@ -56,7 +71,8 @@ class Topimage extends Model
     public function __construct()
     {
         parent::__construct();
-        $this->uploadDir = public_path() . $this->baseFilePath;
+        $this->tmpDir = storage_path() . self::$tmpFilePath;
+        $this->uploadDir = public_path() . self::$baseFilePath;
     }
 
     /**
@@ -68,6 +84,16 @@ class Topimage extends Model
     public function scopeOpen($query)
     {
         return $query->where('status', self::OPEN);
+    }
+
+    /**
+     * トップ画像のポリモーフィックリレーション
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function pictures()
+    {
+        return $this->morphMany(Picture::class, 'target');
     }
 
     /**
@@ -99,29 +125,34 @@ class Topimage extends Model
      */
     public function saveAll(Request $request)
     {
+
         $this->name = $request->name;
         $this->status = $request->status;
-
-        //画像が設定されている場合は拡張子を保存
-        if ($request->hasFile('topimage')) {
-            $this->extention = $request->file('topimage')->getClientOriginalExtension();
-        }
-
-        $this->save(); //IDが欲しいので一旦保存
+        $this->save();
 
         //ファイル処理
-        if ($request->hasFile('topimage')) {
+        if ($request->topimage !== '') {
 
             $uploadDir = $this->uploadDir . $this->id . '/';
-            $fileName = $this->baseFileName . '.' . $this->extention;
+            $fileName = $request->topimage;
 
-            //ディレクトリが空でなければ一旦空にする
-            if (File::exists($uploadDir) && !empty(File::files($uploadDir))) {
+            //picturesテーブルから紐付いているものは一旦全削除
+            $this->pictures()->delete();
+            $this->pictures()->create(['name' => $fileName]);
+
+            if(File::exists($uploadDir) && !empty(File::files($uploadDir))) {
+                //ディレクトリが空でなければ一旦空にする
                 File::cleanDirectory($uploadDir);
+            }elseif(!File::exists($uploadDir)) {
+                //保存先ディレクトリが無い場合は作成
+                File::makeDirectory($uploadDir);
             }
 
             //公開ディレクトリに移動、保存
-            $request->file('topimage')->move($uploadDir, $fileName);
+            //保存先に画像が無ければ（＝新しい画像の場合）、一時ディレクトリから移動
+            if (!File::exists($uploadDir . $fileName)) {
+                File::move($this->tmpDir . $fileName, $uploadDir . $fileName);
+            }
 
             /**
              * リサイズ処理
@@ -130,5 +161,15 @@ class Topimage extends Model
 //            $image->crop(750, 500)->save($uploadDir . 'h700.' . $this->extention);
         }
 
+    }
+
+    /**
+     * トップ画像に紐づく画像の内、order が１の画像のパスを返すメソッド
+     *
+     * @return mixed
+     */
+    public function getPictPath()
+    {
+        return self::$baseFilePath . $this->id . '/' . $this->pictures->first()->name;
     }
 }

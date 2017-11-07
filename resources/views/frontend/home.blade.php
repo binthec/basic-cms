@@ -9,7 +9,7 @@
         <section>
             <div class="top-slider">
                 @foreach($topimages as $img)
-                    <div><img src="{{ $img->baseFilePath . $img->id }}/{{ $img->baseFileName }}.{{ $img->extention }}"></div>
+                    <div><img src="{{ $img->getPictPath() }}"></div>
                 @endforeach
             </div>
         </section>

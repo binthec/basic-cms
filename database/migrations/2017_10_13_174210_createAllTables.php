@@ -45,8 +45,8 @@ class CreateAllTables extends Migration
         Schema::create('pictures', function (Blueprint $table) {
             $table->increments('id');
             $table->morphs('target');
-            $table->string('name')->nullable();
-            $table->integer('order');
+            $table->string('name');
+            $table->integer('order')->nullable();
             $table->timestamps();
         });
 
