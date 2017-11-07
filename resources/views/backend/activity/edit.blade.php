@@ -16,9 +16,9 @@
                 <div class="col-md-12">
 
                     @if($activity->id === null)
-                        {!! Form::open(['method' => 'post', 'route' => 'activity.store','enctype'=> 'multipart/form-data','class' => 'form-horizontal dropzone']) !!}
+                        {!! Form::open(['method' => 'post', 'route' => 'activity.store', 'files'=> true, 'class' => 'form-horizontal']) !!}
                     @else
-                        {!! Form::open(['method' => 'put', 'route' => ['activity.update', $activity],'enctype'=> 'multipart/form-data','class' => 'form-horizontal']) !!}
+                        {!! Form::open(['method' => 'put', 'route' => ['activity.update', $activity], 'files'=> true, 'class' => 'form-horizontal']) !!}
                     @endif
                     {{ csrf_field() }}
 
@@ -86,7 +86,7 @@
                                 <label for="act-pict-tmp" class="col-sm-3 control-label">画像</label>
                                 <div class="col-sm-9">
 
-                                    <div class="pict-add-box" id="pictUpload" data-num=0>
+                                    <div class="pict-add-box" id="pictUpload">
                                         <i class="fa fa-image"> ファイルをドロップするか、ここをクリックしてください</i>
                                     </div>
 
@@ -176,38 +176,77 @@
             // Disabling autoDiscover, otherwise Dropzone will try to attach twice. だそうな。
             Dropzone.autoDiscover = false;
 
-            //順番の設定
-            var order = 0;
-            if($('#pict-input-box input:last-child').attr('data-num') !== undefined){
+            var order = 0; //順番の設定
+
+            if ($('#pict-input-box input:last-child').attr('data-num') !== undefined) {
                 var order = $('#pict-input-box input:last-child').attr('data-num');
             }
 
-            console.log(order);
-
             var actPict = new Dropzone('#pictUpload', { //Dropzoneインスタンスを生成
-                url: "{{ route('activity.store.pict') }}", //送信先
+                url: "{{ route('activity.pict.store') }}", //送信先
                 method: 'POST',
                 uploadMultiple: false, //複数アップロードを許可するか
                 acceptedFiles: '.jpg, .jpeg, .gif, .png',
                 maxFilesize: 8, // 8MBまで
+                addRemoveLinks: true,
+                dictRemoveFile: 'Remove',
+                renameFile: 'test',
 //                previewTemplateContainer: document.querySelector('#preview-template').innerHTML,
 
                 init: function () {
-                    this.on("success", function (file, res) {
 
-                        order++; //順番をインクリメント
-
+                    this.on("addedfile", function (file) { //ファイルを追加した際の処理
                         //プレビューエリアにプレビューを追加
                         $('#pict-preview-box').append(file.previewTemplate);
+                    });
+
+                    this.on("sending", function (file, xhr, formData) { //ファイル送信時の処理
+                        file.baseFileName = getBaseFileName(); //ユニークな名前を生成
+                        formData.append('baseFileName', file.baseFileName);
+                    });
+
+                    this.on("success", function (file, res) { //アップロードが成功した際の処理
+                        order++; //順番をインクリメント
+                        file.serverFileName = res.fileName; //サーバに保存してあるファイル名（拡張子付）
+                        file.order = order;
 
                         //フォームを追加
                         $("#pict-input-box")
-                            .append("<input type=hidden name='pictures[" + order + "]' value='" + res.pictTmpName + "' data-num='" + order + "'>");
+                            .append("<input type=hidden name='pictures[" + order + "]' value='" + res.fileName + "' data-num='" + order + "'>");
+                    });
+
+                    this.on("removedfile", function (file) { //削除が成功した際の処理
+
+                        order--; //順番をデクリメント
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('activity.pict.delete') }}",
+                            data: {fileName: file.serverFileName},
+                            dataType: 'json',
+                            success: function (res) {
+                                $('#pict-input-box input[name="pictures[' + file.order + ']"]').remove();
+                            },
+                            error: function (res) {
+                                console.log('error!'); //TODO
+                            }
+                        });
                     });
                 }
-
             });
-        })
-        ;
+
+            /**
+             * ユニークなファイル名を返すメソッド
+             *
+             * @param myStrong
+             * @returns {string}
+             */
+            function getBaseFileName(myStrong){
+                var strong = 1000;
+                if (myStrong) strong = myStrong;
+                return new Date().getTime().toString(16)  + Math.floor(strong*Math.random()).toString(16)
+            }
+
+        });
     </script>
 @endsection

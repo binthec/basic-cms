@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
 use Validator;
 use App\Activity;
 
@@ -155,13 +156,38 @@ class ActivityController extends Controller
      */
     public function pictStore(Request $request)
     {
-        //画像名生成。YmdHis + 画像の元の拡張子
-        $pictTmpName = md5(uniqid(rand())) . '.' . Activity::getPictExt($request->file($this->pictParamName));
+
+        //画像名生成
+        $fileName = $request->baseFileName . '.' . Activity::getPictExt($request->file($this->pictParamName));
 
         //画像をstorageの一時ファイルに保存
-        $request->file($this->pictParamName)->move(storage_path(Activity::$tmpFilePath), $pictTmpName);
+        $request->file($this->pictParamName)->move(storage_path(Activity::$tmpFilePath), $fileName);
 
-        return response()->json(['code' => '200', 'pictTmpName' => $pictTmpName]);
+        return response()->json(['code' => '200', 'fileName' => $fileName]);
+
+    }
+
+    /**
+     * Dropzone.js から削除ボタンを押された時に呼び出されるメソッド
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function pictDelete(Request $request)
+    {
+
+        //一時ディレクトリに該当ファイルがあれば削除
+        if (File::exists(storage_path(Activity::$tmpFilePath) . $request->fileName)) {
+
+            File::delete(storage_path(Activity::$tmpFilePath) . $request->fileName);
+            return response()->json(['code' => '200', 'msg' => '削除に成功しました。']);
+
+        }else{
+
+            return response()->json(['code' => '500', 'msg' => 'ファイルが存在しないため、削除に失敗しました。']);
+
+        }
+
     }
 
 }

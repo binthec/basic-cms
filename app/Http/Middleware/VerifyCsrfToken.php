@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        '/activity/pictStore'
+        '/activity/pict/store',
+        '/activity/pict/delete',
     ];
 }
