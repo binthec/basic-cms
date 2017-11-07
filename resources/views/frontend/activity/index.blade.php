@@ -11,7 +11,7 @@
             @if($activities->count() > 0)
                 <div class="section-footer">
                     {{ $activities->links() }}
-                </div><!-- /.section-footer -->
+                </div>
             @endif
 
         </div><!-- /.container -->

@@ -10,7 +10,8 @@
         <div class="col-md-2">
             <div class="small-post">
 
-                <img src="/frontend/assets/images/blog1.jpg" class="thum">
+                <img src="{{ $act->getMainPictPath() }}" class="thum">
+
                 <div class="post-text">
                     <h5 class="entry-title">{{ $act->title }}</h5>
                     <p>
@@ -21,8 +22,6 @@
                         <i class="fa fa-arrow-right"></i>
                     </a>
                 </div><!-- /.post-text -->
-
-
 
             </div><!-- /.small-post -->
         </div><!-- /.col-sm-2 -->

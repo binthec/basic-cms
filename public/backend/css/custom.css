@@ -23,25 +23,7 @@ table.with-btn-sm > tbody > tr > td {
 }
 
 /* Form */
-.uploaded-img {
-    border-radius: 20px;
-    overflow: hidden;
-    width: 120px;
-    height: 120px;
-    position: relative;
-    display: inline-block;
-    z-index: 10;
-    margin: 10px;
-}
-.uploaded-img img {
-    display: block;
-    width: 120px;
-    height: 120px;
-}
 
-.dz-preview{
-    margin: 10px;
-}
 
 /*.uploaded-img p {*/
     /*margin-bottom: 10px;*/
@@ -72,8 +54,9 @@ input[type=file] {
     background-color: #fff;
     color: #ccc;
     font-size: 20px;
-    margin-top: 10px;
-    line-height: 100px;
+    padding: 10px;
+    line-height: 80px;
+    height: 100px;
 }
 
 .pict-add-box:hover {
@@ -85,6 +68,26 @@ input[type=file] {
     display: block;
     width: 100%;
     margin-top: 10px;
+}
+
+.uploaded-img {
+    border-radius: 20px;
+    overflow: hidden;
+    width: 120px;
+    height: 120px;
+    position: relative;
+    display: inline-block;
+    z-index: 10;
+    margin: 10px;
+}
+.uploaded-img img {
+    display: block;
+    width: 120px;
+    height: 120px;
+}
+
+.dz-preview{
+    margin: 10px;
 }
 
 /**

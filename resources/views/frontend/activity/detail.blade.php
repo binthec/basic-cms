@@ -24,13 +24,16 @@
 
             </div><!-- /.row -->
 
-            @include('frontend.activity.small-list')
+            @if($activities->count() > 0)
+                @include('frontend.activity.small-list')
+            @endif
 
             <div class="section-footer">
                 <div class="wow fadeInLeft">
                     <a href="{{ route('front.act.index') }}" class="btn btn-primary">もっと見る</a>
                 </div>
             </div><!-- /.section-footer -->
+
 
         </div><!-- /.container -->
     </section>

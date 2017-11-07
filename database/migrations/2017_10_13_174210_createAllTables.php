@@ -17,7 +17,6 @@ class CreateAllTables extends Migration
             $table->increments('id');
             $table->string('name');
             $table->tinyInteger('status');
-            $table->string('extention')->nullable();
             $table->timestamps();
         });
 

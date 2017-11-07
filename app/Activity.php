@@ -94,6 +94,17 @@ class Activity extends Model
     }
 
     /**
+     * 活動の様子のポリモーフィックリレーション
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function pictures()
+    {
+        return $this->morphMany(Picture::class, 'target');
+    }
+
+
+    /**
      * 公開ステータスのものだけ取得する場合のローカルスコープ
      *
      * @param $query
@@ -102,16 +113,6 @@ class Activity extends Model
     public function scopeOpen($query)
     {
         return $query->where('status', self::OPEN);
-    }
-
-    /**
-     * 活動の様子の全画像の取得
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-     */
-    public function pictures()
-    {
-        return $this->morphMany(Picture::class, 'target');
     }
 
     /**
@@ -175,7 +176,7 @@ class Activity extends Model
                 }
 
                 //保存先に画像が無ければ（＝新しい画像の場合）、一時ディレクトリから移動
-                if(!File::exists($uploadDir . $pict)){
+                if (!File::exists($uploadDir . $pict)) {
                     File::move($this->tmpDir . $pict, $uploadDir . $pict);
                 }
 
@@ -217,6 +218,16 @@ class Activity extends Model
         }
 
         return $ext;
+    }
+
+    /**
+     * トップ画像に紐づく画像の内、order が１の画像のパスを返すメソッド
+     *
+     * @return mixed
+     */
+    public function getMainPictPath()
+    {
+        return self::$baseFilePath . $this->id . '/' . $this->pictures->where('order', 1)->first()->name;
     }
 
 }

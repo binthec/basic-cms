@@ -103,12 +103,13 @@
                     <div id="owl-box" class="owl-carousel">
 
                         @foreach($activities as $act)
+
                             <div class="text-center item">
                                 <div class="act-post act-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
                                     <article>
                                         <header class="entry-header">
                                             <div class="entry-thumbnail">
-                                                <img src="/frontend/assets/images/blog1.jpg" alt="">
+                                                <img src="{{ $act->getMainPictPath() }}">
                                             </div>
                                             <h2 class="entry-title">{{ $act->title }}</h2>
                                             <p>
