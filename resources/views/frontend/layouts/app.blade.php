@@ -7,19 +7,19 @@
     <meta name="author" content="">
     <title>転倒予防教室｜Oita</title>
     <!-- core CSS -->
-    <link href="/frontend/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/frontend/assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/frontend/assets/css/animate.min.css" rel="stylesheet">
-    <link href="/frontend/assets/css/owl.carousel.css" rel="stylesheet">
-    <link href="/frontend/assets/css/owl.transitions.css" rel="stylesheet">
-    <link href="/frontend/assets/css/main.css" rel="stylesheet">
+    <link href="/frontend/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/frontend/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/frontend/css/animate.min.css" rel="stylesheet">
+    <link href="/frontend/css/owl.carousel.css" rel="stylesheet">
+    <link href="/frontend/css/owl.transitions.css" rel="stylesheet">
+    <link href="/frontend/css/main.css" rel="stylesheet">
 
     @yield('css')
 
-    <link href="/frontend/assets/css/custom.css" rel="stylesheet">
+    <link href="/frontend/css/custom.css" rel="stylesheet">
     <!--[if lt IE 9]-->
-    <script src="/frontend/assets/js/html5shiv.js"></script>
-    <script src="/frontend/assets/js/respond.min.js"></script>
+    <script src="/frontend/js/html5shiv.js"></script>
+    <script src="/frontend/js/respond.min.js"></script>
     <!--[endif]-->
 </head><!--/head-->
 
@@ -60,18 +60,18 @@
     </div>
 </footer><!--/#footer-->
 
-<script src="/frontend/assets/js/jquery.js"></script>
-<script src="/frontend/assets/js/bootstrap.min.js"></script>
+<script src="/frontend/js/jquery.js"></script>
+<script src="/frontend/js/bootstrap.min.js"></script>
 
-<script src="/frontend/assets/js/owl.carousel.min.js"></script>
-<script src="/frontend/assets/js/mousescroll.js"></script>
-<script src="/frontend/assets/js/smoothscroll.js"></script>
-<script src="/frontend/assets/js/jquery.prettyPhoto.js"></script>
-<script src="/frontend/assets/js/jquery.isotope.min.js"></script>
-<script src="/frontend/assets/js/jquery.inview.min.js"></script>
-<script src="/frontend/assets/js/wow.min.js"></script>
-<script src="/frontend/assets/js/main.js"></script>
-<script src="/frontend/assets/js/scrolling-nav.js"></script>
+<script src="/frontend/js/owl.carousel.min.js"></script>
+<script src="/frontend/js/mousescroll.js"></script>
+<script src="/frontend/js/smoothscroll.js"></script>
+<script src="/frontend/js/jquery.prettyPhoto.js"></script>
+<script src="/frontend/js/jquery.isotope.min.js"></script>
+<script src="/frontend/js/jquery.inview.min.js"></script>
+<script src="/frontend/js/wow.min.js"></script>
+<script src="/frontend/js/main.js"></script>
+<script src="/frontend/js/scrolling-nav.js"></script>
 
 @yield('js')
 

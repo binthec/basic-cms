@@ -89,4 +89,13 @@ class Picture extends Model
 
     }
 
+    public function getPictPath($model, $prefix = '')
+    {
+
+        //こっちでもうまくいくけどなぜか構文エラーでPHPStormに怒られる
+//        return $this->target_type::$baseFilePath . $this->target_id . '/' . $this->name;
+
+        return $model::$baseFilePath . $this->target_id . '/' . $prefix . $this->name;
+    }
+
 }

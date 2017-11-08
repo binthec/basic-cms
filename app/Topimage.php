@@ -153,7 +153,7 @@ class Topimage extends Model
             /**
              * リサイズ処理
              */
-//            $image = Picture::make($uploadDir . $fileName);
+//            $image = Image::make($uploadDir . $fileName);
 //            $image->crop(750, 500)->save($uploadDir . 'h700.' . $this->extention);
         }
 

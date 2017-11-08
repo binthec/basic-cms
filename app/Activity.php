@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Picture;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class Activity extends Model
 {
@@ -66,6 +67,12 @@ class Activity extends Model
      */
     public static $paramName = 'file';
 
+    /**
+     * 詳細ページで使う画像のプレフィックス
+     *
+     * @var string
+     */
+    public static $pictPrefix = '270x180_';
     /**
      * バリデーションメッセージ
      *
@@ -179,15 +186,17 @@ class Activity extends Model
                 //保存先に画像が無ければ（＝新しい画像の場合）、一時ディレクトリから移動
                 if (!File::exists($uploadDir . $pict)) {
                     File::move($this->tmpDir . $pict, $uploadDir . $pict);
+
+                    /**
+                     * リサイズ処理
+                     */
+                    $image = Image::make($uploadDir . $pict);
+                    $image->fit(270, 180)->save($uploadDir . self::$pictPrefix . $pict);
                 }
 
             }
 
-            /**
-             * リサイズ処理
-             */
-//            $image = Picture::make($uploadDir . $fileName);
-//            $image->crop(750, 500)->save($uploadDir . 'h700.' . $this->extention);
+
         }
 
     }
@@ -199,7 +208,7 @@ class Activity extends Model
      */
     public function getMainPictPath()
     {
-        return self::$baseFilePath . $this->id . '/' . $this->pictures->where('order', 1)->first()->name;
+        return self::$baseFilePath . $this->id . '/' . self::$pictPrefix . $this->pictures->where('order', 1)->first()->name;
     }
 
 }
