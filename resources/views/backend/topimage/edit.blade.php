@@ -46,14 +46,14 @@
                                 <div class="col-sm-9">
 
                                     <label class="radio-inline">
-                                        @if($topimage->id === null || $topimage->status === \App\Topimage::OPEN)
+                                        @if($topimage->id !== null && $topimage->status === \App\Topimage::OPEN)
                                             {{ Form::radio('status', \App\Topimage::OPEN, true, ['class' => 'flat-blue']) }} 公開
                                         @else
                                             {{ Form::radio('status', \App\Topimage::OPEN, '', ['class' => 'flat-blue']) }} 公開
                                         @endif
                                     </label>
                                     <label class="radio-inline">
-                                        @if($topimage->id !== null && $topimage->status === \App\Topimage::CLOSE)
+                                        @if($topimage->id === null || $topimage->status === \App\Topimage::CLOSE)
                                             {{ Form::radio('status', \App\Topimage::CLOSE, true, ['class' => 'flat-blue']) }} 非公開
                                         @else
                                             {{ Form::radio('status', \App\Topimage::CLOSE, '', ['class' => 'flat-blue']) }} 非公開
@@ -76,33 +76,25 @@
                                     <div class="pict-add-box" id="pictUpload">
                                         <i class="fa fa-image"> ファイルをドロップするか、ここをクリックしてください</i>
                                     </div>
+                                    <span class="help-block pull-right">
+                                        <p class="text-warning">※高さ600px以上の画像推奨</p>
+                                        @if($errors->has('topimage'))
+                                            <strong class="text-danger">{{ $errors->first('topimage') }}</strong>
+                                        @endif
+                                    </span>
 
                                     <div id="pict-preview-box">
                                         @if($topimage->id !== null)
                                             <div class="uploaded-img">
-                                                <img src="{{ App\Topimage::$baseFilePath . $topimage->id }}/{{ $pict->name }}">
+                                                <img src="{{ App\Topimage::$baseFilePath . $topimage->id }}/{{ $topimage->pictures->first()->name }}">
                                             </div>
                                         @endif
                                     </div>
 
                                     <div id="pict-input-box">
-                                        {{ Form::hidden('topimage', ($topimage->id !== null)? $pict->name : '') }}
+                                        {{ Form::hidden('topimage', ($topimage->id !== null)? $topimage->pictures->first()->name : '') }}
                                     </div>
 
-
-                                    <span class="help-block">
-                                    <p class="text-warning">※高さ600px以上の画像推奨</p>
-                                        @if($errors->has('topimage'))
-                                            <strong class="text-danger">{{ $errors->first('topimage') }}</strong>
-                                        @endif
-                                </span>
-
-                                    @if($topimage->id !== null)
-                                        <div class="uploaded-img">
-                                            <p>※アップロード済み画像があります。変更する場合のみ、再度アップロードしてください。</p>
-                                            <img src="{{ $topimage->baseFilePath . $topimage->id }}/{{ $topimage->baseFileName }}.{{ $topimage->extention }}">
-                                        </div>
-                                    @endif
                                 </div>
                             </div><!-- form-group -->
 
@@ -186,10 +178,10 @@
              * @param myStrong
              * @returns {string}
              */
-            function getBaseFileName(myStrong){
+            function getBaseFileName(myStrong) {
                 var strong = 1000;
                 if (myStrong) strong = myStrong;
-                return new Date().getTime().toString(16)  + Math.floor(strong*Math.random()).toString(16)
+                return new Date().getTime().toString(16) + Math.floor(strong * Math.random()).toString(16)
             }
 
 

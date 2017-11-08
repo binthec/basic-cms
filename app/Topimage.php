@@ -140,15 +140,11 @@ class Topimage extends Model
             $this->pictures()->delete();
             $this->pictures()->create(['name' => $fileName]);
 
-            if(File::exists($uploadDir) && !empty(File::files($uploadDir))) {
-                //ディレクトリが空でなければ一旦空にする
-                File::cleanDirectory($uploadDir);
-            }elseif(!File::exists($uploadDir)) {
-                //保存先ディレクトリが無い場合は作成
+            //保存先ディレクトリが無い場合は作成
+            if (!File::exists($uploadDir)) {
                 File::makeDirectory($uploadDir);
             }
 
-            //公開ディレクトリに移動、保存
             //保存先に画像が無ければ（＝新しい画像の場合）、一時ディレクトリから移動
             if (!File::exists($uploadDir . $fileName)) {
                 File::move($this->tmpDir . $fileName, $uploadDir . $fileName);

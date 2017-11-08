@@ -164,11 +164,6 @@ class Activity extends Model
 
             $uploadDir = $this->uploadDir . $this->id . '/'; //最終的な保存先
 
-            //保存先が空でなければ一旦空にする（容量節約のため…）
-//            if (File::exists($uploadDir) && !empty(File::files($uploadDir))) {
-//                File::cleanDirectory($uploadDir);
-//            }
-
             //picturesテーブルから紐付いているものは一旦全削除
             $this->pictures()->delete();
 
