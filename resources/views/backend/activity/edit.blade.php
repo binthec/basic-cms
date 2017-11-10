@@ -93,9 +93,13 @@
                                     <div id="pict-preview-box">
                                         @if($activity->id !== null)
                                             @forelse($activity->pictures as $pict)
-                                                <div class="uploaded-img">
-                                                    <img src="{{ \App\Activity::$baseFilePath . $activity->id }}/{{ $pict->name }}">
-                                                </div>
+                                                <div class="uploaded-preview">
+                                                    <div class="uploaded-img">
+                                                        <img src="{{ $pict->getPictPath(\App\Activity::class, \App\Activity::$pictPrefix) }}">
+                                                    </div>
+                                                    <a href="javascript: undefined;" class="remove"
+                                                       data-act-id={{ $activity->id }} data-pict-id="{{ $pict->id }}" data-pict-name="{{ $pict->name }}">削除</a>
+                                                </div><!-- /.uploaded-preview -->
                                             @empty
                                             @endforelse
                                         @endif
@@ -189,6 +193,9 @@
                 maxFilesize: 8, // 8MBまで
                 addRemoveLinks: true,
                 dictRemoveFile: '削除',
+                thumbnailWidth: 120,
+                thumbnailHeight: 80,
+
 //                previewTemplateContainer: document.querySelector('#preview-template').innerHTML,
 
                 init: function () {
@@ -221,7 +228,7 @@
 
                         $.ajax({
                             type: 'POST',
-                            url: "{{ route('activity.pict.delete') }}",
+                            url: "{{ route('activity.pict.delete', true) }}",
                             data: {fileName: file.serverFileName},
                             dataType: 'json',
                             success: function (res) {
@@ -235,16 +242,35 @@
                 }
             });
 
+            $('.uploaded-preview .remove').on('click', function () { //アップロード済画像の削除リンク押した時
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('activity.pict.delete') }}",
+                    data: {
+                        actId : $(this).attr('data-act-id'),
+                        pictId : $(this).attr('data-pict-id'),
+                        fileName: $(this).attr('data-pict-name'),
+                    },
+                    context : this, //自身をajaxの中に渡す
+                    success : function (res){
+                        $(this).parent('div').remove();
+                    },
+                    error: function (res) {
+                        console.log('error!'); //TODO
+                    }
+                });
+            });
+
             /**
              * ユニークなファイル名を返すメソッド
              *
              * @param myStrong
              * @returns {string}
              */
-            function getBaseFileName(myStrong){
+            function getBaseFileName(myStrong) {
                 var strong = 1000;
                 if (myStrong) strong = myStrong;
-                return new Date().getTime().toString(16)  + Math.floor(strong*Math.random()).toString(16)
+                return new Date().getTime().toString(16) + Math.floor(strong * Math.random()).toString(16)
             }
 
         });

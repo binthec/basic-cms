@@ -68,24 +68,48 @@ class Picture extends Model
      *
      * @param Request $request
      * @param $model
+     * @param bool $tmpFlg
      * @return \Illuminate\Http\JsonResponse
      */
-    public static function pictDelete(Request $request, $model)
+    public static function pictDelete(Request $request, $model, $tmpFlg = false)
     {
 
-        Log::info(print_r($request->fileName, true));
 
-        //一時ディレクトリに該当ファイルがあれば削除
-        if (File::exists(storage_path($model::$tmpFilePath) . $request->fileName)) {
+        switch ($tmpFlg) {
 
-            File::delete(storage_path($model::$tmpFilePath) . $request->fileName);
-            return response()->json(['code' => '200', 'msg' => '削除に成功しました。']);
+            case true: //一時画像の場合
+                //一時ディレクトリに該当ファイルがあれば削除
+                if (File::exists(storage_path($model::$tmpFilePath) . $request->fileName)) {
+                    File::delete(storage_path($model::$tmpFilePath) . $request->fileName);
+                    return response()->json(['code' => '200', 'msg' => '削除に成功しました。']);
+                } else {
+                    return response()->json(['code' => '500', 'msg' => 'ファイルが存在しないため、削除に失敗しました。']);
+                }
+                break;
 
-        } else {
+            default:
+            case false: //アップロード済画像の場合
 
-            return response()->json(['code' => '500', 'msg' => 'ファイルが存在しないため、削除に失敗しました。']);
+//                Log::info(print_r($request->actId, true));
+//                Log::info(print_r($request->pictId, true));
+//                Log::info(print_r($request->fileName, true));
 
+                Log::info(public_path($model::$baseFilePath) . $request->actId . '/' . $request->fileName);
+                Log::info(File::exists(public_path($model::$baseFilePath) . $request->actId . '/' . $request->fileName));
+
+                if (File::exists(public_path($model::$baseFilePath) . $request->actId . '/' . $request->fileName)) {
+                    File::delete(public_path($model::$baseFilePath) . $request->actId . '/' . $request->fileName);
+                    if ($model::$pictPrefix !== '') {
+                        File::delete(public_path($model::$baseFilePath) . $request->actId . '/' . $model::$pictPrefix . $request->fileName);
+                    }
+                    Picture::find($request->pictId)->delete();
+                    return response()->json(['code' => '200', 'msg' => '削除に成功しました。']);
+                } else {
+                    return response()->json(['code' => '500', 'msg' => 'ファイルが存在しないため、削除に失敗しました。']);
+                }
+                break;
         }
+
 
     }
 

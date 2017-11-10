@@ -156,7 +156,7 @@ class TopimageController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function pictDelete(Request $request)
+    public function pictDelete(Request $request, $tmpFlg = false)
     {
         return Picture::pictDelete($request, Topimage::class);
     }

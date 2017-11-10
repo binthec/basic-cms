@@ -155,9 +155,10 @@ class ActivityController extends Controller
      * Dropzone.js から削除ボタンを押された時に呼び出されるメソッド。Picureモデルを呼び出す
      *
      * @param Request $request
+     * @param bool $tmpFlg
      * @return \Illuminate\Http\JsonResponse
      */
-    public function pictDelete(Request $request)
+    public function pictDelete(Request $request, $tmpFlg = false)
     {
         return Picture::pictDelete($request, Activity::class);
     }

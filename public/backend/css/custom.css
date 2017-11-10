@@ -24,10 +24,9 @@ table.with-btn-sm > tbody > tr > td {
 
 /* Form */
 
-
 /*.uploaded-img p {*/
-    /*margin-bottom: 10px;*/
-    /*color: red;*/
+/*margin-bottom: 10px;*/
+/*color: red;*/
 /*}*/
 
 .form-group label.radio-inline:first-child {
@@ -70,24 +69,62 @@ input[type=file] {
     margin-top: 10px;
 }
 
-.uploaded-img {
-    border-radius: 20px;
-    overflow: hidden;
-    width: 120px;
-    height: 120px;
+.uploaded-preview {
     position: relative;
     display: inline-block;
-    z-index: 10;
+    vertical-align: top;
     margin: 10px;
+    min-height: 100px;
 }
+
+.uploaded-img {
+    border-radius: 10px;
+    overflow: hidden;
+    width: 120px;
+    height: 80px;
+    /*position: relative;*/
+    /*display: inline-block;*/
+    /*z-index: 10;*/
+    /*margin: 10px;*/
+}
+
 .uploaded-img img {
     display: block;
     width: 120px;
-    height: 120px;
+    height: 80px;
 }
 
-.dz-preview{
+.uploaded-preview .remove {
+    font-size: 14px;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    border: none;
+}
+
+.uploaded-preview .remove:hover {
+    text-decoration: underline;
+}
+
+/**
+ * dropzoneのサムネイル表示のカスタマイズ
+ */
+.dz-preview {
     margin: 10px;
+}
+
+.dz-preview .dz-image {
+    height: 80px;
+    border-radius: 10px;
+}
+
+.dz-preview .dz-details {
+    padding: 1em 1em;
+}
+
+.dz-preview .dz-success-mark,
+.dz-preview .dz-error-mark {
+    top: 40px;
 }
 
 /**
