@@ -19,7 +19,7 @@
 
                     <div class="act-picts">
                         @foreach($singleAct->pictures as $pict)
-                            <div><img src="{{ $pict->getPictPath(\App\Activity::class, \App\Activity::$pictPrefix) }}"></div>
+                            <img src="{{ $pict->getPictPath(\App\Activity::class, \App\Activity::$pictPrefix) }}">
                         @endforeach
                     </div>
 
@@ -51,6 +51,7 @@
 @section('js')
     <script src="/vendor/slick/slick.min.js"></script>
     <script>
+
         //Slider
         $('.act-picts').slick({
             dots: true,

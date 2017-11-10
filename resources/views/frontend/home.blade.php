@@ -29,7 +29,7 @@
                     <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="0ms">
                         <div class="media service-box">
                             <div class="pull-left">
-                                <img src="/frontend/assets/images/icon1.png" alt="img">
+                                <img src="/frontend/images/icon1.png" alt="img">
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">Responsive Design</h4>
@@ -44,7 +44,7 @@
                     <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="100ms">
                         <div class="media service-box">
                             <div class="pull-left">
-                                <img src="/frontend/assets/images/icon2.png" alt="img">
+                                <img src="/frontend/images/icon2.png" alt="img">
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">UX Design</h4>
@@ -59,7 +59,7 @@
                     <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="200ms">
                         <div class="media service-box">
                             <div class="pull-left">
-                                <img src="/frontend/assets/images/icon3.png" alt="img">
+                                <img src="/frontend/images/icon3.png" alt="img">
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">UI Design</h4>
@@ -150,7 +150,7 @@
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="panel-one">
-                        <div class="user-img"><img alt="" src="/frontend/assets/images/testimonail_1.jpg"></div>
+                        <div class="user-img"><img alt="" src="/frontend/images/testimonail_1.jpg"></div>
                         <div class="testi-info">
                             <h4>大分 太郎</h4>
                             <h5></h5>
@@ -229,8 +229,5 @@
         $("#owl-box").owlCarousel({
             items: 4,
         })
-
-        //    $("body").data("page", "frontpage");
-
     </script>
 @endsection
