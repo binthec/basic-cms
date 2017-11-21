@@ -107,9 +107,9 @@ class ActivityController extends Controller
 
         DB::beginTransaction();
 
-        try {
+        $activity->saveAll($request);
 
-            $activity->saveAll($request);
+        try {
 
             DB::commit();
             return redirect('/activity')->with('flashMsg', '登録が完了しました。');

@@ -95,7 +95,7 @@
                                             @forelse($activity->pictures as $pict)
                                                 <div class="uploaded-preview">
                                                     <div class="uploaded-img">
-                                                        <img src="{{ $pict->getPictPath(\App\Activity::class, \App\Activity::$pictPrefix) }}">
+                                                        <img src="{{ $pict->getPictPath(\App\Activity::class, \App\Activity::$pictPrefix) }}" data-name="{{ $pict->name }}">
                                                     </div>
                                                     <a href="javascript: undefined;" class="remove" data-act-id={{ $activity->id }} data-pict-id="{{ $pict->id }}" data-pict-name="{{ $pict->name }}">削除</a>
                                                 </div><!-- /.uploaded-preview -->
@@ -171,18 +171,6 @@
 @endsection
 
 @section('js')
-    <script>
-        //jQueryUI sortable
-        $(function () {
-            $("#pict-preview-box").sortable();
-            $("#pict-preview-box").disableSelection();
-
-            $('#pict-preview-box li').map(function () {
-                console.log()
-            });
-        });
-    </script>
-
     <script src="/backend/js/use-ckeditor.js"></script>
     <script>
         $(function () {
@@ -283,6 +271,26 @@
                 if (myStrong) strong = myStrong;
                 return new Date().getTime().toString(16) + Math.floor(strong * Math.random()).toString(16)
             }
+
+            /**
+             *  jQueryUI sortable
+             */
+            $("#pict-preview-box").sortable();
+            $("#pict-preview-box").disableSelection();
+
+            //submit押した際に順番をkeyを順番とした配列にvalを再登録
+//            $('form').submit(function(){
+//                $('.uploaded-img img').map(function () {
+//                    var index = $('.uploaded-img img').index(this);
+//                    console.log($(this).attr('data-name'));
+//                    var order = index + 1;
+//
+//                    console.log(order);
+//
+//                    $('input[name="pictures[' + order + ']"]').val($(this).attr('data-name'));
+//                })
+////                return false;
+//            });
 
         });
     </script>
