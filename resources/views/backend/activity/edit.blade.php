@@ -95,19 +95,15 @@
                                             @forelse($activity->pictures as $pict)
                                                 <div class="uploaded-preview">
                                                     <div class="uploaded-img">
-                                                        <img src="{{ $pict->getPictPath(\App\Activity::class, \App\Activity::$pictPrefix) }}" data-name="{{ $pict->name }}">
+                                                        <img src="{{ $pict->getPictPath(\App\Activity::class, \App\Activity::$pictPrefix) }}">
                                                     </div>
                                                     <a href="javascript: undefined;" class="remove" data-act-id={{ $activity->id }} data-pict-id="{{ $pict->id }}" data-pict-name="{{ $pict->name }}">削除</a>
-                                                </div><!-- /.uploaded-preview -->
-                                            @empty
-                                            @endforelse
-                                        @endif
-                                    </div>
 
-                                    <div id="pict-input-box">
-                                        @if($activity->id !== null)
-                                            @forelse($activity->pictures as $pict)
-                                                {{ Form::hidden('pictures[' . $pict->order . ']', $pict->name, ['data-num' => $pict->order]) }}
+                                                    <span class="pict-input-box">
+                                                        {{ Form::hidden('pictures[]', $pict->name) }}
+                                                    </span>
+                                                </div><!-- /.uploaded-preview -->
+
                                             @empty
                                             @endforelse
                                         @endif
@@ -178,12 +174,6 @@
             // Disabling autoDiscover, otherwise Dropzone will try to attach twice. だそうな。
             Dropzone.autoDiscover = false;
 
-            var order = 0; //順番の設定
-
-            if ($('#pict-input-box input:last-child').attr('data-num') !== undefined) {
-                var order = $('#pict-input-box input:last-child').attr('data-num');
-            }
-
             var actPict = new Dropzone('#pictUpload', { //Dropzoneインスタンスを生成
                 url: "{{ route('activity.pict.store') }}", //送信先
                 method: 'POST',
@@ -210,20 +200,11 @@
                     });
 
                     this.on("success", function (file, res) { //アップロードが成功した際の処理
-                        order++; //順番をインクリメント
                         file.serverFileName = res.fileName; //サーバに保存してあるファイル名（拡張子付）
-                        file.order = order;
-
-                        console.log(file.serverFileName);
-
-                        //フォームを追加
-                        $("#pict-input-box")
-                            .append("<input type=hidden name='pictures[" + order + "]' value='" + res.fileName + "' data-num='" + order + "'>");
+                        $(file.previewTemplate).append("<input type=hidden name=pictures[] value=" + res.fileName + ">"); //フォームを追加
                     });
 
                     this.on("removedfile", function (file) { //削除が成功した際の処理
-
-                        order--; //順番をデクリメント
 
                         $.ajax({
                             type: 'POST',
@@ -231,7 +212,7 @@
                             data: {fileName: file.serverFileName},
                             dataType: 'json',
                             success: function (res) {
-                                $('#pict-input-box input[name="pictures[' + file.order + ']"]').remove();
+                                $('.pict-input-box input').val(file.serverFileName).remove();
                             },
                             error: function (res) {
                                 console.log('error!'); //TODO
@@ -277,21 +258,6 @@
              */
             $("#pict-preview-box").sortable();
             $("#pict-preview-box").disableSelection();
-
-            //submit押した際に順番をkeyを順番とした配列にvalを再登録
-//            $('form').submit(function(){
-//                $('.uploaded-img img').map(function () {
-//                    var index = $('.uploaded-img img').index(this);
-//                    console.log($(this).attr('data-name'));
-//                    var order = index + 1;
-//
-//                    console.log(order);
-//
-//                    $('input[name="pictures[' + order + ']"]').val($(this).attr('data-name'));
-//                })
-////                return false;
-//            });
-
         });
     </script>
 @endsection

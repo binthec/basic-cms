@@ -177,7 +177,7 @@ class Activity extends Model
             //それぞれの画像に対して処理
             foreach ($request->pictures as $key => $pict) {
 
-                $this->pictures()->create(['name' => $pict, 'order' => $key]);
+                $this->pictures()->create(['name' => $pict, 'order' => $key + 1]);
 
                 if (!File::exists($uploadDir)) { //保存先ディレクトリが無い場合は作成
                     File::makeDirectory($uploadDir);

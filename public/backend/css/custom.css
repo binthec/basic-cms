@@ -127,6 +127,10 @@ input[type=file] {
     top: 40px;
 }
 
+.uploaded-img img,
+.dz-image img{
+    cursor: move;
+}
 /**
  * select2
  */
