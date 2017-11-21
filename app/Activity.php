@@ -204,11 +204,17 @@ class Activity extends Model
     /**
      * トップ画像に紐づく画像の内、order が１の画像のパスを返すメソッド
      *
-     * @return mixed
+     * @return string
      */
     public function getMainPictPath()
     {
-        return self::$baseFilePath . $this->id . '/' . self::$pictPrefix . $this->pictures->where('order', 1)->first()->name;
+
+        if ($this->pictures->count() > 0) {
+            return self::$baseFilePath . $this->id . '/' . self::$pictPrefix . $this->pictures->sortBy('order')->first()->name;
+        }
+
+        return '';
+
     }
 
 }

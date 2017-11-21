@@ -97,8 +97,7 @@
                                                     <div class="uploaded-img">
                                                         <img src="{{ $pict->getPictPath(\App\Activity::class, \App\Activity::$pictPrefix) }}">
                                                     </div>
-                                                    <a href="javascript: undefined;" class="remove"
-                                                       data-act-id={{ $activity->id }} data-pict-id="{{ $pict->id }}" data-pict-name="{{ $pict->name }}">削除</a>
+                                                    <a href="javascript: undefined;" class="remove" data-act-id={{ $activity->id }} data-pict-id="{{ $pict->id }}" data-pict-name="{{ $pict->name }}">削除</a>
                                                 </div><!-- /.uploaded-preview -->
                                             @empty
                                             @endforelse
@@ -172,6 +171,18 @@
 @endsection
 
 @section('js')
+    <script>
+        //jQueryUI sortable
+        $(function () {
+            $("#pict-preview-box").sortable();
+            $("#pict-preview-box").disableSelection();
+
+            $('#pict-preview-box li').map(function () {
+                console.log()
+            });
+        });
+    </script>
+
     <script src="/backend/js/use-ckeditor.js"></script>
     <script>
         $(function () {
@@ -247,12 +258,12 @@
                     type: 'POST',
                     url: "{{ route('activity.pict.delete') }}",
                     data: {
-                        actId : $(this).attr('data-act-id'),
-                        pictId : $(this).attr('data-pict-id'),
+                        actId: $(this).attr('data-act-id'),
+                        pictId: $(this).attr('data-pict-id'),
                         fileName: $(this).attr('data-pict-name'),
                     },
-                    context : this, //自身をajaxの中に渡す
-                    success : function (res){
+                    context: this, //自身をajaxの中に渡す
+                    success: function (res) {
                         $(this).parent('div').remove();
                     },
                     error: function (res) {

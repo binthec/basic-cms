@@ -162,7 +162,7 @@
 </div><!-- ./wrapper -->
 
 <script src="/vendor/jquery/jquery.js"></script><!-- jQuery 3 -->
-{{--<script src="/vendor/jquery-ui/jquery-ui.js"></script><!-- jQuery UI 1.11.4 -->--}}
+<script src="/vendor/jquery-ui/jquery-ui.js"></script><!-- jQuery UI 1.11.4 -->
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 {{--<script>--}}
