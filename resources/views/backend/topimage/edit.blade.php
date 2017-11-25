@@ -1,4 +1,5 @@
 @extends('backend.layouts.app')
+@section('bodyId', 'topimage-edit')
 
 @section('content')
     <div class="content-wrapper">
@@ -69,33 +70,34 @@
                             </div><!-- form-group -->
 
                             <div class="form-group{{ $errors->has('topimage') ? ' has-error' : '' }}">
-                                <label for="topimage"
-                                       class="col-sm-3 control-label">画像{!! ($topimage->id === null)? ' <span class="text-danger">*</span>' : '' !!}</label>
+                                <label for="act-pict-tmp" class="col-sm-3 control-label">画像</label>
                                 <div class="col-sm-9">
 
                                     <div class="pict-add-box" id="pictUpload">
                                         <i class="fa fa-image"> ファイルをドロップするか、ここをクリックしてください</i>
                                     </div>
-                                    <span class="help-block pull-right">
-                                        <p class="text-warning">※高さ600px以上の画像推奨</p>
-                                        @if($errors->has('topimage'))
-                                            <strong class="text-danger">{{ $errors->first('topimage') }}</strong>
-                                        @endif
-                                    </span>
 
-                                    <div id="pict-preview-box">
+                                    <div id="pict-preview-box" class="text-center">
                                         @if($topimage->id !== null)
-                                            <div class="uploaded-img">
-                                                <img src="{{ App\Topimage::$baseFilePath . $topimage->id }}/{{ $topimage->pictures->first()->name }}">
-                                            </div>
+                                            <div class="uploaded-preview">
+                                                <div class="uploaded-img">
+                                                    <img src="{{ $topimage->pict->first()->getPictPath(\App\Topimage::class) }}">
+                                                </div>
+                                                <a href="javascript: undefined;" class="remove" data-act-id={{ $topimage->id }} data-pict-id="" data-pict-name="">削除</a>
+
+                                                <span class="pict-input-box">
+                                                    {{ Form::hidden('topimage', '') }}
+                                                </span>
+                                            </div><!-- /.uploaded-preview -->
                                         @endif
                                     </div>
 
-                                    <div id="pict-input-box">
-                                        {{ Form::hidden('topimage', ($topimage->id !== null)? $topimage->pictures->first()->name : '') }}
-                                    </div>
-
-                                </div>
+                                    @if($errors->has('topimage'))
+                                        <span class="help-block">
+                                            <strong class="text-danger">{{ $errors->first('topimage') }}</strong>
+                                        </span>
+                                    @endif
+                                </div><!-- /.col-sm-9 -->
                             </div><!-- form-group -->
 
                         </div><!-- /.box-body -->
@@ -131,9 +133,11 @@
                 uploadMultiple: false, //複数アップロードを許可するか
                 acceptedFiles: '.jpg, .jpeg, .gif, .png',
                 maxFilesize: 8, // 8MBまで
-                maxFile: 1, // ファイル１つまで…？にならない：TODO
                 addRemoveLinks: true,
                 dictRemoveFile: '削除',
+                thumbnailWidth: 360,
+                thumbnailHeight: 240,
+                maxFile: 1, // ファイル１つまで…？にならない：TODO
 
                 init: function () {
 
@@ -149,20 +153,20 @@
 
                     this.on("success", function (file, res) { //アップロードが成功した際の処理
                         file.serverFileName = res.fileName; //サーバに保存してあるファイル名（拡張子付）
-
-                        //フォームにファイル名を追加
-                        $("#pict-input-box input").val(res.fileName);
+                        $(file.previewTemplate).append("<input type='hidden' name='topimage' value='" + res.fileName + "'>"); //フォームを追加
                     });
 
                     this.on("removedfile", function (file) { //削除が成功した際の処理
-
                         $.ajax({
                             type: 'POST',
                             url: "{{ route('topimage.pict.delete') }}",
-                            data: {fileName: file.serverFileName},
+                            data: {
+                                fileName: file.serverFileName,
+                                tmpFlg : true
+                            },
                             dataType: 'json',
                             success: function (res) {
-                                $('#pict-input-box input').val('');
+                                $('.pict-input-box input').val(file.serverFileName).remove();
                             },
                             error: function (res) {
                                 console.log('error!'); //TODO
@@ -172,18 +176,24 @@
                 }
             });
 
-            /**
-             * ユニークなファイル名を返すメソッド
-             *
-             * @param myStrong
-             * @returns {string}
-             */
-            function getBaseFileName(myStrong) {
-                var strong = 1000;
-                if (myStrong) strong = myStrong;
-                return new Date().getTime().toString(16) + Math.floor(strong * Math.random()).toString(16)
-            }
-
+            $('.uploaded-preview .remove').on('click', function () { //アップロード済画像の削除リンク押した時
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('topimage.pict.delete') }}",
+                    data: {
+                        actId: $(this).attr('data-act-id'),
+                        pictId: $(this).attr('data-pict-id'),
+                        fileName: $(this).attr('data-pict-name'),
+                    },
+                    context: this, //自身をajaxの中に渡す
+                    success: function (res) {
+                        $(this).parent('div').remove();
+                    },
+                    error: function (res) {
+                        console.log('error!'); //TODO
+                    }
+                });
+            });
 
         });
     </script>

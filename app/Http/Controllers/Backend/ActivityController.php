@@ -158,7 +158,7 @@ class ActivityController extends Controller
      * @param bool $tmpFlg
      * @return \Illuminate\Http\JsonResponse
      */
-    public function pictDelete(Request $request, $tmpFlg = false)
+    public function pictDelete(Request $request)
     {
         return Picture::pictDelete($request, Activity::class);
     }

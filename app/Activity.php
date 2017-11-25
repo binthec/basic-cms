@@ -184,6 +184,7 @@ class Activity extends Model
                 }
 
                 //保存先に画像が無ければ（＝新しい画像の場合）、一時ディレクトリから移動
+                //保存先に画像がある時（＝既に登録されている画像の場合）は何もしない
                 if (!File::exists($uploadDir . $pict)) {
                     File::move($this->tmpDir . $pict, $uploadDir . $pict);
 
@@ -196,9 +197,7 @@ class Activity extends Model
 
             }
 
-
         }
-
     }
 
     /**

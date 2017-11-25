@@ -185,8 +185,6 @@
                 thumbnailWidth: 120,
                 thumbnailHeight: 80,
 
-//                previewTemplateContainer: document.querySelector('#preview-template').innerHTML,
-
                 init: function () {
 
                     this.on("addedfile", function (file) { //ファイルを追加した際の処理
@@ -201,15 +199,17 @@
 
                     this.on("success", function (file, res) { //アップロードが成功した際の処理
                         file.serverFileName = res.fileName; //サーバに保存してあるファイル名（拡張子付）
-                        $(file.previewTemplate).append("<input type=hidden name=pictures[] value=" + res.fileName + ">"); //フォームを追加
+                        $(file.previewTemplate).append("<input type='hidden' name='pictures[]' value='" + res.fileName + "'>"); //フォームを追加
                     });
 
                     this.on("removedfile", function (file) { //削除が成功した際の処理
-
                         $.ajax({
                             type: 'POST',
-                            url: "{{ route('activity.pict.delete', true) }}",
-                            data: {fileName: file.serverFileName},
+                            url: "{{ route('activity.pict.delete') }}",
+                            data: {
+                                fileName: file.serverFileName,
+                                tmpFlg : true
+                            },
                             dataType: 'json',
                             success: function (res) {
                                 $('.pict-input-box input').val(file.serverFileName).remove();
@@ -240,18 +240,6 @@
                     }
                 });
             });
-
-            /**
-             * ユニークなファイル名を返すメソッド
-             *
-             * @param myStrong
-             * @returns {string}
-             */
-            function getBaseFileName(myStrong) {
-                var strong = 1000;
-                if (myStrong) strong = myStrong;
-                return new Date().getTime().toString(16) + Math.floor(strong * Math.random()).toString(16)
-            }
 
             /**
              *  jQueryUI sortable

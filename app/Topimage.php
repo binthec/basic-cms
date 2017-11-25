@@ -149,12 +149,6 @@ class Topimage extends Model
             if (!File::exists($uploadDir . $fileName)) {
                 File::move($this->tmpDir . $fileName, $uploadDir . $fileName);
             }
-
-            /**
-             * リサイズ処理
-             */
-//            $image = Image::make($uploadDir . $fileName);
-//            $image->crop(750, 500)->save($uploadDir . 'h700.' . $this->extention);
         }
 
     }

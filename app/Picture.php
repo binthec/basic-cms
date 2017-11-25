@@ -68,14 +68,12 @@ class Picture extends Model
      *
      * @param Request $request
      * @param $model
-     * @param bool $tmpFlg
      * @return \Illuminate\Http\JsonResponse
      */
-    public static function pictDelete(Request $request, $model, $tmpFlg = false)
+    public static function pictDelete(Request $request, $model)
     {
 
-
-        switch ($tmpFlg) {
+        switch ($request->tmpFlg) {
 
             case true: //一時画像の場合
                 //一時ディレクトリに該当ファイルがあれば削除
@@ -90,13 +88,6 @@ class Picture extends Model
             default:
             case false: //アップロード済画像の場合
 
-//                Log::info(print_r($request->actId, true));
-//                Log::info(print_r($request->pictId, true));
-//                Log::info(print_r($request->fileName, true));
-
-                Log::info(public_path($model::$baseFilePath) . $request->actId . '/' . $request->fileName);
-                Log::info(File::exists(public_path($model::$baseFilePath) . $request->actId . '/' . $request->fileName));
-
                 if (File::exists(public_path($model::$baseFilePath) . $request->actId . '/' . $request->fileName)) {
                     File::delete(public_path($model::$baseFilePath) . $request->actId . '/' . $request->fileName);
                     if ($model::$pictPrefix !== '') {
@@ -110,9 +101,15 @@ class Picture extends Model
                 break;
         }
 
-
     }
 
+    /**
+     * 画像単体のファイルパスを返すメソッド
+     *
+     * @param $model
+     * @param string $prefix
+     * @return string
+     */
     public function getPictPath($model, $prefix = '')
     {
 

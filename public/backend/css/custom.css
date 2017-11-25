@@ -49,7 +49,7 @@ input[type=file] {
     width: 100%;
     text-align: center;
     border: 2px solid #ccc;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: #fff;
     color: #ccc;
     font-size: 20px;
@@ -82,16 +82,25 @@ input[type=file] {
     overflow: hidden;
     width: 120px;
     height: 80px;
-    /*position: relative;*/
-    /*display: inline-block;*/
-    /*z-index: 10;*/
-    /*margin: 10px;*/
+}
+
+#topimage-edit .uploaded-img,
+#topimage-edit .dz-preview .dz-image {
+    width: 360px;
+    height: 240px;
+}
+
+#topimage-edit .dz-preview .dz-details {
+    top: 30%;
+}
+
+#topimage-edit .dz-preview .dz-success-mark,
+#topimage-edit .dz-preview .dz-error-mark {
+    top: 45%;
 }
 
 .uploaded-img img {
     display: block;
-    width: 120px;
-    height: 80px;
 }
 
 .uploaded-preview .remove {
@@ -128,9 +137,10 @@ input[type=file] {
 }
 
 .uploaded-img img,
-.dz-image img{
+.dz-image img {
     cursor: move;
 }
+
 /**
  * select2
  */
