@@ -85,7 +85,8 @@ input[type=file] {
 }
 
 #topimage-edit .uploaded-img,
-#topimage-edit .dz-preview .dz-image {
+#topimage-edit .dz-preview .dz-image,
+#topimage-edit .uploaded-img img{
     width: 360px;
     height: 240px;
 }

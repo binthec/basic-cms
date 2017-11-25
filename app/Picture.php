@@ -51,8 +51,6 @@ class Picture extends Model
     public static function pictStore(Request $request, $model)
     {
 
-        Log::info(print_r($model::$paramName, true));
-
         //画像名生成
         $fileName = $request->baseFileName . '.' . self::getPictExt($request->file($model::$paramName));
 
@@ -90,7 +88,7 @@ class Picture extends Model
 
                 if (File::exists(public_path($model::$baseFilePath) . $request->actId . '/' . $request->fileName)) {
                     File::delete(public_path($model::$baseFilePath) . $request->actId . '/' . $request->fileName);
-                    if ($model::$pictPrefix !== '') {
+                    if (isset($model::$pictPrefix) && $model::$pictPrefix !== '') {
                         File::delete(public_path($model::$baseFilePath) . $request->actId . '/' . $model::$pictPrefix . $request->fileName);
                     }
                     Picture::find($request->pictId)->delete();

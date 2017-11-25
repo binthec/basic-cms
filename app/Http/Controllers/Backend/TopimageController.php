@@ -84,7 +84,8 @@ class TopimageController extends Controller
      */
     public function edit(Topimage $topimage)
     {
-        return view('backend.topimage.edit', compact('topimage'));
+        $pict = $topimage->pictures->first();
+        return view('backend.topimage.edit', compact('topimage', 'pict'));
     }
 
     /**
@@ -156,7 +157,7 @@ class TopimageController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function pictDelete(Request $request, $tmpFlg = false)
+    public function pictDelete(Request $request)
     {
         return Picture::pictDelete($request, Topimage::class);
     }

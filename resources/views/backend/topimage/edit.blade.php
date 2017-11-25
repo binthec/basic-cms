@@ -81,12 +81,12 @@
                                         @if($topimage->id !== null)
                                             <div class="uploaded-preview">
                                                 <div class="uploaded-img">
-                                                    <img src="{{ $topimage->pict->first()->getPictPath(\App\Topimage::class) }}">
+                                                    <img src="{{ $topimage->pictures->first()->getPictPath(\App\Topimage::class) }}">
                                                 </div>
-                                                <a href="javascript: undefined;" class="remove" data-act-id={{ $topimage->id }} data-pict-id="" data-pict-name="">削除</a>
+                                                <a href="javascript: undefined;" class="remove" data-act-id="{{ $topimage->id }}" data-pict-id="{{ $pict->id }}" data-pict-name="{{ $pict->name }}">削除</a>
 
                                                 <span class="pict-input-box">
-                                                    {{ Form::hidden('topimage', '') }}
+                                                    {{ Form::hidden('topimage', $pict->name) }}
                                                 </span>
                                             </div><!-- /.uploaded-preview -->
                                         @endif
@@ -121,7 +121,10 @@
 
 @endsection
 
+
+
 @section('js')
+    @include('backend/parts/func-dz', ['className' => 'topimage'])
     <script>
         $(function () {
             // Disabling autoDiscover, otherwise Dropzone will try to attach twice. だそうな。
@@ -139,62 +142,8 @@
                 thumbnailHeight: 240,
                 maxFile: 1, // ファイル１つまで…？にならない：TODO
 
-                init: function () {
-
-                    this.on("addedfile", function (file) { //ファイルを追加した際の処理
-                        //プレビューエリアにプレビューを追加
-                        $('#pict-preview-box').append(file.previewTemplate);
-                    });
-
-                    this.on("sending", function (file, xhr, formData) { //ファイル送信時の処理
-                        file.baseFileName = getBaseFileName(); //ユニークな名前を生成
-                        formData.append('baseFileName', file.baseFileName);
-                    });
-
-                    this.on("success", function (file, res) { //アップロードが成功した際の処理
-                        file.serverFileName = res.fileName; //サーバに保存してあるファイル名（拡張子付）
-                        $(file.previewTemplate).append("<input type='hidden' name='topimage' value='" + res.fileName + "'>"); //フォームを追加
-                    });
-
-                    this.on("removedfile", function (file) { //削除が成功した際の処理
-                        $.ajax({
-                            type: 'POST',
-                            url: "{{ route('topimage.pict.delete') }}",
-                            data: {
-                                fileName: file.serverFileName,
-                                tmpFlg : true
-                            },
-                            dataType: 'json',
-                            success: function (res) {
-                                $('.pict-input-box input').val(file.serverFileName).remove();
-                            },
-                            error: function (res) {
-                                console.log('error!'); //TODO
-                            }
-                        });
-                    });
-                }
+                init: getDZInit('topimage', 'topimage'),
             });
-
-            $('.uploaded-preview .remove').on('click', function () { //アップロード済画像の削除リンク押した時
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('topimage.pict.delete') }}",
-                    data: {
-                        actId: $(this).attr('data-act-id'),
-                        pictId: $(this).attr('data-pict-id'),
-                        fileName: $(this).attr('data-pict-name'),
-                    },
-                    context: this, //自身をajaxの中に渡す
-                    success: function (res) {
-                        $(this).parent('div').remove();
-                    },
-                    error: function (res) {
-                        console.log('error!'); //TODO
-                    }
-                });
-            });
-
         });
     </script>
 @endsection
