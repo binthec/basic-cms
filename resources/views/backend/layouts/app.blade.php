@@ -22,6 +22,12 @@
     <link rel="stylesheet" href="/vendor/bootstrap-datepicker/bootstrap-datepicker.css">
     <link rel="stylesheet" href="/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="/vendor/dropzone/dropzone-custom.css">
+
+    <!-- fullCalendar -->
+    <link rel="stylesheet" href="/vendor/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="/vendor/fullcalendar/fullcalendar.print.min.css" media="print">
+
+
     {{--<link rel="stylesheet" href="/vendor/dropzone/dropzone.css">--}}
 
     {{--<link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">--}}
@@ -113,6 +119,17 @@
                     </ul>
                 </li>
 
+                <li class="treeview {{ isActiveUrl('event*') }}">
+                    <a href="#">
+                        <i class="fa fa-calendar"></i> <span>カレンダー</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu {{ isActiveUrl('event*') }}">
+                        <li class="{{ isActiveUrl('event') }}"><a href="{{ route('event.index') }}"><i class="fa fa-circle-o"></i> 一覧表示・編集</a></li>
+                        <li class="{{ isActiveUrl('event/create') }}"><a href="{{ route('event.create') }}"><i class="fa fa-circle-o"></i> 新規登録</a></li>
+                    </ul>
+                </li>
+
                 <li class="treeview {{ isActiveUrl('activity*') }}">
                     <a href="#">
                         <i class="fa fa-newspaper-o"></i> <span>活動の様子</span>
@@ -161,7 +178,8 @@
 
 </div><!-- ./wrapper -->
 
-<script src="/vendor/jquery/jquery.js"></script><!-- jQuery 3 -->
+{{--<script src="/vendor/jquery/jquery.js"></script><!-- jQuery 3 -->--}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/vendor/jquery-ui/jquery-ui.js"></script><!-- jQuery UI 1.11.4 -->
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -181,6 +199,10 @@
 <script src="/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 {{--<script src="/vendor/dropzone/dropzone.js"></script>--}}
 <script src="/vendor/dropzone/dropzone.js"></script>
+
+<!-- fullCalendar -->
+<script src="/vendor/fullcalendar/fullcalendar.min.js"></script>
+{{--<script src='/vendor/fullcalendar/dist/locale/ja.js'></script>--}}
 
 <!-- Sparkline -->
 {{--<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>--}}

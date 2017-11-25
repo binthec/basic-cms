@@ -50,6 +50,13 @@ class CreateAllTables extends Migration
             $table->timestamps();
         });
 
+        Schema::create('events', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->date('date');
+            $table->timestamps();
+        });
+
         //パーティショニングのため、SQL直書き
         DB::statement("
 			ALTER TABLE action_logs
@@ -99,5 +106,6 @@ class CreateAllTables extends Migration
         Schema::dropIfExists('action_logs');
         Schema::dropIfExists('activities');
         Schema::dropIfExists('pictures');
+        Schema::dropIfExists('events');
     }
 }
