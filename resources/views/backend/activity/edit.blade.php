@@ -181,6 +181,7 @@
                 dictRemoveFile: '削除',
                 thumbnailWidth: 120,
                 thumbnailHeight: 80,
+                dictCancelUpload: 'アップロードをキャンセル',
 
                 init: getDZInit('pictures[]', 'activity')
             });

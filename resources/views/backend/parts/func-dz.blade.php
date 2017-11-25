@@ -54,9 +54,6 @@
         /**
          * アップロード「済」画像の削除リンク押した時の処理
          */
-        var className = '{{ $className }}';
-        console.log(className);
-
         $('.uploaded-preview .remove').on('click', function () {
             $.ajax({
                 type: 'POST',

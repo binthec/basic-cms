@@ -92,11 +92,13 @@
                                         @endif
                                     </div>
 
-                                    @if($errors->has('topimage'))
-                                        <span class="help-block">
+                                    <span class="help-block">
+                                        <p class="text-warning text-right">※高さ600px以上の画像推奨</p>
+                                        @if($errors->has('topimage'))
                                             <strong class="text-danger">{{ $errors->first('topimage') }}</strong>
-                                        </span>
-                                    @endif
+                                        @endif
+                                    </span>
+
                                 </div><!-- /.col-sm-9 -->
                             </div><!-- form-group -->
 
@@ -121,8 +123,6 @@
 
 @endsection
 
-
-
 @section('js')
     @include('backend/parts/func-dz', ['className' => 'topimage'])
     <script>
@@ -137,7 +137,9 @@
                 dictRemoveFile: '削除',
                 thumbnailWidth: 360,
                 thumbnailHeight: 240,
-                maxFile: 1, // ファイル１つまで…？にならない：TODO
+                maxFiles: 1, // ファイルアップロードは１つまで
+                dictMaxFilesExceeded: 'アップロード出来るファイルは１つです',
+                dictCancelUpload: 'アップロードをキャンセル',
 
                 init: getDZInit('topimage', 'topimage'),
             });
