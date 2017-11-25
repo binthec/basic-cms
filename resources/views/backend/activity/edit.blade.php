@@ -167,13 +167,10 @@
 @endsection
 
 @section('js')
+    @include('backend/parts/func-dz', ['className' => 'activity'])
     <script src="/backend/js/use-ckeditor.js"></script>
     <script>
         $(function () {
-
-            // Disabling autoDiscover, otherwise Dropzone will try to attach twice. だそうな。
-            Dropzone.autoDiscover = false;
-
             var actPict = new Dropzone('#pictUpload', { //Dropzoneインスタンスを生成
                 url: "{{ route('activity.pict.store') }}", //送信先
                 method: 'POST',
@@ -185,60 +182,7 @@
                 thumbnailWidth: 120,
                 thumbnailHeight: 80,
 
-                init: function () {
-
-                    this.on("addedfile", function (file) { //ファイルを追加した際の処理
-                        //プレビューエリアにプレビューを追加
-                        $('#pict-preview-box').append(file.previewTemplate);
-                    });
-
-                    this.on("sending", function (file, xhr, formData) { //ファイル送信時の処理
-                        file.baseFileName = getBaseFileName(); //ユニークな名前を生成
-                        formData.append('baseFileName', file.baseFileName);
-                    });
-
-                    this.on("success", function (file, res) { //アップロードが成功した際の処理
-                        file.serverFileName = res.fileName; //サーバに保存してあるファイル名（拡張子付）
-                        $(file.previewTemplate).append("<input type='hidden' name='pictures[]' value='" + res.fileName + "'>"); //フォームを追加
-                    });
-
-                    this.on("removedfile", function (file) { //削除が成功した際の処理
-                        $.ajax({
-                            type: 'POST',
-                            url: "{{ route('activity.pict.delete') }}",
-                            data: {
-                                fileName: file.serverFileName,
-                                tmpFlg : true
-                            },
-                            dataType: 'json',
-                            success: function (res) {
-                                $('.pict-input-box input').val(file.serverFileName).remove();
-                            },
-                            error: function (res) {
-                                console.log('error!'); //TODO
-                            }
-                        });
-                    });
-                }
-            });
-
-            $('.uploaded-preview .remove').on('click', function () { //アップロード済画像の削除リンク押した時
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('activity.pict.delete') }}",
-                    data: {
-                        actId: $(this).attr('data-act-id'),
-                        pictId: $(this).attr('data-pict-id'),
-                        fileName: $(this).attr('data-pict-name'),
-                    },
-                    context: this, //自身をajaxの中に渡す
-                    success: function (res) {
-                        $(this).parent('div').remove();
-                    },
-                    error: function (res) {
-                        console.log('error!'); //TODO
-                    }
-                });
+                init: getDZInit('pictures[]', 'activity')
             });
 
             /**

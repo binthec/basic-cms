@@ -48,6 +48,9 @@
     }
 
     $(function () {
+        // Disabling autoDiscover, otherwise Dropzone will try to attach twice. だそうな。
+        Dropzone.autoDiscover = false;
+
         /**
          * アップロード「済」画像の削除リンク押した時の処理
          */

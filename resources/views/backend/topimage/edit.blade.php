@@ -127,9 +127,6 @@
     @include('backend/parts/func-dz', ['className' => 'topimage'])
     <script>
         $(function () {
-            // Disabling autoDiscover, otherwise Dropzone will try to attach twice. だそうな。
-            Dropzone.autoDiscover = false;
-
             var Topimage = new Dropzone('#pictUpload', { //Dropzoneインスタンスを生成
                 url: "{{ route('topimage.pict.store') }}", //送信先
                 method: 'POST',
