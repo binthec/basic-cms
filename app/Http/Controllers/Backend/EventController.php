@@ -26,7 +26,6 @@ class EventController extends Controller
                 $events[$val->id] = [
                     'title' => $val->title,
                     'start' => $val->date,
-                    'end' => $val->date,
                 ];
             }
         }
@@ -57,7 +56,7 @@ class EventController extends Controller
 
             Event::create(['title' => $request->title, 'date' => getStdDate($request->date)]);
             DB::commit();
-            return redirect('/event')->with('flashMsg', '登録が完了しました。');
+            return redirect('/event');
 
         } catch (\Exception $e) {
 
@@ -88,16 +87,14 @@ class EventController extends Controller
 
         DB::beginTransaction();
 
-        dd($event);
-
-        $event->title = $request->title;
-        $event->date = getStdDate($request->date);
-        $event->save();
+        $event->update(['title' => $request->title, 'date' => getStdDate($request->date)]);
 
         try {
 
+
+
             DB::commit();
-            return redirect('/event')->with('flashMsg', '登録が完了しました。');
+            return redirect('/event');
 
         } catch (\Exception $e) {
 
@@ -118,6 +115,6 @@ class EventController extends Controller
     {
         $event->delete();
 
-        return redirect('/event')->with('flashMsg', '削除が完了しました。');
+        return redirect('/event');
     }
 }

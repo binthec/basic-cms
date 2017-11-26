@@ -8,6 +8,9 @@
     margin: 5px 0 0 5px;
     color: #666;
 }
+.box .box-header.bg-primary{
+    color: #fff;
+}
 
 /* table */
 table.with-btn > tbody > tr > td {

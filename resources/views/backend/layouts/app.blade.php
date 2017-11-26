@@ -202,7 +202,7 @@
 
 <!-- fullCalendar -->
 <script src="/vendor/fullcalendar/fullcalendar.min.js"></script>
-{{--<script src='/vendor/fullcalendar/dist/locale/ja.js'></script>--}}
+<script src='/vendor/fullcalendar/locale/ja.js'></script>
 
 <!-- Sparkline -->
 {{--<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>--}}
