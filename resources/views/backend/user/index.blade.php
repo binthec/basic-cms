@@ -14,24 +14,31 @@
                 <div class="col-md-12">
                     <div class="box box-primary">
 
+                        <div class="box-header with-border text-right">
+                            <a class="btn btn-primary" href="{{ route('user.create') }}">新規登録</a>
+                        </div><!-- /.box-header -->
+
                         <div class="box-body">
                             @if($users->count() > 0)
                                 <table class="table table-bordered">
                                     <thead>
-                                    <tr class="bg-primary">
-                                        <th>ID</th>
-                                        <th>名前</th>
+                                    <tr class="bg-primary text-center">
+                                        <th>ユーザ名</th>
+                                        <th>作成日</th>
+                                        <th>最終変更日</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($users as $user)
                                         <tr>
-                                            <td>{{ $user->id }}</td>
-                                            <td>{{ $user->name }}</td>
+                                            <td class="text-center">{{ $user->name }}</td>
+                                            <td class="text-center">{{ getJaDateTime($user->created_at) }}</td>
+                                            <td class="text-center">{{ getJaDateTime($user->updated_at) }}</td>
                                             <td>
-                                                <a class="btn btn-primary">ユーザ名変更</a>
-                                                <a class="btn btn-warning">パスワード変更</a>
+                                                <a href="" class="btn btn-primary">ユーザ名変更</a>
+                                                &emsp;
+                                                <a href="" class="btn btn-warning">パスワード変更</a>
                                             </td>
                                         </tr>
                                     @endforeach

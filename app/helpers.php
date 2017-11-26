@@ -80,6 +80,17 @@ function getJaDate($date)
 }
 
 /**
+ * 'Y-m-d H:i:s'の形式のデータを'Y年m月d日 H時i分s秒'に変換するメソッド
+ *
+ * @param $date
+ * @return string
+ */
+function getJaDateTime($date)
+{
+    return date('Y年m月d日 H:i:s', strtotime($date));
+}
+
+/**
  * 'Y-m-d'の形式のデータを'Y/m/d/'に変換するメソッド
  *
  * @param $date

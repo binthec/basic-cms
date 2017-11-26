@@ -14,8 +14,7 @@
             <div class="row">
                 <div class="col-md-12">
 
-                    {!! Form::open(['method' => 'POST', 'url' => route('register'), 'class' => 'form-horizontal']) !!}
-                    {{ csrf_field() }}
+                    {!! Form::open(['method' => 'POST', 'route' => 'user.store', 'class' => 'form-horizontal']) !!}
 
                     <div class="box box-info">
 

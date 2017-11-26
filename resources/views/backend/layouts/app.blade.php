@@ -135,8 +135,8 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu {{ isActiveUrl('topimage*') }}">
-                        <li class="{{ isActiveUrl('user') }}"><a href="{{ route('user') }}"><i class="fa fa-circle-o"></i> 一覧表示・編集</a></li>
-                        <li class="{{ isActiveUrl('register') }}"><a href="{{ route('register') }}"><i class="fa fa-circle-o"></i> 新規登録</a></li>
+                        <li class="{{ isActiveUrl('user') }}"><a href="{{ route('user.index') }}"><i class="fa fa-circle-o"></i> 一覧表示・編集</a></li>
+                        <li class="{{ isActiveUrl('user/create') }}"><a href="{{ route('user.create') }}"><i class="fa fa-circle-o"></i> 新規登録</a></li>
                     </ul>
                 </li>
 
