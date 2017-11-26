@@ -25,4 +25,27 @@ class Event extends Model
 
         return $rules;
     }
+
+    /**
+     * 全てのイベントをfullcalendarで使える配列に整形して返すメソッド
+     *
+     * @return array
+     */
+    public static function getAllEvents()
+    {
+        $events = [];
+        $data = self::all();
+        if ($data->count()) {
+            foreach ($data as $key => $val) {
+                $events[$val->id] = [
+                    'title' => $val->title,
+                    'start' => $val->date,
+                ];
+            }
+        }
+
+        return $events;
+    }
+
+
 }

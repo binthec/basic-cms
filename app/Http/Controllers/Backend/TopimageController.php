@@ -25,7 +25,7 @@ class TopimageController extends Controller
      */
     public function index()
     {
-        $topimages = Topimage::paginate(self::PAGINATION);
+        $topimages = Topimage::order()->paginate(self::PAGINATION);
         return view('backend.topimage.index', compact('topimages'));
     }
 
@@ -161,4 +161,54 @@ class TopimageController extends Controller
     {
         return Picture::pictDelete($request, Topimage::class);
     }
+
+
+    /**
+     * 表示順ページの表示
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function orderEdit()
+    {
+        $topimages = Topimage::open()->order()->get();
+        return view('Backend.topimage.order', compact('topimages'));
+    }
+
+    /**
+     * 表示順編集実行
+     *
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function orderUpdate(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'pictures' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        DB::beginTransaction();
+
+        try{
+
+            foreach($request->pictures as $key => $id){
+                Topimage::where('id', $id)->update(['order' => $key + 1]);
+            }
+
+            DB::commit();
+            return redirect('topimage')->with('flashMsg', '変更が完了しました。');
+        } catch (\Exception $e){
+            DB::rollback();
+            return redirect('topimage')->with('flashErrMsg', '変更に失敗しました。');
+        }
+
+    }
+
 }

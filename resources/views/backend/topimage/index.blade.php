@@ -25,12 +25,17 @@
 
                     <div class="box box-primary">
 
+                        <div class="box-header with-border text-right">
+                            <a class="btn btn-primary" href="{{ route('topimage.create') }}">新規作成</a>
+                            &emsp;
+                            <a class="btn btn-success" href="{{ route('topimage.order.edit') }}">表示順変更</a>
+                        </div><!-- /.box-header -->
+
                         <div class="box-body">
                             @if($topimages->count() > 0)
                                 <table class="table table-bordered with-btn">
                                     <thead>
                                     <tr class="bg-primary text-center">
-                                        <td width="5%">ID</td>
                                         <td width="10%">ステータス</td>
                                         <td>サムネイルと名前</td>
                                         <td width="5%">編集</td>
@@ -41,7 +46,6 @@
                                     <tbody>
                                     @foreach($topimages as $image)
                                         <tr>
-                                            <td class="text-center">{{ $image->id }}</td>
                                             <td class="text-center">
                                                 <label class="label label-lg {{ ($image->status === 1)? 'label-info' : 'label-danger' }}">
                                                     {{ \App\Topimage::$statusList[$image->status] }}

@@ -36,7 +36,9 @@ Route::domain(env('BACKEND_DOMAIN'))->group(function() {
 		//トップ画像
         Route::post('topimage/pict/store', 'Backend\TopimageController@pictStore')->name('topimage.pict.store'); //XHRでの画像アップロード
         Route::post('topimage/pict/delete', 'Backend\TopimageController@pictDelete')->name('topimage.pict.delete'); //ajaxでの画像削除
-		Route::resource('topimage', 'Backend\TopimageController');
+        Route::get('topimage/order', 'Backend\TopimageController@orderEdit')->name('topimage.order.edit');
+        Route::post('topimage/order', 'Backend\TopimageController@orderUpdate')->name('topimage.order.update');
+		Route::resource('topimage', 'Backend\TopimageController', ['except' => 'show']);
 
 		//アクションログ
         Route::resource('actionlog', 'Backend\ActionLogController');
@@ -47,7 +49,7 @@ Route::domain(env('BACKEND_DOMAIN'))->group(function() {
         Route::resource('activity', 'Backend\ActivityController');
 
         //カレンダー
-        Route::resource('event', 'Backend\EventController');
+        Route::resource('event', 'Backend\EventController', ['except' => ['create', 'edit', 'show']]);
 	});
 });
 

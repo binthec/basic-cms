@@ -4,6 +4,18 @@
  * ************************************
  */
 
+.btn {
+    border-bottom-width: 0;
+}
+
+/*
+ * section
+ */
+.section-footer {
+    text-align: right;
+    margin-top: 50px;
+}
+
 /**
  * スライド画像
  */
@@ -33,21 +45,44 @@
     font-size: 30px;
 }
 
-/* トップの活動の様子 */
+/*
+ * 活動の様子
+ */
+#home #act {
+    /*background-color: #fff;*/
+}
+
 #home #act .btn.btn-primary {
     margin-top: 0;
 }
 
-.btn {
-    border-bottom-width: 0;
+/**
+ * カレンダー
+ */
+
+#home #events {
+    padding: 87px 0 87px 0;
+    background-color: #f6f6f6;
 }
 
-/* section */
-.section-footer {
-    text-align: right;
-    margin-top: 50px;
+#home #events #calendar {
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 5px;
 }
 
+.fc-row th.fc-day-header,
+.fc-unthemed td.fc-today {
+    background-color: #CBE6F3;
+}
+
+.fc-row th.fc-sat {
+    background-color: #FCF1D3;
+}
+
+.fc-row th.fc-sun {
+    background-color: #F6D4D8;
+}
 /**
  * ************************************
  *             活動の様子
@@ -57,22 +92,26 @@
 /**
  * 活動の様子のスライド
  */
-#act .act-picts img{
-    width : 270px;
-    height : 180px;
+#act .act-picts img {
+    width: 270px;
+    height: 180px;
 }
+
 .act-picts .slick-prev,
 .act-picts .slick-next {
     z-index: 1;
     width: 30px;
     height: 30px;
 }
+
 .act-picts .slick-next {
     right: 10px;
 }
+
 .act-picts .slick-prev {
     left: 10px;
 }
+
 .act-picts .slick-prev:before,
 .act-picts .slick-next:before {
     font-size: 30px;
@@ -113,17 +152,19 @@
 }
 
 #act .small-post .post-text {
-     padding: 10px;
-     text-align: center;
+    padding: 10px;
+    text-align: center;
 }
-#act .small-post .post-text h5{
+
+#act .small-post .post-text h5 {
     margin-top: 0;
 }
-#act .small-post .post-text p{
+
+#act .small-post .post-text p {
     margin-bottom: 2px;
 }
 
-#act .small-post .read-more{
+#act .small-post .read-more {
     background-color: #ff641b;
     color: #fff;
     text-align: center;
@@ -142,7 +183,6 @@
     text-align: center;
     margin-top: 20px;
 }
-
 
 /**
  * ************************************
@@ -164,6 +204,6 @@
 }
 
 .pagination > li > a,
-.pagination > li > span{
+.pagination > li > span {
     color: #ff641b;
 }

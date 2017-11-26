@@ -13,6 +13,8 @@
     <link href="/frontend/css/owl.carousel.css" rel="stylesheet">
     <link href="/frontend/css/owl.transitions.css" rel="stylesheet">
     <link href="/frontend/css/main.css" rel="stylesheet">
+    <link href="/vendor/fullcalendar/fullcalendar.min.css"rel="stylesheet" >
+    <link href="/vendor/fullcalendar/fullcalendar.print.min.css" media="print" rel="stylesheet" >
 
     @yield('css')
 
@@ -43,6 +45,7 @@
                     <li class="scroll"><a href="/">ホーム </a></li>
                     <li class="scroll"><a href="{{ route('home') }}/#services">活動の主旨と内容 </a></li>
                     <li class="scroll"><a href="/#act">活動の様子 </a></li>
+                    <li class="scroll"><a href="/#events">活動予定 </a></li>
                     <li class="scroll"><a href="/#testimonial">主催者 </a></li>
                     <li class="scroll"><a href="/#get-in-touch">問い合せ </a></li>
                 </ul>
@@ -72,7 +75,9 @@
 <script src="/frontend/js/wow.min.js"></script>
 <script src="/frontend/js/main.js"></script>
 <script src="/frontend/js/scrolling-nav.js"></script>
-
+<script src="/vendor/moment/moment.js"></script>
+<script src="/vendor/fullcalendar/fullcalendar.min.js"></script>
+<script src='/vendor/fullcalendar/locale/ja.js'></script>
 @yield('js')
 
 </body>

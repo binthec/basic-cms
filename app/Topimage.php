@@ -87,6 +87,17 @@ class Topimage extends Model
     }
 
     /**
+     * 順番を指定するローカルスコープ
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopeOrder($query)
+    {
+        return $query->orderBy('order')->orderByDesc('id');
+    }
+
+    /**
      * トップ画像のポリモーフィックリレーション
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany

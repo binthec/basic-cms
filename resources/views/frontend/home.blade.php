@@ -75,20 +75,6 @@
         </div><!--/.container-->
     </section><!--/#services-->
 
-
-    <section id="animated-number">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title text-center wow fadeInDown">Special Thanks!!</h2>
-                <p class="text-center wow fadeInDown">
-                    私達「大分県体力づくり研究会」は、○○○○の資金提供を受けて活動を行っています。<br>
-                    皆様のご協力に感謝致します。
-                </p>
-            </div>
-        </div>
-    </section><!--/#animated-number-->
-
-
     @if($activities->count() > 0)
         <section id="act">
             <div class="container">
@@ -103,7 +89,6 @@
                     <div id="owl-box" class="owl-carousel">
 
                         @foreach($activities as $act)
-
                             <div class="text-center item">
                                 <div class="act-post act-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
                                     <article>
@@ -138,6 +123,38 @@
             </div><!-- /.container -->
         </section><!--/#act-->
     @endif
+
+
+    <section id="animated-number">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title text-center wow fadeInDown">Special Thanks!!</h2>
+                <p class="text-center wow fadeInDown">
+                    私達「大分県体力づくり研究会」は、○○○○の資金提供を受けて活動を行っています。<br>
+                    皆様のご協力に感謝致します。
+                </p>
+            </div>
+        </div>
+    </section><!--/#animated-number-->
+
+
+    <section id="events">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title text-center wow fadeInDown">活動予定カレンダー</h2>
+                <p class="text-center wow fadeInDown">
+                    今後の活動の予定をご紹介します。
+                </p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 col-lg-offset-2">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+
+        </div><!-- /.container -->
+    </section><!--/#events-->
 
 
     <section id="testimonial">
@@ -229,5 +246,24 @@
         $("#owl-box").owlCarousel({
             items: 4,
         })
+
+        /**
+         * カレンダー
+         *
+         * @type {jQuery}
+         */
+        var calendar = $('#calendar').fullCalendar({
+            locale: 'ja',
+            events: [
+                    @foreach($events as $id => $event)
+                {
+                    id: "{{ $id }}",
+                    title: "{{ $event['title'] }}",
+                    start: "{{ $event['start'] }}",
+                },
+                @endforeach
+            ],
+        });
     </script>
+
 @endsection

@@ -22,8 +22,6 @@
     <link rel="stylesheet" href="/vendor/bootstrap-datepicker/bootstrap-datepicker.css">
     <link rel="stylesheet" href="/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="/vendor/dropzone/dropzone-custom.css">
-
-    <!-- fullCalendar -->
     <link rel="stylesheet" href="/vendor/fullcalendar/fullcalendar.min.css">
     <link rel="stylesheet" href="/vendor/fullcalendar/fullcalendar.print.min.css" media="print">
 
@@ -116,17 +114,7 @@
                     <ul class="treeview-menu {{ isActiveUrl('topimage*') }}">
                         <li class="{{ isActiveUrl('topimage') }}"><a href="{{ route('topimage.index') }}"><i class="fa fa-circle-o"></i> 一覧表示・編集</a></li>
                         <li class="{{ isActiveUrl('topimage/create') }}"><a href="{{ route('topimage.create') }}"><i class="fa fa-circle-o"></i> 新規登録</a></li>
-                    </ul>
-                </li>
-
-                <li class="treeview {{ isActiveUrl('event*') }}">
-                    <a href="#">
-                        <i class="fa fa-calendar"></i> <span>カレンダー</span>
-                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                    </a>
-                    <ul class="treeview-menu {{ isActiveUrl('event*') }}">
-                        <li class="{{ isActiveUrl('event') }}"><a href="{{ route('event.index') }}"><i class="fa fa-circle-o"></i> 一覧表示・編集</a></li>
-                        <li class="{{ isActiveUrl('event/create') }}"><a href="{{ route('event.create') }}"><i class="fa fa-circle-o"></i> 新規登録</a></li>
+                        <li class="{{ isActiveUrl('topimage/order') }}"><a href="{{ route('topimage.order.edit') }}"><i class="fa fa-circle-o"></i> 表示順</a></li>
                     </ul>
                 </li>
 
@@ -139,6 +127,10 @@
                         <li class="{{ isActiveUrl('activity') }}"><a href="{{ route('activity.index') }}"><i class="fa fa-circle-o"></i> 一覧表示・編集</a></li>
                         <li class="{{ isActiveUrl('activity/create') }}"><a href="{{ route('activity.create') }}"><i class="fa fa-circle-o"></i> 新規登録</a></li>
                     </ul>
+                </li>
+
+                <li class="{{ isActiveUrl('event') }}">
+                    <a href="{{ route('event.index') }}"><i class="fa fa-calendar"></i> <span>カレンダー</span></a>
                 </li>
 
                 <li class="header">管理メニュー</li>
@@ -182,11 +174,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/vendor/jquery-ui/jquery-ui.js"></script><!-- jQuery UI 1.11.4 -->
 
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-{{--<script>--}}
-    {{--$.widget.bridge('uibutton', $.ui.button);--}}
-{{--</script>--}}
-
 <!-- Tools JS -->
 <script src="/vendor/bootstrap/js/bootstrap.js"></script>
 <script src="/vendor/select2/select2.js"></script>
@@ -197,28 +184,9 @@
 <script src="/vendor/bootstrap-datepicker/bootstrap-datepicker.js"></script>
 <script src="/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.ja.min.js"></script>
 <script src="/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
-{{--<script src="/vendor/dropzone/dropzone.js"></script>--}}
 <script src="/vendor/dropzone/dropzone.js"></script>
-
-<!-- fullCalendar -->
 <script src="/vendor/fullcalendar/fullcalendar.min.js"></script>
 <script src='/vendor/fullcalendar/locale/ja.js'></script>
-
-<!-- Sparkline -->
-{{--<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>--}}
-<!-- jvectormap -->
-{{--<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>--}}
-{{--<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>--}}
-<!-- jQuery Knob Chart -->
-{{--<script src="bower_components/jquery-knob/dist/jquery.knob.min.js"></script>--}}
-<!-- daterangepicker -->
-{{--<script src="bower_components/moment/min/moment.min.js"></script>--}}
-{{--<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>--}}
-<!-- Slimscroll -->
-{{--<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>--}}
-<!-- FastClick -->
-{{--<script src="bower_components/fastclick/lib/fastclick.js"></script>--}}
-
 <script src="/vendor/AdminLTE/js/adminlte.js"></script>
 
 @yield('js')

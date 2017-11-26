@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Topimage;
-use App\Activity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Topimage;
+use App\Activity;
+use App\Event;
 
 class HomeController extends Controller
 {
@@ -19,7 +20,8 @@ class HomeController extends Controller
 	{
 	    $topimages = Topimage::open()->get();
 	    $activities = Activity::open()->take(4)->get();
-		return view('frontend.home', compact('topimages', 'activities'));
+	    $events = Event::getAllEvents();
+		return view('frontend.home', compact('topimages', 'activities', 'events'));
 	}
 
 }

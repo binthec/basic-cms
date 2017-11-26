@@ -19,19 +19,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = [];
-        $data = Event::all();
-        if ($data->count()) {
-            foreach ($data as $key => $val) {
-                $events[$val->id] = [
-                    'title' => $val->title,
-                    'start' => $val->date,
-                ];
-            }
-        }
-
+        $events = Event::getAllEvents();
         return view('backend.event.index', compact('events'));
-
     }
 
     /**
@@ -87,12 +76,8 @@ class EventController extends Controller
 
         DB::beginTransaction();
 
-        $event->update(['title' => $request->title, 'date' => getStdDate($request->date)]);
-
         try {
-
-
-
+            $event->update(['title' => $request->title, 'date' => getStdDate($request->date)]);
             DB::commit();
             return redirect('/event');
 
@@ -114,7 +99,6 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         $event->delete();
-
         return redirect('/event');
     }
 }
