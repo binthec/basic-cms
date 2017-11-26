@@ -16,12 +16,20 @@
             <p class="content-description">
                 <i class="fa fa-info-circle"></i> 「活動の様子」一覧です。
             </p>
+            <ol class="breadcrumb">
+                <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> dashboard</a></li>
+                <li class="active">活動の様子一覧</li>
+            </ol>
         </section>
 
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
                     <div class="box box-primary">
+
+                        <div class="box-header with-border text-right">
+                            <a class="btn btn-primary" href="{{ route('activity.create') }}">新規作成</a>
+                        </div>
 
                         <div class="box-body">
 

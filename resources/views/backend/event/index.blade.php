@@ -3,10 +3,13 @@
 @section('content')
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>カレンダー<small>日程を管理します。</small></h1>
+            <h1>カレンダー</h1>
+            <p class="content-description">
+                <i class="fa fa-info-circle"></i> 左のフォームから追加するか、カレンダーの日付欄をクリックしても予定を追加出来ます。
+            </p>
             <ol class="breadcrumb">
-                <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Calendar</li>
+                <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> dashboard</a></li>
+                <li class="active">カレンダー</li>
             </ol>
         </section>
 

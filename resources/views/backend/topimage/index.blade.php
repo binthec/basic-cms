@@ -17,6 +17,10 @@
             <p class="content-description">
                 <i class="fa fa-info-circle"></i> トップ画面のスライダーに表示される画像の一覧です。ミニアイコンにマウスポインタを乗せると、画像を拡大して見ることが出来ます。
             </p>
+            <ol class="breadcrumb">
+                <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> dashboard</a></li>
+                <li class="active">トップ画像一覧</li>
+            </ol>
         </section>
 
         <section class="content">

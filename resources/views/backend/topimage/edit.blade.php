@@ -5,10 +5,15 @@
     <div class="content-wrapper">
 
         <section class="content-header">
-            <h1>トップ画像{{ ($topimage->id === null)? '新規登録' : '編集' }}</h1>
+            <h1>トップ画像を{{ ($topimage->id === null)? '新規登録' : '編集' }}</h1>
             <p class="content-description">
                 <i class="fa fa-info-circle"></i> トップページのスライダーに表示する画像を{{ ($topimage->id === null)? '新規登録' : '編集' }}します。
             </p>
+            <ol class="breadcrumb">
+                <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> dashboard</a></li>
+                <li><a href="{{ route('topimage.index') }}">トップ画像一覧</a></li>
+                <li class="active">トップ画像を{{ ($topimage->id === null)? '新規登録' : '編集' }}</li>
+            </ol>
         </section>
 
         <section class="content">

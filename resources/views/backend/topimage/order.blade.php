@@ -9,6 +9,11 @@
             <p class="content-description">
                 <i class="fa fa-info-circle"></i> ドラッグ＆ドロップでトップ画像の表示順を設定します。
             </p>
+            <ol class="breadcrumb">
+                <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> dashboard</a></li>
+                <li><a href="{{ route('topimage.index') }}">トップ画像一覧</a></li>
+                <li class="active">トップ画像表示順設定</li>
+            </ol>
         </section>
 
         <section class="content">

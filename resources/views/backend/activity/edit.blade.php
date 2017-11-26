@@ -5,10 +5,15 @@
     <div class="content-wrapper">
 
         <section class="content-header">
-            <h1>活動の様子{{ ($activity->id === null)? '新規登録' : '編集' }}</h1>
+            <h1>活動の様子を{{ ($activity->id === null)? '新規登録' : '編集' }}</h1>
             <p class="content-description">
                 <i class="fa fa-info-circle"></i> 「活動の様子」に表示される記事を{{ ($activity->id === null)? '新規登録' : '編集' }}します。
             </p>
+            <ol class="breadcrumb">
+                <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> dashboard</a></li>
+                <li><a href="{{ route('activity.index') }}">活動の様子一覧</a></li>
+                <li class="active">活動の様子を{{ ($activity->id === null)? '新規登録' : '編集' }}</li>
+            </ol>
         </section>
 
         <section class="content">
