@@ -48,10 +48,6 @@
 /*
  * 活動の様子
  */
-#home #act {
-    /*background-color: #fff;*/
-}
-
 #home #act .btn.btn-primary {
     margin-top: 0;
 }
@@ -59,7 +55,6 @@
 /**
  * カレンダー
  */
-
 #home #events {
     padding: 87px 0 87px 0;
     background-color: #f6f6f6;
@@ -85,7 +80,7 @@
 }
 /**
  * ************************************
- *             活動の様子
+ *         活動の様子　個別ページ
  * ************************************
  */
 

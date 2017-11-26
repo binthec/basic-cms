@@ -25,12 +25,6 @@
     <link rel="stylesheet" href="/vendor/fullcalendar/fullcalendar.min.css">
     <link rel="stylesheet" href="/vendor/fullcalendar/fullcalendar.print.min.css" media="print">
 
-
-    {{--<link rel="stylesheet" href="/vendor/dropzone/dropzone.css">--}}
-
-    {{--<link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">--}}
-
-
     @yield('css')
 
     <link rel="stylesheet" href="/backend/css/custom.css">
@@ -165,7 +159,7 @@
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs"><b>Version</b> 1.0.0</div>
-        <strong>Copyright &copy; 2017- <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rightsreserved.
+        <strong>Copyright &copy; 2017- 大分県体力づくり研究会.</strong> All rightsreserved.
     </footer>
 
 </div><!-- ./wrapper -->

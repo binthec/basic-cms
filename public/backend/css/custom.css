@@ -225,3 +225,73 @@ input[type=file] {
     max-height: 100px;
     border-radius: 10px;
 }
+
+/**
+ * ********************************************
+ *                  dashboard
+ * ********************************************
+ */
+/**
+ * トップ画像
+ */
+.top-slider img {
+    width: auto;
+    height: 200px;
+}
+
+.top-slider .slick-prev,
+.top-slider .slick-next {
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+}
+
+.top-slider .slick-prev {
+    left: 20px !important;
+}
+
+.top-slider .slick-next {
+    right: 20px;
+}
+
+.top-slider .slick-prev::before,
+.top-slider .slick-next::before {
+    z-index: 1;
+    font-size: 30px;
+}
+
+/**
+ * 活動の様子
+ */
+#act-box .box-body{
+    background-color: #f6f6f6;
+}
+.act-post{
+    background-color: #fff;
+    padding: 15px 15px 10px;
+    margin-bottom: 15px;
+}
+.act-post .entry-thumbnail{
+    margin: -15px -15px 15px;
+    position: relative;
+}
+.act-post img{
+    width: 100%;
+}
+.act-post h2.entry-title{
+    font-size: 16px;
+    font-weight: bold;
+}
+.act-post .entry-date {
+    font-size: 12px;
+    display: block;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    color: #45aed6;
+}
+.act-post .entry-place {
+    font-size: 12px;
+    line-height: 12px;
+    margin-bottom: 5px;
+    text-align:center;
+}

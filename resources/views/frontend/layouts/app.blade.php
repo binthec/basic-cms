@@ -66,13 +66,13 @@
 <script src="/frontend/js/jquery.js"></script>
 <script src="/frontend/js/bootstrap.min.js"></script>
 
+<script src="/frontend/js/wow.min.js"></script>
 <script src="/frontend/js/owl.carousel.min.js"></script>
 <script src="/frontend/js/mousescroll.js"></script>
 <script src="/frontend/js/smoothscroll.js"></script>
 <script src="/frontend/js/jquery.prettyPhoto.js"></script>
 <script src="/frontend/js/jquery.isotope.min.js"></script>
 <script src="/frontend/js/jquery.inview.min.js"></script>
-<script src="/frontend/js/wow.min.js"></script>
 <script src="/frontend/js/main.js"></script>
 <script src="/frontend/js/scrolling-nav.js"></script>
 <script src="/vendor/moment/moment.js"></script>

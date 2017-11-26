@@ -185,7 +185,7 @@
     <section id="get-in-touch">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title text-center wow fadeInDown">CONRACT</h2>
+                <h2 class="section-title text-center wow fadeInDown">CONTACT</h2>
                 <p class="text-center wow fadeInDown">
                     お問い合わせはこちらからお願い致します。１週間以内にご連絡致します。
                 </p>
@@ -221,24 +221,12 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" href="/vendor/slick/slick.css"/>
-    <link rel="stylesheet" href="/vendor/slick/slick-theme.css"/>
+    @include('common.top-css')
 @endsection
 
 @section('js')
-    <script src="/vendor/slick/slick.min.js"></script>
+    @include('common.top-js')
     <script>
-        //Top Slider
-        $('.top-slider').slick({
-            dots: true,
-            infinite: true,
-            slidesToShow: 1,
-            centerMode: true,
-            variableWidth: true,
-            autoplay: true,
-            autoplaySpeed: 1000,
-        });
-
         //OWL for Activity
         $(document).ready(function ($) {
             $("#owl-box").owlCarousel();
@@ -246,24 +234,5 @@
         $("#owl-box").owlCarousel({
             items: 4,
         })
-
-        /**
-         * カレンダー
-         *
-         * @type {jQuery}
-         */
-        var calendar = $('#calendar').fullCalendar({
-            locale: 'ja',
-            events: [
-                    @foreach($events as $id => $event)
-                {
-                    id: "{{ $id }}",
-                    title: "{{ $event['title'] }}",
-                    start: "{{ $event['start'] }}",
-                },
-                @endforeach
-            ],
-        });
     </script>
-
 @endsection
