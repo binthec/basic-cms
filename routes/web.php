@@ -31,6 +31,8 @@ Route::domain(env('BACKEND_DOMAIN'))->group(function () {
         //ユーザ管理
         Route::get('user/create', 'Backend\Auth\RegisterController@showRegistrationForm')->name('user.create');
         Route::post('user', 'Backend\Auth\RegisterController@register')->name('user.store');
+        Route::get('user/password/{user}/edit', 'Backend\UserController@editPassword')->name('user.password.edit');
+        Route::put('user/password/{user}', 'Backend\UserController@updatePassword')->name('user.password.update');
         Route::resource('user', 'Backend\UserController', ['except' => ['create', 'store']]);
 
         //トップ画像

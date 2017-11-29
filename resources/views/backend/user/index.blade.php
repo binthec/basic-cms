@@ -36,9 +36,9 @@
                                             <td class="text-center">{{ getJaDateTime($user->created_at) }}</td>
                                             <td class="text-center">{{ getJaDateTime($user->updated_at) }}</td>
                                             <td>
-                                                <a href="" class="btn btn-primary">ユーザ名変更</a>
+                                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">ユーザ名変更</a>
                                                 &emsp;
-                                                <a href="" class="btn btn-warning">パスワード変更</a>
+                                                <a href="{{ route('user.password.edit', $user->id) }}" class="btn btn-warning">パスワード変更</a>
                                             </td>
                                         </tr>
                                     @endforeach
