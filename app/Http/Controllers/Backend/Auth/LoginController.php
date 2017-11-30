@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -27,6 +28,16 @@ use AuthenticatesUsers;
 	 */
 	protected $redirectTo = '/dashboard';
 
+    /**
+     * ログイン時に使うカラム名を変更
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return 'name';
+    }
+
 	/**
 	 * ログインフォーム表示のパスを変更
 	 *
@@ -37,14 +48,17 @@ use AuthenticatesUsers;
 		return view('backend.auth.login');
 	}
 
-	/**
-	 * ログイン時に使うカラム名を変更
-	 *
-	 * @return string
-	 */
-	public function username()
-	{
-		return 'name';
-	}
+    /**
+     * 認証を処理する
+     *
+     * @return Response
+     */
+//    public function authenticate(Request $request)
+//    {
+//        if (Auth::attempt(['name' => $request->name, 'password' => $request->password], $request->remember)) {
+//            // 認証に成功したら、デフォルトでダッシュボードへ
+//            return redirect()->intended($this->redirectTo);
+//        }
+//    }
 
 }

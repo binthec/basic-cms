@@ -18,7 +18,7 @@
                         <span class="date">{{ getJaDate($act->date) }}</span><span class="place">{{ $act->place }}</span>
                     </p>
 
-                    <a class="read-more" href="{{ route('front.act.detail', $act->id) }}">
+                    <a class="read-more" href="{{ route('front.act.detail', $act) }}">
                         <i class="fa fa-arrow-right"></i>
                     </a>
                 </div><!-- /.post-text -->

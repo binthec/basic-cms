@@ -104,7 +104,7 @@
                                         </header>
                                         <div class="entry-content">
                                             {{--<P></P>--}}
-                                            <a class="btn btn-primary" href="{{ route('front.act.detail', $act->id) }}">読む</a>
+                                            <a class="btn btn-primary" href="{{ route('front.act.detail', $act) }}">読む</a>
                                         </div>
                                     </article>
                                 </div>
