@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
 		DB::table('users')->truncate();
 		DB::table('users')->insert([
 			[
-				'name' => 'yobo-admin',
+				'name' => 'admin',
 				'password' => bcrypt('aaaaaaaa'),
 				'created_at' => \Carbon\Carbon::now(),
 				'updated_at' => \Carbon\Carbon::now(),
