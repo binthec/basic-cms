@@ -38,6 +38,7 @@
                     dataType: 'json',
                     success: function (res) {
                         $('.pict-input-box input').val(file.serverFileName).remove();
+                        showPictUpload(); //ドロップゾーンを表示
                     },
                     error: function (res) {
                         console.log('error!'); //TODO
@@ -71,7 +72,19 @@
                     console.log('error! Uploaded Topimage couldnt delete.'); //TODO
                 }
             });
+
+            showPictUpload(); //ドロップゾーンを表示
         });
     });
+
+    /**
+     * 画像のドロップゾーンの表示・非表示メソッド
+     */
+    function showPictUpload() {
+        $('#pictUpload').show();
+    }
+    function hidePictUpload(){
+        $('#pictUpload').hide();
+    }
 
 </script>

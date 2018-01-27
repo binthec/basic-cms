@@ -37,7 +37,7 @@
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-sm-3 control-label">名前 <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    {{ Form::text('name', ($topimage->id !== null)? $topimage->name: '', ['id' => 'name', 'class' => 'form-control']) }}
+                                    {{ Form::text('name', ($topimage->id !== null)? $topimage->name: '', ['id' => 'name', 'class' => 'form-control', 'required']) }}
                                     @if($errors->has('name'))
                                         <span class="help-block">
 							            <strong class="text-danger">{{ $errors->first('name') }}</strong>
@@ -75,17 +75,18 @@
                             </div><!-- form-group -->
 
                             <div class="form-group{{ $errors->has('topimage') ? ' has-error' : '' }}">
-                                <label for="act-pict-tmp" class="col-sm-3 control-label">画像</label>
+                                <label for="act-pict-tmp" class="col-sm-3 control-label">画像 <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
 
-                                    @if(!$topimage->pictures->first() || $topimage->pictures->first()->name == '')
+
                                     <div class="pict-add-box" id="pictUpload">
                                         <i class="fa fa-image"> ファイルをドロップするか、ここをクリックしてください</i>
                                     </div>
-                                    @endif
+
 
                                     <div id="pict-preview-box" class="text-center">
-                                        @if($topimage->id !== null)
+                                        @if($topimage->id !== null && $topimage->pictures->isNotEmpty())
+
                                             <div class="uploaded-preview">
                                                 <div class="uploaded-img">
                                                     <img src="{{ $topimage->pictures->first()->getPictPath(\App\Topimage::class) }}">
@@ -150,6 +151,24 @@
 
                 init: getDZInit('topimage', 'topimage'),
             });
+
+            /**
+             * 画像がドロップされたら、ドロップエリアは隠す
+             */
+            Topimage.on('drop', function (file) {
+                hidePictUpload();
+            });
+
         });
     </script>
+
+    @if($topimage->id !== null && $topimage->pictures->isNotEmpty())
+        <script>
+            //編集の時の初期表示ではドロップゾーンを隠す
+            $(function () {
+                hidePictUpload();
+            });
+        </script>
+    @endif
+
 @endsection

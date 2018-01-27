@@ -49,7 +49,7 @@ class TopimageController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), Topimage::getValidationRules(true));
+        $validator = Validator::make($request->all(), Topimage::getValidationRules());
         if ($validator->fails()) {
             return redirect()
                 ->back()
@@ -129,6 +129,7 @@ class TopimageController extends Controller
      *
      * @param Topimage $topimage
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Topimage $topimage)
     {

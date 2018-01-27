@@ -113,17 +113,13 @@ class Topimage extends Model
      * @param bool $storeFlg
      * @return array
      */
-    static function getValidationRules($storeFlg = false)
+    static function getValidationRules()
     {
         $rules = [
             'name' => 'required',
             'status' => 'required',
+            'topimage' => 'required'
         ];
-
-        //新規作成の場合のみ、画像を必須に
-        if ($storeFlg === true) {
-            $rules = array_merge($rules, ['topimage' => 'required']);
-        }
 
         return $rules;
 
