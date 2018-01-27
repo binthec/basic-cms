@@ -128,6 +128,7 @@ class ActivityController extends Controller
      *
      * @param Activity $activity
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Activity $activity)
     {
@@ -155,7 +156,6 @@ class ActivityController extends Controller
      * Dropzone.js から削除ボタンを押された時に呼び出されるメソッド。Picureモデルを呼び出す
      *
      * @param Request $request
-     * @param bool $tmpFlg
      * @return \Illuminate\Http\JsonResponse
      */
     public function pictDelete(Request $request)
