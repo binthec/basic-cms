@@ -135,6 +135,9 @@ class Topimage extends Model
 
         $this->name = $request->name;
         $this->status = $request->status;
+        if($this->order === null) { //表示順がまだ無い場合は、一番後ろに持って来る
+            $this->order = self::max('order') + 1;
+        }
         $this->save();
 
         //ファイル処理

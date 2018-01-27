@@ -40,6 +40,7 @@
                                 <table class="table table-bordered with-btn">
                                     <thead>
                                     <tr class="bg-primary text-center">
+                                        <td width="5%">表示順</td>
                                         <td width="10%">ステータス</td>
                                         <td>サムネイルと名前</td>
                                         <td width="5%">編集</td>
@@ -50,6 +51,7 @@
                                     <tbody>
                                     @foreach($topimages as $image)
                                         <tr>
+                                            <td class="text-center">{{ $image->order }}</td>
                                             <td class="text-center">
                                                 <label class="label label-lg {{ ($image->status === 1)? 'label-info' : 'label-danger' }}">
                                                     {{ \App\Topimage::$statusList[$image->status] }}

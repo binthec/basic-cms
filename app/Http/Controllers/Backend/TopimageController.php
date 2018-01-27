@@ -172,7 +172,7 @@ class TopimageController extends Controller
      */
     public function orderEdit()
     {
-        $topimages = Topimage::open()->order()->get();
+        $topimages = Topimage::order()->get();
         return view('Backend.topimage.order', compact('topimages'));
     }
 
