@@ -74,6 +74,8 @@
                                 </div>
                             </div><!-- form-group -->
 
+                            <hr>
+
                             <div class="form-group{{ $errors->has('topimage') ? ' has-error' : '' }}">
                                 <label for="act-pict-tmp" class="col-sm-3 control-label">画像 <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
@@ -83,8 +85,7 @@
                                         <i class="fa fa-image"> ファイルをドロップするか、ここをクリックしてください</i>
                                     </div>
 
-
-                                    <div id="pict-preview-box" class="text-center">
+                                    <div id="pict-preview-box">
                                         @if($topimage->id !== null && $topimage->pictures->isNotEmpty())
 
                                             <div class="uploaded-preview">
@@ -101,7 +102,7 @@
                                     </div>
 
                                     <span class="help-block">
-                                        <p class="text-warning text-right">※高さ600px以上の画像推奨</p>
+                                        <p class="text-warning">※高さ600px以上の画像推奨</p>
                                         @if($errors->has('topimage'))
                                             <strong class="text-danger">{{ $errors->first('topimage') }}</strong>
                                         @endif
