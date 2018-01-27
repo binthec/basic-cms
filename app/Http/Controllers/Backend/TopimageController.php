@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\Exception\NotFoundException;
 use Validator;
 use App\Topimage;
 
@@ -196,15 +197,15 @@ class TopimageController extends Controller
 
         DB::beginTransaction();
 
-        try{
+        try {
 
-            foreach($request->pictures as $key => $id){
+            foreach ($request->pictures as $key => $id) {
                 Topimage::where('id', $id)->update(['order' => $key + 1]);
             }
 
             DB::commit();
             return redirect('topimage')->with('flashMsg', '変更が完了しました。');
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             DB::rollback();
             return redirect('topimage')->with('flashErrMsg', '変更に失敗しました。');
         }

@@ -78,9 +78,11 @@
                                 <label for="act-pict-tmp" class="col-sm-3 control-label">画像</label>
                                 <div class="col-sm-9">
 
+                                    @if(!$topimage->pictures->first() || $topimage->pictures->first()->name == '')
                                     <div class="pict-add-box" id="pictUpload">
                                         <i class="fa fa-image"> ファイルをドロップするか、ここをクリックしてください</i>
                                     </div>
+                                    @endif
 
                                     <div id="pict-preview-box" class="text-center">
                                         @if($topimage->id !== null)

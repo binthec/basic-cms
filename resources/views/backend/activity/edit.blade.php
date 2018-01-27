@@ -38,7 +38,7 @@
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                 <label for="title" class="col-sm-3 control-label">記事の名前 <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    {{ Form::text('title', ($activity->id !== null)? $activity->title: '', ['id' => 'name', 'class' => 'form-control', 'placeholder' => '記事のタイトル']) }}
+                                    {{ Form::text('title', $activity->title, ['id' => 'name', 'class' => 'form-control', 'placeholder' => '記事のタイトル']) }}
 
                                     @if($errors->has('title'))
                                         <span class="help-block">
@@ -51,7 +51,7 @@
                             <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
                                 <label for="date" class="col-sm-3 control-label">開催日 <span class="text-danger">*</span></label>
                                 <div class="col-sm-3">
-                                    {!! Form::text('date', ($activity->id !== null)? getNormalDateFromStd($activity->date) : '', ['class' => 'form-control use-datepicker', 'placeholder' => 'yyyy/mm/dd']) !!}
+                                    {!! Form::text('date', ($activity->id !== null)? getNormalDateFromStd($activity->date) : $activity->date, ['class' => 'form-control use-datepicker', 'placeholder' => 'yyyy/mm/dd']) !!}
 
                                     @if($errors->has('date'))
                                         <span class="help-block">
@@ -64,7 +64,7 @@
                             <div class="form-group{{ $errors->has('place') ? ' has-error' : '' }}">
                                 <label for="place" class="col-sm-3 control-label">開催場所 <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    {{ Form::text('place', ($activity->id !== null)? $activity->place: '', ['id' => 'place', 'class' => 'form-control', 'placeholder' => '開催した場所や地域名、会場名など']) }}
+                                    {{ Form::text('place', $activity->place, ['id' => 'place', 'class' => 'form-control', 'placeholder' => '開催した場所や地域名、会場名など']) }}
 
                                     @if($errors->has('place'))
                                         <span class="help-block">
@@ -77,7 +77,7 @@
                             <div class="form-group{{ $errors->has('detail') ? ' has-error' : '' }}">
                                 <label for="detail" class="col-sm-3 control-label">内容</label>
                                 <div class="col-sm-9">
-                                    {!! Form::textarea('detail', ($activity->id !== null)? $activity->detail: '', ['class' => 'form-control', 'id' => 'use-ckeditor']) !!}
+                                    {!! Form::textarea('detail', $activity->detail, ['class' => 'form-control', 'id' => 'use-ckeditor']) !!}
 
                                     @if($errors->has('detail'))
                                         <span class="help-block">
