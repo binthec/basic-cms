@@ -153,9 +153,9 @@
             });
 
             /**
-             * 画像がドロップされたら、ドロップエリアは隠す
+             * 画像アップロードが成功したら、ドロップエリアは隠す
              */
-            Topimage.on('drop', function (file) {
+            Topimage.on('success', function (file) {
                 hidePictUpload();
             });
 
