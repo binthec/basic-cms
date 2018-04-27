@@ -19,6 +19,7 @@
     @yield('css')
 
     <link href="/frontend/css/custom.css" rel="stylesheet">
+    <link href="/common/css/style.css" rel="stylesheet">
     <!--[if lt IE 9]-->
     <script src="/frontend/js/html5shiv.js"></script>
     <script src="/frontend/js/respond.min.js"></script>

@@ -42,28 +42,7 @@
                         </div>
 
                         <div class="box-body">
-
-                            @forelse($activities as $act)
-                                <div class="col-md-6 text-center">
-                                    <div class="act-post">
-                                        <article>
-                                            <header class="entry-header">
-                                                <div class="entry-thumbnail">
-                                                    <img src="{{ $act->getMainPictPath() }}">
-                                                </div>
-                                                <h2 class="entry-title">{{ $act->title }}</h2>
-                                                <p>
-                                                    <span class="entry-date">{{ getJaDate($act->date) }}</span>
-                                                    <span class="entry-place">{{ $act->place }}</span>
-                                                </p>
-                                            </header>
-                                        </article>
-                                    </div>
-                                </div>
-                            @empty
-                                活動の様子はありません。
-                            @endforelse
-
+                            @include('frontend.activity.small-list')
                         </div><!-- /.box-body -->
 
                     </div><!-- /.box -->
