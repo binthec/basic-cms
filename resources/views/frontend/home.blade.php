@@ -78,12 +78,6 @@
     @if($activities->count() > 0)
         <section id="act">
             <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title text-center wow fadeInDown">活動の様子</h2>
-                    <p class="text-center wow fadeInDown">
-                        最近の活動の内容をご紹介します。
-                    </p>
-                </div>
 
                 @include('frontend.activity.small-list')
 

@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('bodyId', 'act-index')
+@section('bodyId', 'act-list')
 
 @section('content')
     <section id="act">

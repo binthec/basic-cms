@@ -7,7 +7,6 @@
 .btn {
     border-bottom-width: 0;
 }
-
 /*
  * section
  */
@@ -15,7 +14,6 @@
     text-align: right;
     margin-top: 50px;
 }
-
 /**
  * スライド画像
  */
@@ -23,35 +21,29 @@
     width: auto;
     height: 600px;
 }
-
 .top-slider .slick-prev,
 .top-slider .slick-next {
     z-index: 1;
     width: 30px;
     height: 30px;
 }
-
 .top-slider .slick-prev {
     left: 20px !important;
 }
-
 .top-slider .slick-next {
     right: 20px;
 }
-
 .top-slider .slick-prev::before,
 .top-slider .slick-next::before {
     z-index: 1;
     font-size: 30px;
 }
-
 /*
  * 活動の様子
  */
 #home #act .btn.btn-primary {
     margin-top: 0;
 }
-
 /**
  * カレンダー
  */
@@ -59,22 +51,18 @@
     padding: 87px 0 87px 0;
     background-color: #f6f6f6;
 }
-
 #home #events #calendar {
     background-color: #fff;
     padding: 50px;
     border-radius: 5px;
 }
-
 .fc-row th.fc-day-header,
 .fc-unthemed td.fc-today {
     background-color: #CBE6F3;
 }
-
 .fc-row th.fc-sat {
     background-color: #FCF1D3;
 }
-
 .fc-row th.fc-sun {
     background-color: #F6D4D8;
 }
@@ -91,28 +79,23 @@
     width: 270px;
     height: 180px;
 }
-
 .act-picts .slick-prev,
 .act-picts .slick-next {
     z-index: 1;
     width: 30px;
     height: 30px;
 }
-
 .act-picts .slick-next {
     right: 10px;
 }
-
 .act-picts .slick-prev {
     left: 10px;
 }
-
 .act-picts .slick-prev:before,
 .act-picts .slick-next:before {
     font-size: 30px;
     opacity: .90;
 }
-
 /*
  * 活動の様子詳細ページ
  */
@@ -121,51 +104,34 @@
     background: #f6f6f6;
     overflow: hidden;
 }
-
-#act .post {
-    background: #fff;
-    margin-bottom: 50px;
-    padding: 30px 60px;
-}
-
-#act .entry-date {
-    color: #45aed6;
-}
-
-#act .entry-place {
-    margin-left: 10px;
-}
-
 .act-list {
-    width:100%;
-    margin:0;
-    padding:0;
-    display:-webkit-box;
-    display:-moz-box;
-    display:-ms-box;
-    display:-webkit-flexbox;
-    display:-moz-flexbox;
-    display:-ms-flexbox;
-    display:-webkit-flex;
-    display:-moz-flex;
-    display:-ms-flex;
-    display:flex;
-    -webkit-box-lines:multiple;
-    -moz-box-lines:multiple;
-    -webkit-flex-wrap:wrap;
-    -moz-flex-wrap:wrap;
-    -ms-flex-wrap:wrap;
-    flex-wrap:wrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: -webkit-flexbox;
+    display: -moz-flexbox;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: flex;
+    -webkit-box-lines: multiple;
+    -moz-box-lines: multiple;
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
-
 /* トップページにあるのだけ、4列 */
 #home .small-post {
     width: 23%;
 }
-
 /* それ以外は5列 */
 .small-post {
-    width:18%;
+    width: 18%;
     position: relative;
     background: #fff;
     padding: 0;
@@ -173,29 +139,24 @@
     margin-left: 1%;
     margin-bottom: 20px;
 }
-
-#act .small-post img.thum {
+.small-post img.thum {
     width: 100%;
 }
-
-#act .small-post .post-text {
+.small-post .post-text {
     padding: 10px;
     text-align: center;
     position: relative;
     padding-bottom: 4.5rem !important;
 }
-
-#act .small-post .post-text h5 {
+.small-post .post-text h5 {
     margin-top: 0;
 }
-
-#act .small-post .post-text p {
+.small-post .post-text p {
     margin-bottom: 2px;
 }
-
-#act .small-post .read-more {
+.small-post .read-more {
     position: absolute;
-    width : 50%;
+    width: 50%;
     left: 25%;
     padding: 0;
     bottom: 10px;
@@ -205,19 +166,16 @@
     border-radius: 15px;
     font-size: 12px;
 }
-
-#act .small-post .post-text .place {
+.small-post .post-text .place {
     margin: 0 0 10px 0;
     padding: 0;
     font-size: 0.7em;
     line-height: 10px;
 }
-
-#act-index #act .section-footer {
+#act-list .section-footer {
     text-align: center;
     margin-top: 20px;
 }
-
 /**
  * ************************************
  *              common
@@ -236,7 +194,6 @@
     background-color: #ff641b;
     border-color: #ff641b;
 }
-
 .pagination > li > a,
 .pagination > li > span {
     color: #ff641b;
