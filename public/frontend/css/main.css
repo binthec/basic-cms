@@ -3,7 +3,7 @@
 body {
   padding-top: 100px;
   background: #fff;
-  font-family: "メイリオ", 'Roboto-regular',  helvetica, arial, 'hiragino kaku gothic pro', meiryo, 'ms pgothic', sans-serif;
+  font-family: "メイリオ",  meiryo, 'ms pgothic', sans-serif, 'Roboto-regular', helvetica, arial, 'hiragino kaku gothic pro';
   font-weight: 300;
   color: #454545; font-size:15px;
   line-height: 26px;
@@ -236,7 +236,7 @@ ul.nostyle i {
   #main-menu.navbar-default .navbar-nav > li.open > a,
   #main-menu.navbar-default .navbar-nav > li:hover > a {
     background: transparent;
-    border-top: 0px solid #ff6c00; color:#ff6c00;
+    border-top: 0 solid #ff6c00; color:#ff6c00;
   }
   #main-menu.navbar-default .dropdown-menu {
     padding: 0 20px;
@@ -347,7 +347,7 @@ ul.nostyle i {
   text-indent: -14px;
 }
 #bar {
-  width: 0%;
+  width: 0;
   max-width: 100%;
   height: 4px;
   background: #45aed6;
@@ -448,7 +448,7 @@ ul.nostyle i {
   border-color: #318daf transparent transparent transparent;
 }*/
 #portfolio .portfolio-filter > li:first-child a {
-  border-radius: 0px 0 0 0px;
+  border-radius: 0;
 }
 #portfolio .portfolio-filter > li:last-child a {
   /* border-radius: 0 4px 4px 0;*/
@@ -576,15 +576,15 @@ ul.nostyle i {
 }
 
 #testimonial .col-sm-6{border-bottom:1px solid #f4f4f4; border-right:1px solid #f4f4f4; padding-bottom:20px;}
-#testimonial .col-sm-6:nth-child(2n+0){border-right:0px solid #f4f4f4;}
-#testimonial .col-sm-6:nth-child(3), #testimonial .col-sm-6:nth-child(4){border-bottom:0px solid #06F;}
+#testimonial .col-sm-6:nth-child(2n+0){border-right:0 solid #f4f4f4;}
+#testimonial .col-sm-6:nth-child(3), #testimonial .col-sm-6:nth-child(4){border-bottom:0 solid #06F;}
 #testimonial .panel-one{ padding-bottom:20px; padding-top:20px; float:left; height:200px; overflow:hidden;}
 #testimonial .user-img{ width:25%; margin-right:15px; float:left;}
 #testimonial .user-img img{ border-radius:50%; border:4px solid #e5e5e5; width:100%;}
 
 #testimonial .testi-info{ width:66%; float:left;}
-#testimonial .testi-info h4{ font-size:18px; color:#454545; margin:0px; padding-top:15px;}
-#testimonial .testi-info h5{ font-size:14px; color:#454545; margin:0px; padding-bottom:10px; font-weight:normal;}
+#testimonial .testi-info h4{ font-size:18px; color:#454545; margin:0; padding-top:15px;}
+#testimonial .testi-info h5{ font-size:14px; color:#454545; margin:0; padding-bottom:10px; font-weight:normal;}
 #testimonial .testi-info p{ font-size:15px; color:#454545; line-height:20px;}
 
 
@@ -613,7 +613,7 @@ ul.nostyle i {
 	margin-bottom: 10px;*/
 }
 
-.team-info h3{ margin-bottom:0px;}
+.team-info h3{ margin-bottom:0;}
 
 #meet-team .team-member:hover {
   border-color: #45aed6;
@@ -725,7 +725,7 @@ ul.nostyle i {
   margin-bottom: 20px;
 }
 #pricing {
-  padding: 84px 0 70px 0px; background:#c4f0fb;
+  padding: 84px 0 70px 0; background:#c4f0fb;
 }
 #pricing ul.pricing {
   list-style: none;
@@ -736,7 +736,7 @@ ul.nostyle i {
   padding: 15px;
   text-align: center; background: #fff; box-shadow:1px 1px 1px rgba(0,0,0,0.1);
 }
-#pricing ul.pricing:hover{box-shadow:0px 4px 12px rgba(0, 0, 0, 0.2); transition:all 0.3s ease 0s;}
+#pricing ul.pricing:hover{box-shadow:0 4px 12px rgba(0, 0, 0, 0.2); transition:all 0.3s ease 0s;}
 
 #pricing ul.pricing li {
   display: block; font-size:18px;
@@ -819,8 +819,8 @@ ul.nostyle i {
   color: #454545;
 }
 #get-in-touch .address{ float:left; width:100%; margin-bottom:25px;}
-#get-in-touch .address h4{ font-size:16px; color:#454545; margin:0px; padding-bottom:5px;}
-#get-in-touch .address p{ font-size:16px; color:#454545; margin:0px; padding-bottom:5px;}
+#get-in-touch .address h4{ font-size:16px; color:#454545; margin:0; padding-bottom:5px;}
+#get-in-touch .address p{ font-size:16px; color:#454545; margin:0; padding-bottom:5px;}
 #get-in-touch .address a{ color:#454545;}
 
 #get-in-touch .form-control{ height:40px;font-family: 'Roboto-regular'; color:#323232;}
@@ -1019,5 +1019,5 @@ ul.nostyle i {
   #home #act .act-post.act-large .entry-thumbnail img, .team-img img{ width:100%;}
   .animated-number{ height:130px; width:130px; line-height:130px; font-size:22px;}
   #animated-number strong{ font-size:17px;}
-  #home #act .act-post.act-large .entry-thumbnail{ padding-top:0px;}
+  #home #act .act-post.act-large .entry-thumbnail{ padding-top:0;}
 }

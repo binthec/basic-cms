@@ -5,25 +5,21 @@
     @endif
 </div>
 
-<div class="row">
+<div class="act-list">
     @foreach($activities as $act)
-        <div class="col-md-2">
-            <div class="small-post">
+        <div class="small-post">
 
-                <img src="{{ $act->getMainPictPath() }}" class="thum">
+            <img src="{{ $act->getMainPictPath() }}" class="thum">
 
-                <div class="post-text">
-                    <h5 class="entry-title">{{ $act->title }}</h5>
-                    <p>
-                        <span class="date">{{ getJaDate($act->date) }}</span><span class="place">{{ $act->place }}</span>
-                    </p>
+            <div class="post-text">
+                <h5 class="entry-title">{{ $act->title }}</h5>
+                <p>
+                    <span class="date">{{ getJaDate($act->date) }}</span><span class="place">{{ $act->place }}</span>
+                </p>
+            </div><!-- /.post-text -->
 
-                    <a class="read-more" href="{{ route('front.act.detail', $act) }}">
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div><!-- /.post-text -->
+            <a class="read-more" href="{{ route('front.act.detail', $act) }}">読む</a>
 
-            </div><!-- /.small-post -->
-        </div><!-- /.col-sm-2 -->
+        </div><!-- /.small-post -->
     @endforeach
-</div><!-- /.row -->
+</div><!-- /.act-list -->
