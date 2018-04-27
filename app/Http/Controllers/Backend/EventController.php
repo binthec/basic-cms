@@ -45,7 +45,7 @@ class EventController extends Controller
 
             Event::create(['title' => $request->title, 'date' => getStdDate($request->date)]);
             DB::commit();
-            return redirect('/event');
+            return redirect('/event')->with('editedDate', getStdDate($request->date));
 
         } catch (\Exception $e) {
 
@@ -79,7 +79,7 @@ class EventController extends Controller
         try {
             $event->update(['title' => $request->title, 'date' => getStdDate($request->date)]);
             DB::commit();
-            return redirect('/event');
+            return redirect('/event')->with('editedDate', getStdDate($request->date));
 
         } catch (\Exception $e) {
 
@@ -94,7 +94,8 @@ class EventController extends Controller
      * 削除実行
      *
      * @param Event $event
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
     public function destroy(Event $event)
     {

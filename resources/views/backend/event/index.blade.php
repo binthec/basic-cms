@@ -130,9 +130,23 @@
     <script>
         $(function () {
             var calendar = $('#calendar').fullCalendar({
-                locale: 'ja',
+
+                //基本設定
+                header: getCalendarHeaderTools(),
+                views: {
+                    listYear: {buttonText: '1年の予定'}
+                },
+                noEventsMessage: '予定がありません。',
+
+                //初期表示の月
+                @if (Session::has('editedDate'))
+                //編集後に遷移してきた場合は、初期表示月を編集した月にする
+                defaultDate: '{{ Session::get('editedDate') }}',
+                @endif
+
+                //イベントを回して出力
                 events: [
-                    @foreach($events as $id => $event)
+                        @foreach($events as $id => $event)
                     {
                         id: "{{ $id }}",
                         title: "{{ $event['title'] }}",
@@ -140,6 +154,7 @@
                     },
                     @endforeach
                 ],
+
                 //日付欄をクリックした時
                 dayClick: function (date, jsEvent, view, resourceObj) {
                     var myModal = $('#modal-add').modal();

@@ -18,6 +18,15 @@
      */
     var calendar = $('#calendar').fullCalendar({
         locale: 'ja',
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,listYear'
+        },
+        views: {
+            listYear: {buttonText: '1年の予定'}
+        },
+        noEventsMessage: '予定がありません。',
         events: [
                 @foreach($events as $id => $event)
             {
