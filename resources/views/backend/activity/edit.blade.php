@@ -87,7 +87,7 @@
                                 </div>
                             </div><!-- form-group -->
 
-                            <div class="form-group{{ $errors->has('activity') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('pictures') ? ' has-error' : '' }}">
                                 <label for="act-pict-tmp" class="col-sm-3 control-label">画像</label>
                                 <div class="col-sm-9">
 
@@ -114,9 +114,9 @@
                                         @endif
                                     </div>
 
-                                    @if($errors->has('activity'))
+                                    @if($errors->has('pictures'))
                                         <span class="help-block">
-                                            <strong class="text-danger">{{ $errors->first('activity') }}</strong>
+                                            <strong class="text-danger">{{ $errors->first('pictures') }}</strong>
                                         </span>
                                     @endif
                                 </div><!-- /.col-sm-9 -->
@@ -129,18 +129,24 @@
                                 <div class="col-sm-9">
 
                                     <label class="radio-inline">
-                                        @if($activity->id !== null && $activity->status === \App\Activity::OPEN)
-                                            {{ Form::radio('status', \App\Activity::OPEN, true, ['class' => 'flat-blue']) }} 公開
+                                        @if(old('status') == \App\Activity::OPEN)
+                                            {{ Form::radio('status', \App\Activity::OPEN, '', ['class' => 'flat-blue', 'checked']) }}
+                                        @elseif($activity->id !== null && $activity->status === \App\Activity::OPEN)
+                                            {{ Form::radio('status', \App\Activity::OPEN, true, ['class' => 'flat-blue']) }}
                                         @else
-                                            {{ Form::radio('status', \App\Activity::OPEN, '', ['class' => 'flat-blue']) }} 公開
+                                            {{ Form::radio('status', \App\Activity::OPEN, '', ['class' => 'flat-blue']) }}
                                         @endif
+                                         公開
                                     </label>
                                     <label class="radio-inline">
-                                        @if($activity->id === null || $activity->status === \App\Activity::CLOSE)
-                                            {{ Form::radio('status', \App\Activity::CLOSE, true, ['class' => 'flat-blue']) }} 非公開
+                                        @if(old('status') == \App\Activity::CLOSE)
+                                            {{ Form::radio('status', \App\Activity::CLOSE, '', ['class' => 'flat-blue', 'checked']) }}
+                                        @elseif($activity->id === null || $activity->status === \App\Activity::CLOSE)
+                                            {{ Form::radio('status', \App\Activity::CLOSE, true, ['class' => 'flat-blue']) }}
                                         @else
-                                            {{ Form::radio('status', \App\Activity::CLOSE, '', ['class' => 'flat-blue']) }} 非公開
+                                            {{ Form::radio('status', \App\Activity::CLOSE, '', ['class' => 'flat-blue']) }}
                                         @endif
+                                         非公開
                                     </label>
 
                                     @if($errors->has('status'))

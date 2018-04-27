@@ -34,13 +34,13 @@
                         <div class="box-body">
 
                         @if($activities->count() > 0)
-                            <table class="table table-bordered with-btn">
+                            <table class="table table-bordered">
                                 <thead>
                                 <tr class="bg-primary text-center">
                                     <th width="10%">ステータス</th>
-                                    <th>名前</th>
-                                    <th>開催場所</th>
-                                    <th>開催日</th>
+                                    <th width="10%">開催日</th>
+                                    <th>タイトル</th>
+                                    <th width="10%">開催場所</th>
                                     <th width="5%">編集</th>
                                     <th width="5%">削除</th>
                                 </tr>

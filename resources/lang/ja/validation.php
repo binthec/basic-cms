@@ -106,5 +106,7 @@ return [
         'topimage' => 'トップ画像',
         'date' => '日付',
         'place' => '開催場所',
+        'pictures' => '画像',
+        'status' => '公開ステータス',
 	],
 ];
