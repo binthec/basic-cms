@@ -13,8 +13,8 @@ class ActivityController extends Controller
     /**
      * １ページに表示する数
      */
-    const INDEX_PAGINATION = 24;
-    const DETAIL_ACT_NUM = 6;
+    const ACT_NUM_LIST = 20;
+    const ACT_NUM_DETAIL = 5;
 
     /**
      * 一覧画面
@@ -23,7 +23,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        $activities = Activity::open()->paginate(self::INDEX_PAGINATION);
+        $activities = Activity::open()->paginate(self::ACT_NUM_LIST);
         return view('frontend.activity.index', compact('activities'));
     }
 
@@ -38,7 +38,7 @@ class ActivityController extends Controller
         //一覧で表示する用のグループ
         $activities = Activity::where('id', '!=', $activity->id)
             ->open()
-            ->take(self::DETAIL_ACT_NUM)
+            ->take(self::ACT_NUM_DETAIL)
             ->get();
 
         //単記事表示用。公開ステータスのものしか表示しない

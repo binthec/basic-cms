@@ -85,34 +85,7 @@
                     </p>
                 </div>
 
-                <div class="row">
-                    <div id="owl-box" class="owl-carousel">
-
-                        @foreach($activities as $act)
-                            <div class="text-center item">
-                                <div class="act-post act-large wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="0ms">
-                                    <article>
-                                        <header class="entry-header">
-                                            <div class="entry-thumbnail">
-                                                <img src="{{ $act->getMainPictPath() }}">
-                                            </div>
-                                            <h2 class="entry-title">{{ $act->title }}</h2>
-                                            <p>
-                                                <span class="entry-date">{{ getJaDate($act->date) }}</span>
-                                                <span class="entry-place">{{ $act->place }}</span>
-                                            </p>
-                                        </header>
-                                        <div class="entry-content">
-                                            {{--<P></P>--}}
-                                            <a class="btn btn-primary" href="{{ route('front.act.detail', $act) }}">読む</a>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-                        @endforeach
-
-                    </div><!-- /.owl-box -->
-                </div><!-- /.row -->
+                @include('frontend.activity.small-list')
 
                 <div class="section-footer">
                     <div class="wow fadeInLeft">

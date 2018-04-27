@@ -158,7 +158,13 @@
     flex-wrap:wrap;
 }
 
-#act .small-post {
+/* トップページにあるのだけ、4列 */
+#home .small-post {
+    width: 23%;
+}
+
+/* それ以外は5列 */
+.small-post {
     width:18%;
     position: relative;
     background: #fff;
