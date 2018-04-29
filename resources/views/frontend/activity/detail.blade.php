@@ -28,9 +28,7 @@
                 </div><!-- /.col -->
             </div><!-- /.row -->
 
-            @if($activities->count() > 0)
-                @include('frontend.activity.small-list')
-            @endif
+            @include('frontend.activity.small-list')
 
             <div class="section-footer">
                 <div class="wow fadeInLeft">

@@ -40,6 +40,19 @@
     margin-left: 1%;
     margin-bottom: 20px;
 }
+@media (max-width: 767px) {
+    .small-post {
+        width: 31%;
+    }
+    #home .small-post {
+        width: 48%;
+    }
+}
+@media (max-width:500px){
+    .small-post {
+        width: 48%;
+    }
+}
 .small-post img.thum {
     width: 100%;
 }

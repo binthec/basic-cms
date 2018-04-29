@@ -1,25 +1,29 @@
-<div class="section-header">
-    <h2 class="section-title text-center wow fadeInDown">{{ isset($singleAct)? 'その他の記事' : '活動の様子' }}</h2>
-    @if(!isset($singleAct))
-        <p class="text-center wow fadeInDown">最近の活動を紹介します。</p>
-    @endif
-</div>
+@if($activities->count() > 0)
 
-<div class="act-list">
-    @foreach($activities as $act)
-        <div class="small-post">
+    <div class="section-header">
+        <h2 class="section-title text-center wow fadeInDown">{{ isset($singleAct)? 'その他の記事' : '活動の様子' }}</h2>
+        @if(!isset($singleAct))
+            <p class="text-center wow fadeInDown">最近の活動を紹介します。</p>
+        @endif
+    </div>
 
-            <img src="{{ $act->getMainPictPath() }}" class="thum">
+    <div class="act-list">
+        @foreach($activities as $act)
+            <div class="small-post">
 
-            <div class="post-text">
-                <h5 class="entry-title">{{ mb_strimwidth($act->title, 0, 48, "...") }}</h5>
-                <p>
-                    <span class="date">{{ getJaDate($act->date) }}</span><span class="place">{{ $act->place }}</span>
-                </p>
-            </div><!-- /.post-text -->
+                <img src="{{ $act->getMainPictPath() }}" class="thum">
 
-            <a class="read-more" href="{{ route('front.act.detail', $act) }}">読む</a>
+                <div class="post-text">
+                    <h5 class="entry-title">{{ mb_strimwidth($act->title, 0, 48, "...") }}</h5>
+                    <p>
+                        <span class="date">{{ getJaDate($act->date) }}</span><span class="place">{{ $act->place }}</span>
+                    </p>
+                </div><!-- /.post-text -->
 
-        </div><!-- /.small-post -->
-    @endforeach
-</div><!-- /.act-list -->
+                <a class="read-more" href="{{ route('front.act.detail', $act) }}">読む</a>
+
+            </div><!-- /.small-post -->
+        @endforeach
+    </div><!-- /.act-list -->
+
+@endif
