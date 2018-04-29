@@ -7,10 +7,10 @@
         <div class="container">
 
             <div class="section-header">
-                <h2 class="section-title text-center wow fadeInDown">{{ $singleAct->title }}</h2>
+                <h2 class="section-title text-center wow fadeInDown">{{ $actSingle->title }}</h2>
                 <p class="text-center wow fadeInDown">
-                    <span class="entry-date">{{ getJaDate($singleAct->date) }}</span>
-                    <span class="entry-place">於&ensp;{{ $singleAct->place }}</span>
+                    <span class="entry-date">{{ getJaDate($actSingle->date) }}</span>
+                    <span class="entry-place">於&ensp;{{ $actSingle->place }}</span>
                 </p>
             </div>
 
@@ -18,12 +18,12 @@
                 <div class="col-md-12">
 
                     <div class="act-picts">
-                        @foreach($singleAct->pictures as $pict)
+                        @foreach($actSingle->pictures as $pict)
                             <img src="{{ $pict->getPictPath(\App\Activity::class, \App\Activity::$pictPrefix) }}">
                         @endforeach
                     </div>
 
-                    <div class="post">{!! $singleAct->detail !!}</div>
+                    <div class="post">{!! $actSingle->detail !!}</div>
 
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -49,7 +49,6 @@
 @section('js')
     <script src="/vendor/slick/slick.min.js"></script>
     <script>
-
         //Slider
         $('.act-picts').slick({
             dots: true,

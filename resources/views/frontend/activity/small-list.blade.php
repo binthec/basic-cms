@@ -1,8 +1,8 @@
 @if($activities->count() > 0)
 
     <div class="section-header">
-        <h2 class="section-title text-center wow fadeInDown">{{ isset($singleAct)? 'その他の記事' : '活動の様子' }}</h2>
-        @if(!isset($singleAct))
+        <h2 class="section-title text-center wow fadeInDown">{{ isset($actSingle)? 'その他の記事' : '活動の様子' }}</h2>
+        @if(!isset($actSingle))
             <p class="text-center wow fadeInDown">最近の活動を紹介します。</p>
         @endif
     </div>

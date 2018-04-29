@@ -41,27 +41,29 @@
                                     <th width="10%">開催日</th>
                                     <th>タイトル</th>
                                     <th width="10%">開催場所</th>
+                                    <th width="5%">表示確認</th>
                                     <th width="5%">編集</th>
                                     <th width="5%">削除</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($activities as $activity)
+                                @foreach($activities as $act)
                                     <tr class="text-center">
                                         <td>
-                                            <label class="label label-lg {{ ($activity->status === 1)? 'label-info' : 'label-danger' }}">
-                                                {{ \App\Activity::$statusList[$activity->status] }}
+                                            <label class="label label-lg {{ ($act->status === 1)? 'label-info' : 'label-danger' }}">
+                                                {{ \App\Activity::$statusList[$act->status] }}
                                             </label>
                                         </td>
-                                        <td>{{ getJaDate($activity->date) }}</td>
-                                        <td class="text-left">{{ $activity->title }}</td>
-                                        <td>{{ $activity->place }}</td>
-                                        <td><a class="btn btn-primary" href="{{ route('activity.edit', $activity->id) }}">編集</a></td>
+                                        <td>{{ getJaDate($act->date) }}</td>
+                                        <td class="text-left">{{ $act->title }}</td>
+                                        <td>{{ $act->place }}</td>
+                                        <td><a class="btn btn-success" href="{{ route('activity.confirm', $act->id) }}">表示確認</a></td>
+                                        <td><a class="btn btn-primary" href="{{ route('activity.edit', $act->id) }}">編集</a></td>
                                         <td>
-                                            <a class="btn btn-danger" data-toggle="modal" data-target="#destroy{{ $activity->id }}">削除</a>
+                                            <a class="btn btn-danger" data-toggle="modal" data-target="#destroy{{ $act->id }}">削除</a>
 
                                             <!-- Modal -->
-                                            <div class="modal fade" id="destroy{{ $activity->id }}" tabindex="-1" role="dialog" aria-labelledby="modal">
+                                            <div class="modal fade" id="destroy{{ $act->id }}" tabindex="-1" role="dialog" aria-labelledby="modal">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header bg-danger">
@@ -72,13 +74,13 @@
                                                         </div>
                                                         <div class="modal-body clearfix">
                                                             <div>
-                                                                <p><i class="fa fa-image"></i> 選択したトップ画像：「{{ $activity->name }}」</p>
+                                                                <p><i class="fa fa-image"></i> 選択したトップ画像：「{{ $act->name }}」</p>
                                                             </div>
                                                             <div class="help-block pull-right">
                                                                 <p class="text-danger"><i class="fa fa-warning"></i>この処理は取り消せません。</p>
                                                             </div>
                                                         </div>
-                                                        {!! Form::open(['method' => 'delete', 'route' => ['activity.destroy', $activity->id]]) !!}
+                                                        {!! Form::open(['method' => 'delete', 'route' => ['activity.destroy', $act->id]]) !!}
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-primary-outline" data-dismiss="modal">キャンセル</button>
                                                             <button type="submit" class="btn btn-danger">削除実行</button>

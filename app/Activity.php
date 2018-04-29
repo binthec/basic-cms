@@ -21,6 +21,12 @@ class Activity extends Model
     use SoftDeletes;
 
     /**
+     * １ページに表示する数
+     */
+    const ACT_NUM_LIST = 20;
+    const ACT_NUM_DETAIL = 5;
+
+    /**
      * ステータス
      */
     const OPEN = 1;
@@ -73,6 +79,7 @@ class Activity extends Model
      * @var string
      */
     public static $pictPrefix = '270x180_';
+
     /**
      * バリデーションメッセージ
      *
@@ -201,7 +208,7 @@ class Activity extends Model
     }
 
     /**
-     * トップ画像に紐づく画像の内、order が１の画像のパスを返すメソッド
+     * 画像の内、order が１の画像のパスを返すメソッド
      *
      * @return string
      */
@@ -213,6 +220,20 @@ class Activity extends Model
         }
 
         return '';
+
+    }
+
+    /**
+     * 詳細画面で表示する、「自分以外の、公開中の」活動の様子を取得して返すメソッド
+     *
+     * @return mixed
+     */
+    public function getActList(){
+
+        return self::where('id', '!=', $this->id)
+            ->open()
+            ->take(self::ACT_NUM_DETAIL)
+            ->get();
 
     }
 

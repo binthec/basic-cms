@@ -48,6 +48,7 @@ Route::domain(env('BACKEND_DOMAIN'))->group(function () {
         //活動報告
         Route::post('activity/pict/store', 'Backend\ActivityController@pictStore')->name('activity.pict.store'); //XHRでの画像アップロード
         Route::post('activity/pict/delete', 'Backend\ActivityController@pictDelete')->name('activity.pict.delete'); //ajaxでの画像削除
+        Route::get('activity/confirm/{activity}', 'Backend\ActivityController@confirm')->name('activity.confirm'); //表示確認
         Route::resource('activity', 'Backend\ActivityController');
 
         //カレンダー

@@ -107,9 +107,9 @@ class ActivityController extends Controller
 
         DB::beginTransaction();
 
-        $activity->saveAll($request);
-
         try {
+
+            $activity->saveAll($request);
 
             DB::commit();
             return redirect('/activity')->with('flashMsg', '登録が完了しました。');
@@ -139,6 +139,20 @@ class ActivityController extends Controller
         $activity->delete();
 
         return redirect('/activity')->with('flashMsg', '削除が完了しました。');
+    }
+
+    /**
+     * 表示確認
+     *
+     * @param Activity $activity
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function confirm(Activity $activity)
+    {
+        //単記事以外の記事を取得
+        $activities = $activity->getActList();
+
+        return view('frontend.activity.detail', ['activities' => $activities, 'actSingle' => $activity]);
     }
 
     /**
