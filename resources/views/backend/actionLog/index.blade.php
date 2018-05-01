@@ -27,12 +27,12 @@
                             <div class="form-group">
                                 <label for="function-name" class="col-sm-2 control-label">機能名</label>
                                 <div class="col-sm-4">
-                                    {!! Form::text('func_name', old('func_name'), ['id' => 'function-name', 'class' => 'form-control']) !!}
+                                    {!! Form::select('func_name', \App\ActionLog::$controllers, null,['class' => 'form-control use-select2', 'placeholder' => '選択してください']) !!}
                                 </div>
 
-                                <label for="action-name" class="col-sm-2 control-label">操作内容</label>
+                                <label for="method-name" class="col-sm-2 control-label">操作内容</label>
                                 <div class="col-sm-4">
-                                    {!! Form::text('action_name', old('action_name'), ['id' => 'action-name', 'class' => 'form-control']) !!}
+                                    {!! Form::select('method_name', \App\ActionLog::$actionLabels, null,['class' => 'form-control use-select2', 'placeholder' => '選択してください']) !!}
                                 </div>
                             </div><!-- form-group -->
 
@@ -55,8 +55,9 @@
                         </div><!-- /.box-body -->
 
                         <div class="box-footer text-center">
-                            {!! Form::submit('検　　索',['class' => 'btn btn-primary']) !!}&emsp;
-                            <a href="{{ route('actionlog.index') }}" class="btn btn-warning">リセット</a>
+                            <a href="{{ route('actionlog.index') }}" class="btn btn-warning">リセット</a>&emsp;
+                            {!! Form::submit('検　　索',['class' => 'btn btn-primary']) !!}
+
                         </div>
 
                     </div><!-- /.box -->
@@ -93,13 +94,9 @@
                                             <td>{{ $log->getFuncName() }}</td>
 
                                             <td class="text-center">
-                                                @if($log->route_action !== \App\ActionLog::LOGIN_CONTROLLER)
-                                                    <label class="label {{ \App\ActionLog::$labelColor[$log->method] }}">
-                                                        {{ \App\ActionLog::$actionLabels[$log->method] }}
-                                                    </label>
-                                                @else
-                                                    ー
-                                                @endif
+                                                <label class="label {{ \App\ActionLog::$labelColor[$log->method] }}">
+                                                    {{ \App\ActionLog::$actionLabels[$log->method] }}
+                                                </label>
                                             </td>
                                             <td>
                                                 @php

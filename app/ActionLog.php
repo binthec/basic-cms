@@ -63,9 +63,15 @@ class ActionLog extends Model
         $query = ActionLog::query();
         $query->orderBy('created_at', 'desc'); //日付の新しい順に並べる
 
-//        if (!empty($data['start_date'])) {
-//            $query->where('email', 'like', '%' . $data['email'] . '%');
-//        }
+        //機能で検索
+        if (!empty($data['func_name'])) {
+            $query->where('route_action', $data['func_name']);
+        }
+
+        //操作内容で検索
+        if (!empty($data['method_name'])) {
+            $query->where('method', $data['method_name']);
+        }
 
         //ユーザIDで検索
         if (!empty($data['user_id'])) {
@@ -106,14 +112,14 @@ class ActionLog extends Model
 
         if ($this->route_action !== null) {
 
-            if ($this->route_action === self::LOGIN_CONTROLLER) {
-                //ログインの場合は、値の有無によってログインがログアウトか見分ける
-                return empty($this->request)? self::$actionLabels[self::LOGOUT] : self::$actionLabels[self::LOGIN];
-            } else {
+//            if ($this->route_action === self::LOGIN_CONTROLLER) {
+//                //ログインの場合は、値の有無によってログインがログアウトか見分ける
+//                return empty($this->request)? self::$actionLabels[self::LOGOUT] : self::$actionLabels[self::LOGIN];
+//            } else {
                 //それ以外はコントローラ名を出力
                 return \App\ActionLog::$controllers[$this->route_action];
-            }
-            
+//            }
+
         }
 
         return '-';

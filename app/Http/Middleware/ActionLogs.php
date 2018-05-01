@@ -21,20 +21,42 @@ class ActionLogs
 
         $response = $next($request);
 
-        if (!$request->isMethod('GET') && !empty($request->all())){
+        if (!$request->isMethod('GET') && !empty($request->all())) {
 
             $actionLog = new ActionLog();
             $actionLog->user_id = ($request->user()) ? $request->user()->id : null;
             $actionLog->remote_address = $request->ip();
             $actionLog->route_action = preg_replace(['/App\\\Http\\\Controllers\\\Backend\\\/', '/@.*$/'], '', Route::currentRouteAction());
-            $actionLog->method = $request->method();
+            $actionLog->method = $this->getMethod($request, $actionLog->route_action);
 
             $requestData = $request->except('_token', 'password', 'password_confirmation');
-            $actionLog->request = !empty($requestData)? json_encode($requestData) : null;
+            $actionLog->request = !empty($requestData) ? json_encode($requestData) : null;
+
             $actionLog->save();
+
         }
 
         return $response;
+
+    }
+
+    /**
+     * 操作のメソッド名を返すメソッド。
+     * ログイン・ログアウトの場合はLOGIN・LOGOUT、それ以外は$request->method()を返す
+     *
+     * @param $request
+     * @param $routeAction
+     * @return string
+     */
+    protected function getMethod($request, $routeAction)
+    {
+
+        //ログイン・ログアウトの場合はネーミングルートを大文字にして返す
+        if($routeAction === ActionLog::LOGIN_CONTROLLER){
+            return strtoupper(Route::currentRouteName());
+        }
+
+        return $request->method();
 
     }
 }
