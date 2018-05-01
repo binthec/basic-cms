@@ -26,9 +26,8 @@ class ActionLogController extends Controller
         $query = ActionLog::getSearchQuery($request->input());
         $logs = $query->paginate(self::PAGINATION);
 
-        $userNames = User::getUserNames();
-
-        return view('backend.actionLog.index', compact('logs', 'userNames'))
+        return view('backend.actionLog.index', compact('logs'))
             ->with($request->input());
+
     }
 }

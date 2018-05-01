@@ -19,7 +19,19 @@ class UsersTableSeeder extends Seeder
 				'password' => bcrypt('aaaaaaaa'),
 				'created_at' => \Carbon\Carbon::now(),
 				'updated_at' => \Carbon\Carbon::now(),
-			]
+			],
+            [
+                'name' => 'hanako',
+                'password' => bcrypt('aaaaaaaa'),
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'name' => 'taro',
+                'password' => bcrypt('aaaaaaaa'),
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
 		]);
 	}
 

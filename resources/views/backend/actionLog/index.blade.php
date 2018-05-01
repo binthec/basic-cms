@@ -78,28 +78,91 @@
                                 <table class="table table-bordered with-btn-sm">
                                     <thead>
                                     <tr class="bg-primary text-center">
+                                        <th>操作日時</th>
+                                        <th>操作したユーザ</th>
                                         <th>機能名</th>
                                         <th>操作内容</th>
-                                        <th>操作したユーザ</th>
-                                        <th>操作日時</th>
                                         <th>詳細表示</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($logs as $log)
                                         <tr class="text-center">
-                                            <td>{{ $log->route_name }}</td>
-                                            <td class="text-center">
-                                                <label class="label {{ \App\ActionLog::$labelColor[$log->method] }}">
-                                                    {{ \App\ActionLog::$actionLabels[$log->method] }}
-                                                </label>
-                                            </td>
-                                            <td>{{ $log->getUserName() }}</td>
                                             <td>{{ $log->created_at }}</td>
+                                            <td>{{ $log->getUserName() }}</td>
+                                            <td>{{ $log->getFuncName() }}</td>
+
+                                            <td class="text-center">
+                                                @if($log->route_action !== \App\ActionLog::LOGIN_CONTROLLER)
+                                                    <label class="label {{ \App\ActionLog::$labelColor[$log->method] }}">
+                                                        {{ \App\ActionLog::$actionLabels[$log->method] }}
+                                                    </label>
+                                                @else
+                                                    ー
+                                                @endif
+                                            </td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-info">詳細</a>
+                                                @php
+                                                    $detail = json_decode($log->request, true);
+                                                @endphp
+
+                                                @if(!empty($detail))
+                                                    <a href="#" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-default-{{$log->id}}">詳細</a>
+                                                @else
+                                                    ー
+                                                @endif
                                             </td>
                                         </tr>
+
+                                        <div class="modal fade" id="modal-default-{{$log->id}}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-info">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title">アクションログ詳細</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <dl class="dl-horizontal">
+                                                            <dt>操作日時</dt>
+                                                            <dd>{{ $log->created_at }}</dd>
+                                                            <dt>操作したユーザ</dt>
+                                                            <dd>{{ $log->getUserName() }}</dd>
+                                                            <dt>機能名</dt>
+                                                            <dd>{{ $log->getFuncName() }}</dd>
+
+                                                            <dt>操作区分</dt>
+                                                            <dd>
+                                                                <label class="label {{ \App\ActionLog::$labelColor[$log->method] }}">
+                                                                    {{ \App\ActionLog::$actionLabels[$log->method] }}
+                                                                </label>
+                                                            </dd>
+
+                                                            @if(!empty($detail))
+                                                                <hr>
+                                                                @foreach($detail as $key => $data)
+                                                                    <dt>{{ $key }}</dt>
+                                                                    <dd>
+                                                                        @if(is_array($data))
+                                                                            @foreach($data as $k => $d)
+                                                                                {{ $d }}<br>
+                                                                            @endforeach
+                                                                        @else
+                                                                            {{ $data }}
+                                                                        @endif
+                                                                    </dd>
+                                                                @endforeach
+                                                            @endif
+                                                        </dl>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">閉じる</button>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+
                                     @endforeach
                                     </tbody>
                                 </table>
@@ -122,14 +185,14 @@
 
 @section('js')
     <script>
-        $(function(){
+        $(function () {
             $('#date_start').datetimepicker();
             $('#date_end').datetimepicker({
                 useCurrent: false,
             });
-           $("#date_start").on("dp.change", function (e) {
-               $('#date_end').data("DateTimePicker").minDate(e.date);
-           });
+            $("#date_start").on("dp.change", function (e) {
+                $('#date_end').data("DateTimePicker").minDate(e.date);
+            });
             $("#date_end").on("dp.change", function (e) {
                 $('#date_start').data("DateTimePicker").maxDate(e.date);
             });

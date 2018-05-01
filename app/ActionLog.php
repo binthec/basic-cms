@@ -32,6 +32,31 @@ class ActionLog extends Model
         self::DELETE => 'label-danger',
     ];
 
+    /**
+     * 機能名
+     */
+    const ACTIVITY_CONTROLLER = 'ActivityController';
+    const EVENT_CONTROLLER = 'EventController';
+    const HOME_CONTROLLER = 'HomeController';
+    const TOPIMAGE_CONTROLLER = 'TopimageController';
+    const USER_CONTROLLER = 'UserController';
+    const LOGIN_CONTROLLER = 'Auth\LoginController';
+
+    static $controllers = [
+        self::ACTIVITY_CONTROLLER => '活動の様子',
+        self::EVENT_CONTROLLER => 'カレンダー',
+        self::HOME_CONTROLLER => 'ホーム',
+        self::TOPIMAGE_CONTROLLER => 'トップ画像',
+        self::USER_CONTROLLER => 'ユーザ管理',
+        self::LOGIN_CONTROLLER => '認証',
+    ];
+
+    /**
+     * 検索条件のクエリを返すメソッド
+     *
+     * @param $data
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public static function getSearchQuery($data)
     {
 
@@ -69,5 +94,29 @@ class ActionLog extends Model
             return User::getUserNames()[$this->user_id];
         }
         return 'ー';
+    }
+
+    /**
+     * 機能名を返すメソッド
+     *
+     * @return string
+     */
+    public function getFuncName()
+    {
+
+        if ($this->route_action !== null) {
+
+            if ($this->route_action === self::LOGIN_CONTROLLER) {
+                //ログインの場合は、値の有無によってログインがログアウトか見分ける
+                return empty($this->request)? self::$actionLabels[self::LOGOUT] : self::$actionLabels[self::LOGIN];
+            } else {
+                //それ以外はコントローラ名を出力
+                return \App\ActionLog::$controllers[$this->route_action];
+            }
+            
+        }
+
+        return '-';
+
     }
 }
