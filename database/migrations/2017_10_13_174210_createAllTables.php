@@ -25,7 +25,8 @@ class CreateAllTables extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
             $table->string('remote_address');
-            $table->string('route_action')->nullable();
+            $table->string('controller')->nullable();
+            $table->string('action')->nullable();
             $table->string('method');
             $table->text('request')->nullable();
             $table->datetime('created_at');

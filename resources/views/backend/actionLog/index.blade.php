@@ -25,14 +25,14 @@
                         <div class="box-body">
 
                             <div class="form-group">
-                                <label for="function-name" class="col-sm-2 control-label">機能名</label>
+                                <label for="controller-name" class="col-sm-2 control-label">機能名</label>
                                 <div class="col-sm-4">
-                                    {!! Form::select('func_name', \App\ActionLog::$controllers, null,['class' => 'form-control use-select2', 'placeholder' => '選択してください']) !!}
+                                    {!! Form::select('controller_name', \App\ActionLog::$controllers, null,['class' => 'form-control use-select2', 'placeholder' => '選択してください']) !!}
                                 </div>
 
-                                <label for="method-name" class="col-sm-2 control-label">操作内容</label>
+                                <label for="action-name" class="col-sm-2 control-label">操作内容</label>
                                 <div class="col-sm-4">
-                                    {!! Form::select('method_name', \App\ActionLog::$actionLabels, null,['class' => 'form-control use-select2', 'placeholder' => '選択してください']) !!}
+                                    {!! Form::select('action_name', \App\ActionLog::$actionLabels, null,['class' => 'form-control use-select2', 'placeholder' => '選択してください']) !!}
                                 </div>
                             </div><!-- form-group -->
 
@@ -91,11 +91,11 @@
                                         <tr class="text-center">
                                             <td>{{ $log->created_at }}</td>
                                             <td>{{ $log->getUserName() }}</td>
-                                            <td>{{ $log->getFuncName() }}</td>
+                                            <td>{{ $log->getControllerName() }}</td>
 
                                             <td class="text-center">
-                                                <label class="label {{ \App\ActionLog::$labelColor[$log->method] }}">
-                                                    {{ \App\ActionLog::$actionLabels[$log->method] }}
+                                                <label class="label label-{{ \App\ActionLog::$labelColor[$log->action] }}">
+                                                    {{ \App\ActionLog::$actionLabels[$log->action] }}
                                                 </label>
                                             </td>
                                             <td>
@@ -127,12 +127,12 @@
                                                             <dt>操作したユーザ</dt>
                                                             <dd>{{ $log->getUserName() }}</dd>
                                                             <dt>機能名</dt>
-                                                            <dd>{{ $log->getFuncName() }}</dd>
+                                                            <dd>{{ $log->getControllerName() }}</dd>
 
                                                             <dt>操作区分</dt>
                                                             <dd>
-                                                                <label class="label {{ \App\ActionLog::$labelColor[$log->method] }}">
-                                                                    {{ \App\ActionLog::$actionLabels[$log->method] }}
+                                                                <label class="label label-{{ \App\ActionLog::$labelColor[$log->action] }}">
+                                                                    {{ \App\ActionLog::$actionLabels[$log->action] }}
                                                                 </label>
                                                             </dd>
 

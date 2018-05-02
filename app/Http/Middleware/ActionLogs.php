@@ -26,7 +26,8 @@ class ActionLogs
             $actionLog = new ActionLog();
             $actionLog->user_id = ($request->user()) ? $request->user()->id : null;
             $actionLog->remote_address = $request->ip();
-            $actionLog->route_action = preg_replace(['/App\\\Http\\\Controllers\\\Backend\\\/', '/@.*$/'], '', Route::currentRouteAction());
+            $actionLog->controller = preg_replace(['/App\\\Http\\\Controllers\\\Backend\\\/', '/Controller@.*$/'], '', Route::currentRouteAction());
+            $actionLog->action = preg_replace('/.*@/', '', Route::currentRouteAction());
             $actionLog->method = $this->getMethod($request, $actionLog->route_action);
 
             $requestData = $request->except('_token', 'password', 'password_confirmation');

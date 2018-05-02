@@ -7,40 +7,16 @@ use App\User;
 
 class ActionLog extends Model
 {
-    /**
-     * 操作内容
-     */
-    const LOGIN = 'LOGIN';
-    const LOGOUT = 'LOGOUT';
-    const POST = 'POST';
-    const PUT = 'PUT';
-    const DELETE = 'DELETE';
-
-    static $actionLabels = [
-        self::LOGIN => 'ログイン',
-        self::LOGOUT => 'ログアウト',
-        self::POST => '新規作成',
-        self::PUT => '編　　集',
-        self::DELETE => '削　　除',
-    ];
-
-    static $labelColor = [
-        self::LOGIN => 'label-info',
-        self::LOGOUT => 'label-info',
-        self::POST => 'label-success',
-        self::PUT => 'label-warning',
-        self::DELETE => 'label-danger',
-    ];
 
     /**
      * 機能名
      */
-    const ACTIVITY_CONTROLLER = 'ActivityController';
-    const EVENT_CONTROLLER = 'EventController';
-    const HOME_CONTROLLER = 'HomeController';
-    const TOPIMAGE_CONTROLLER = 'TopimageController';
-    const USER_CONTROLLER = 'UserController';
-    const LOGIN_CONTROLLER = 'Auth\LoginController';
+    const ACTIVITY_CONTROLLER = 'Activity';
+    const EVENT_CONTROLLER = 'Event';
+    const HOME_CONTROLLER = 'Home';
+    const TOPIMAGE_CONTROLLER = 'Topimage';
+    const USER_CONTROLLER = 'User';
+    const LOGIN_CONTROLLER = 'Auth\Login';
 
     static $controllers = [
         self::ACTIVITY_CONTROLLER => '活動の様子',
@@ -49,6 +25,41 @@ class ActionLog extends Model
         self::TOPIMAGE_CONTROLLER => 'トップ画像',
         self::USER_CONTROLLER => 'ユーザ管理',
         self::LOGIN_CONTROLLER => '認証',
+    ];
+
+    /**
+     * 操作内容
+     */
+    const LOGIN = 'login';
+    const LOGOUT = 'logout';
+    const STORE = 'store';
+    const UPDATE = 'update';
+    const DESTROY = 'destroy';
+    const PICT_STORE = 'pictStore';
+    const PICT_DELETE = 'pictDelete';
+    const ORDER_UPDATE = 'orderUpdate';
+
+    static $actionLabels = [
+        self::LOGIN => 'ログイン',
+        self::LOGOUT => 'ログアウト',
+        self::STORE => '新規作成',
+        self::UPDATE => '編集',
+        self::DESTROY => '削除',
+        self::PICT_STORE => '画像新規登録',
+        self::PICT_DELETE => '画像削除',
+        self::ORDER_UPDATE => '表示順更新',
+    ];
+
+    //操作内容のラベルの色指定
+    static $labelColor = [
+        self::LOGIN => 'info',
+        self::LOGOUT => 'info',
+        self::STORE => 'success',
+        self::UPDATE => 'warning',
+        self::DESTROY => 'danger',
+        self::PICT_STORE => 'success',
+        self::PICT_DELETE => 'warning',
+        self::ORDER_UPDATE => 'warning',
     ];
 
     /**
@@ -64,13 +75,13 @@ class ActionLog extends Model
         $query->orderBy('created_at', 'desc'); //日付の新しい順に並べる
 
         //機能で検索
-        if (!empty($data['func_name'])) {
-            $query->where('route_action', $data['func_name']);
+        if (!empty($data['controller_name'])) {
+            $query->where('controller', $data['controller_name']);
         }
 
         //操作内容で検索
-        if (!empty($data['method_name'])) {
-            $query->where('method', $data['method_name']);
+        if (!empty($data['action_name'])) {
+            $query->where('action', $data['action_name']);
         }
 
         //ユーザIDで検索
@@ -107,22 +118,11 @@ class ActionLog extends Model
      *
      * @return string
      */
-    public function getFuncName()
+    public function getControllerName()
     {
-
-        if ($this->route_action !== null) {
-
-//            if ($this->route_action === self::LOGIN_CONTROLLER) {
-//                //ログインの場合は、値の有無によってログインがログアウトか見分ける
-//                return empty($this->request)? self::$actionLabels[self::LOGOUT] : self::$actionLabels[self::LOGIN];
-//            } else {
-                //それ以外はコントローラ名を出力
-                return \App\ActionLog::$controllers[$this->route_action];
-//            }
-
+        if ($this->controller !== null) {
+            return \App\ActionLog::$controllers[$this->controller];
         }
-
         return '-';
-
     }
 }
