@@ -72,7 +72,7 @@
 
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{ route('mypage') }}" class="btn btn-default btn-flat">マイページ</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault();document.getElementById('logout-form').submit();">ログアウト</a>
@@ -127,22 +127,24 @@
                     <a href="{{ route('event.index') }}"><i class="fa fa-calendar"></i> <span>カレンダー</span></a>
                 </li>
 
-                <li class="header">管理メニュー</li>
+                @can('owner-higher')
+                    <li class="header">管理メニュー</li>
 
-                <li class="treeview {{ isActiveUrl('user*') }}">
-                    <a href="#">
-                        <i class="fa fa-newspaper-o"></i> <span>ユーザ管理</span>
-                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                    </a>
-                    <ul class="treeview-menu {{ isActiveUrl('topimage*') }}">
-                        <li class="{{ isActiveUrl('user') }}"><a href="{{ route('user.index') }}"><i class="fa fa-circle-o"></i> 一覧表示・編集</a></li>
-                        <li class="{{ isActiveUrl('user/create') }}"><a href="{{ route('user.create') }}"><i class="fa fa-circle-o"></i> 新規登録</a></li>
-                    </ul>
-                </li>
+                    <li class="treeview {{ isActiveUrl('user*') }}">
+                        <a href="#">
+                            <i class="fa fa-newspaper-o"></i> <span>ユーザ管理</span>
+                            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                        </a>
+                        <ul class="treeview-menu {{ isActiveUrl('topimage*') }}">
+                            <li class="{{ isActiveUrl('user') }}"><a href="{{ route('user.index') }}"><i class="fa fa-circle-o"></i> 一覧表示・編集</a></li>
+                            <li class="{{ isActiveUrl('user/create') }}"><a href="{{ route('user.create') }}"><i class="fa fa-circle-o"></i> 新規登録</a></li>
+                        </ul>
+                    </li>
 
-                <li class="{{ isActiveUrl('actionlog*') }}">
-                    <a href="{{ route('actionlog.index') }}"><i class="fa fa-circle-o text-aqua"></i> <span>操作ログ閲覧</span></a>
-                </li>
+                    <li class="{{ isActiveUrl('actionlog*') }}">
+                        <a href="{{ route('actionlog.index') }}"><i class="fa fa-circle-o text-aqua"></i> <span>操作ログ閲覧</span></a>
+                    </li>
+                @endcan
             </ul>
         </section><!-- /.sidebar -->
 

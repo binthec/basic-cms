@@ -28,22 +28,12 @@ Route::domain(env('BACKEND_DOMAIN'))->group(function () {
         //ログアウト
         Route::post('logout', 'Backend\Auth\LoginController@logout')->name('logout');
 
-        //ユーザ管理
-        Route::get('user/create', 'Backend\Auth\RegisterController@showRegistrationForm')->name('user.create');
-        Route::post('user', 'Backend\Auth\RegisterController@register')->name('user.store');
-        Route::get('user/password/{user}/edit', 'Backend\UserController@editPassword')->name('user.password.edit');
-        Route::put('user/password/{user}', 'Backend\UserController@updatePassword')->name('user.password.update');
-        Route::resource('user', 'Backend\UserController', ['except' => ['create', 'store']]);
-
         //トップ画像
         Route::post('topimage/pict/store', 'Backend\TopimageController@pictStore')->name('topimage.pict.store'); //XHRでの画像アップロード
         Route::post('topimage/pict/delete', 'Backend\TopimageController@pictDelete')->name('topimage.pict.delete'); //ajaxでの画像削除
         Route::get('topimage/order', 'Backend\TopimageController@orderEdit')->name('topimage.order.edit');
         Route::post('topimage/order', 'Backend\TopimageController@orderUpdate')->name('topimage.order.update');
         Route::resource('topimage', 'Backend\TopimageController', ['except' => 'show']);
-
-        //アクションログ
-        Route::resource('actionlog', 'Backend\ActionLogController');
 
         //活動報告
         Route::post('activity/pict/store', 'Backend\ActivityController@pictStore')->name('activity.pict.store'); //XHRでの画像アップロード
@@ -53,6 +43,26 @@ Route::domain(env('BACKEND_DOMAIN'))->group(function () {
 
         //カレンダー
         Route::resource('event', 'Backend\EventController', ['except' => ['create', 'edit', 'show']]);
+
+        //ユーザ管理
+        Route::get('mypage', 'Backend\UserController@myPage')->name('mypage');
+        Route::put('user/{user}', 'Backend\UserController@update')->name('user.update');
+        Route::put('user/password/{user}', 'Backend\UserController@updatePassword')->name('user.password.update');
+
+        /**
+         * オーナー以上（＝システム管理者とオーナー）にのみ許可された操作
+         */
+        Route::group(['middleware' => 'can:owner-higher'], function(){
+            //ユーザ管理
+            Route::get('user/create', 'Backend\Auth\RegisterController@showRegistrationForm')->name('user.create');
+            Route::post('user', 'Backend\Auth\RegisterController@register')->name('user.store');
+            Route::get('user/password/{user}/edit', 'Backend\UserController@editPassword')->name('user.password.edit');
+            Route::resource('user', 'Backend\UserController', ['except' => ['create', 'store', 'update']]);
+
+            //アクションログ
+            Route::resource('actionlog', 'Backend\ActionLogController');
+        });
+
     });
 });
 

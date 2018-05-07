@@ -12,12 +12,25 @@ class User extends Authenticatable
     use SoftDeletes;
 
     /**
+     * 権限
+     */
+    const SYSTEM_ADMIN = 1;
+    const OWNER = 10;
+    const OPERATOR = 100;
+
+    public static $roles = [
+        self::SYSTEM_ADMIN => 'システム管理者',
+        self::OWNER => 'オーナー',
+        self::OPERATOR => 'オペレータ',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'role', 'name', 'email', 'password',
     ];
 
     /**
@@ -30,6 +43,16 @@ class User extends Authenticatable
     ];
 
     /**
+     * 権限がオーナー以上であるかの判定
+     *
+     * @return bool
+     */
+    public function isHigherOwner()
+    {
+        return $this->role <= self::OWNER;
+    }
+
+    /**
      * ユーザ名のIDをkey、nameを値にした配列を返すメソッド
      *
      * @return \Illuminate\Support\Collection
@@ -38,4 +61,5 @@ class User extends Authenticatable
     {
         return User::all()->pluck('name', 'id');
     }
+
 }

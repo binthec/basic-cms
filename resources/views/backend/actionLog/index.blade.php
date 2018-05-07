@@ -94,7 +94,7 @@
                                             <td>{{ $log->getControllerName() }}</td>
 
                                             <td class="text-center">
-                                                <label class="label label-{{ \App\ActionLog::$labelColor[$log->action] }}">
+                                                <label class="label label-lg label-{{ \App\ActionLog::$labelColor[$log->action] }}">
                                                     {{ \App\ActionLog::$actionLabels[$log->action] }}
                                                 </label>
                                             </td>
