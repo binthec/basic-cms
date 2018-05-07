@@ -48,8 +48,8 @@
 
         <!-- Logo -->
         <a href="{{ route('dashboard') }}" class="logo">
-            <span class="logo-mini"><b>Y</b></span>
-            <span class="logo-lg"><b>Yobo</b>Admin</span>
+            <span class="logo-mini"><b><i class="fa fa-cog"></i></b></span>
+            <span class="logo-lg"><b>{{ config('app.name') }}</b>Admin</span>
         </a>
 
         <nav class="navbar navbar-static-top">
@@ -61,13 +61,16 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="/backend/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <i class="fa fa-cog"></i>
                             <span class="hidden-xs"> {{ Auth::user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
-                                <img src="/backend/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                                <p>{{ Auth::user()->name }}</p>
+                                <i class="fa fa-child"></i>
+                                <p>
+                                    <span class="text-lg">{{ Auth::user()->name }}</span><br>
+                                    <span class="text-sm">{{ \App\User::$roles[Auth::user()->role] }}</span>
+                                </p>
                             </li>
 
                             <li class="user-footer">

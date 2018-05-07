@@ -12,27 +12,20 @@
 
         <section class="content">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-12">
 
-                    <!-- Profile Image -->
-                    <div class="box box-primary">
-                        <div class="box-body box-profile">
-                            <h3 class="profile-username text-center">{{ $user->name }}</h3>
+                    <div class="small-box bg-primary">
+                        <div class="inner">
+                            <h3>{{ $user->name }}</h3>
+                            <p>{{ \App\User::$roles[$user->role] }}</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person"></i>
+                        </div>
+                        {{--<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>--}}
+                    </div>
 
-                            <p class="text-muted text-center">権限：{{ \App\User::$roles[$user->role] }}</p>
-
-                            <ul class="list-group list-group-unbordered">
-                                <li class="list-group-item">
-                                    <b>アカウント作成日</b> <a class="pull-right">{{ getJaDateTime($user->created_at) }}</a>
-                                </li>
-                                {{--<li class="list-group-item">--}}
-                                {{--<b>Friends</b> <a class="pull-right">13,287</a>--}}
-                                {{--</li>--}}
-                            </ul>
-                        </div><!-- /.box-body -->
-                    </div><!-- /.box -->
                 </div><!-- /.col -->
-
             </div><!-- /.row -->
 
             <div class="row">
