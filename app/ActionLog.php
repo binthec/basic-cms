@@ -38,6 +38,7 @@ class ActionLog extends Model
     const PICT_STORE = 'pictStore';
     const PICT_DELETE = 'pictDelete';
     const ORDER_UPDATE = 'orderUpdate';
+    const UPDATE_PASSWORD = 'updatePassword';
 
     static $actionLabels = [
         self::LOGIN => 'ログイン',
@@ -48,6 +49,7 @@ class ActionLog extends Model
         self::PICT_STORE => '画像新規登録',
         self::PICT_DELETE => '画像削除',
         self::ORDER_UPDATE => '表示順更新',
+        self::UPDATE_PASSWORD => 'パスワード変更',
     ];
 
     //操作内容のラベルの色指定
@@ -58,8 +60,9 @@ class ActionLog extends Model
         self::UPDATE => 'warning',
         self::DESTROY => 'danger',
         self::PICT_STORE => 'success',
-        self::PICT_DELETE => 'warning',
+        self::PICT_DELETE => 'danger',
         self::ORDER_UPDATE => 'warning',
+        self::UPDATE_PASSWORD => 'warning',
     ];
 
     /**
