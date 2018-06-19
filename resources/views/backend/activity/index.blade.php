@@ -57,7 +57,7 @@
                                         <td>{{ getJaDate($act->date) }}</td>
                                         <td class="text-left">{{ $act->title }}</td>
                                         <td>{{ $act->place }}</td>
-                                        <td><a class="btn btn-success" href="{{ route('activity.confirm', $act->id) }}">表示確認</a></td>
+                                        <td><a class="btn btn-success" href="{{ route('activity.confirm', $act->id) }}" target="_blank">表示確認</a></td>
                                         <td><a class="btn btn-primary" href="{{ route('activity.edit', $act->id) }}">編集</a></td>
                                         <td>
                                             <a class="btn btn-danger" data-toggle="modal" data-target="#destroy{{ $act->id }}">削除</a>

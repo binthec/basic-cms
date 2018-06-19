@@ -30,14 +30,14 @@
                         <div class="box-body">
                             @if($topimages->count())
 
-                                <div id="topimages" class="box-body">
+                                <ul id="topimages" class="box-body">
                                     @foreach($topimages as $img)
-                                        <div class="topimage col-md-2">
+                                        <li class="list">
                                             <img src="{{ $img->getPictPath() }}">
                                             {!! Form::hidden('pictures[]', $img->id) !!}
-                                        </div>
+                                        </li>
                                     @endforeach
-                                </div><!-- /.box-body -->
+                                </ul><!-- /.box-body -->
 
                             @else
                                 トップ画像がありません。
@@ -60,7 +60,19 @@
             /**
              *  jQueryUI sortable
              */
-            $("#topimages").sortable();
+            $("#topimages").sortable({
+                cursor: 'move',
+                opacity: 0.7,
+                placeholder: 'highlight',
+                start: function(event, ui){
+                    ui.item.toggleClass("highlight");
+                    ui.placeholder.width(ui.item.width());
+                    ui.placeholder.height(ui.item.height());
+                },
+                stop: function (event, ui) {
+                    ui.item.toggleClass("highlight");
+                },
+            });
             $("#topimages").disableSelection();
         });
     </script>
