@@ -136,6 +136,29 @@ class Activity extends Model
     }
 
     /**
+     * timetable カラム用のアクセサ
+     * timetable の値を取ってくる時に、自動的にアンシリアライズする
+     *
+     * @param $value
+     * @return mixed
+     */
+    public function getTimetableAttribute($value)
+    {
+        return unserialize($value);
+    }
+
+    /**
+     * timetable カラム用のミューテタ
+     * timetable に値がセットされる際に自動的にシリアライズする
+     *
+     * @param $value
+     */
+    public function setTimetableAttribute($value)
+    {
+        $this->attributes['timetable'] = serialize($value);
+    }
+
+    /**
      * バリデーションルールを返すメソッド
      *
      * @param bool $storeFlg
@@ -171,6 +194,16 @@ class Activity extends Model
         $this->place = $request->place; //必須項目
         $this->detail = ($request->detail !== null) ? $request->detail : null;
         $this->status = $request->status; //必須項目
+
+        $timetable = [];
+        if (!empty($request->time) && !empty($request->action)) { //プログラムの流れを整形
+            foreach ($request->time as $key => $time) {
+                $timetable[$key]['time'] = $time;
+                $timetable[$key]['action'] = $request->action[$key];
+            }
+        }
+        $this->timetable = !empty($timetable) ? $timetable : null;
+
         $this->save();
 
         //画像が設定されている場合は保存処理
@@ -228,7 +261,8 @@ class Activity extends Model
      *
      * @return mixed
      */
-    public function getActList(){
+    public function getActList()
+    {
 
         return self::where('id', '!=', $this->id)
             ->open()

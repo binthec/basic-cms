@@ -8,7 +8,7 @@
         centerMode: true,
         variableWidth: true,
         autoplay: true,
-        autoplaySpeed: 1000,
+        autoplaySpeed: 2000,
     });
 
     /**

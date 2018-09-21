@@ -24,8 +24,8 @@
 .top-slider .slick-prev,
 .top-slider .slick-next {
     z-index: 1;
-    width: 30px;
-    height: 30px;
+    width: 80px;
+    height: 80px;
 }
 .top-slider .slick-prev {
     left: 20px !important;
@@ -36,7 +36,7 @@
 .top-slider .slick-prev::before,
 .top-slider .slick-next::before {
     z-index: 1;
-    font-size: 30px;
+    font-size: 80px;
 }
 /*
  * 活動の様子

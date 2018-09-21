@@ -87,6 +87,7 @@
                                 </div>
                             </div><!-- form-group -->
 
+
                             <div class="form-group{{ $errors->has('pictures') ? ' has-error' : '' }}">
                                 <label for="act-pict-tmp" class="col-sm-3 control-label">画像</label>
                                 <div class="col-sm-9">
@@ -124,6 +125,69 @@
 
                             <hr>
 
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">プログラムの流れ</label>
+                            </div>
+                            <div id="time-tables">
+
+                                @if(!empty($activity->timetable))
+
+                                    @foreach($activity->timetable as $timetable)
+                                        <div class="form-group time-table{{ $errors->has('timeline') ? ' has-error' : '' }}">
+                                            <div class="col-sm-3 col-sm-offset-3">
+                                                {{ Form::text('time[]', $timetable['time'], ['class' => 'form-control', 'placeholder' => '時間']) }}
+                                            </div><!-- /.col-sm-9 -->
+
+                                            <div class="col-sm-5">
+                                                {{ Form::text('action[]', $timetable['action'], ['class' => 'form-control', 'placeholder' => '内容']) }}
+                                            </div>
+
+                                            <div class="col-sm-1">
+                                                <button type="button" class="btn btn-danger del-btn">ー</button>
+                                            </div>
+
+                                            @if($errors->has('time'))
+                                                <span class="help-block">
+                                            <strong class="text-danger">{{ $errors->first('timeline') }}</strong>
+                                        </span>
+                                            @endif
+                                        </div><!-- form-group -->
+                                    @endforeach
+
+                                @else
+
+                                    <div class="form-group time-table{{ $errors->has('timeline') ? ' has-error' : '' }}">
+                                        <div class="col-sm-3 col-sm-offset-3">
+                                            {{ Form::text('time[]', '', ['class' => 'form-control', 'placeholder' => '時間']) }}
+                                        </div><!-- /.col-sm-9 -->
+
+                                        <div class="col-sm-5">
+                                            {{ Form::text('action[]', '', ['class' => 'form-control', 'placeholder' => '内容']) }}
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <button type="button" class="btn btn-danger del-btn">ー</button>
+                                        </div>
+
+                                        @if($errors->has('time'))
+                                            <span class="help-block">
+                                            <strong class="text-danger">{{ $errors->first('timeline') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div><!-- form-group -->
+
+                                @endif
+
+                            </div><!-- /.time-tables -->
+
+                            <div class="form-group margin-top20">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button type="button" class="btn btn-success" id="add-btn">＋</button>
+                                </div>
+                            </div>
+
+                            <hr>
+
                             <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                                 <label for="status" class="col-sm-3 control-label">公開ステータス <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
@@ -136,7 +200,7 @@
                                         @else
                                             {{ Form::radio('status', \App\Activity::OPEN, '', ['class' => 'flat-blue']) }}
                                         @endif
-                                         公開
+                                        公開
                                     </label>
                                     <label class="radio-inline">
                                         @if(old('status') == \App\Activity::CLOSE)
@@ -146,7 +210,7 @@
                                         @else
                                             {{ Form::radio('status', \App\Activity::CLOSE, '', ['class' => 'flat-blue']) }}
                                         @endif
-                                         非公開
+                                        非公開
                                     </label>
 
                                     @if($errors->has('status'))
@@ -202,6 +266,19 @@
              */
             $("#pict-preview-box").sortable();
             $("#pict-preview-box").disableSelection();
+
+            /**
+             * プログラムの流れ
+             */
+            $('#add-btn').on('click', function () {
+                var timeTable = $(this).parents().find('.time-table').last();
+                timeTable.clone(true).appendTo('#time-tables');
+                var lastTimetable = $('.time-table').last();
+                lastTimetable.find('input').val('');
+            });
+            $('.del-btn').on('click', function () {
+                $(this).closest('.time-table').remove();
+            });
         });
     </script>
 @endsection
