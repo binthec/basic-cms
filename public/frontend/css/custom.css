@@ -108,12 +108,16 @@
     background: #fff;
     margin-bottom: 50px;
     padding: 30px 60px;
+    line-height: 2.2em;
 }
 #act .entry-date {
     color: #45aed6;
 }
 #act .entry-place {
     margin-left: 10px;
+}
+#act .timetable h2{
+    font-weight: 400;
 }
 /**
  * ************************************

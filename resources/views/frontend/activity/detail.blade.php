@@ -23,6 +23,34 @@
                         @endforeach
                     </div>
 
+                    @if(!empty($actSingle->timetable))
+                        <div class="timetable">
+                            <header class="clearfix">
+                                <span>Programm</span>
+                                <h1>プログラムの流れ</h1>
+                            </header>
+                            <div class="main">
+                                <ul class="cbp_tmtimeline">
+
+                                    @foreach($actSingle->timetable as $timetable)
+                                        <li>
+                                            @if(!empty($timetable['time']))
+                                                <time class="cbp_tmtime" datetime="{{ $timetable['time'] }}}">
+                                                    <span>{{ getMdDate($actSingle->date) }}</span> <span>{{ $timetable['time'] }}</span>
+                                                </time>
+                                            @endif
+                                            <div class="cbp_tmicon cbp_tmicon-earth"></div>
+                                            <div class="cbp_tmlabel">
+                                                <h2>{{$timetable['action']}}</h2>
+                                                {{--<p>テキストテキスト</p>--}}
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div><!-- /.container -->
+                    @endif
+
                     <div class="post">{!! $actSingle->detail !!}</div>
 
                 </div><!-- /.col -->
@@ -44,6 +72,8 @@
 @section('css')
     <link rel="stylesheet" href="/vendor/slick/slick.css"/>
     <link rel="stylesheet" href="/vendor/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="/vendor/vertical-timeline/css/component.css"/>
+    <link rel="stylesheet" href="/vendor/vertical-timeline/css/default.css"/>
 @endsection
 
 @section('js')
@@ -59,4 +89,5 @@
             autoplaySpeed: 3000,
         });
     </script>
+    <script src="/vendor/vertical-timeline/js/modernizr.custom.js"></script>
 @endsection
