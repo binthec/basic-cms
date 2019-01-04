@@ -116,8 +116,11 @@
 #act .entry-place {
     margin-left: 10px;
 }
-#act .timetable h2{
+#act .timetable h2 {
     font-weight: 400;
+}
+.grid-item {
+    width: 200px;
 }
 /**
  * ************************************

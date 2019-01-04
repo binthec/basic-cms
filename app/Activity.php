@@ -37,6 +37,21 @@ class Activity extends Model
         self::CLOSE => '非公開',
     ];
 
+    /**
+     * 記事タイプ
+     */
+    const PHOTO_BASE = 1;
+    const TEXT_BASE = 2;
+
+    static $typeList = [
+        self::PHOTO_BASE => '写真メインの記事',
+        self::TEXT_BASE => 'テキストメインの記事',
+    ];
+
+    static $typePrefix = [
+        self::PHOTO_BASE => 'photo',
+        self::TEXT_BASE => 'text',
+    ];
 
     /**
      * Dropzone.jsで上げた画像を一時的に保存するディレクトリの絶対パス
@@ -115,7 +130,7 @@ class Activity extends Model
     }
 
     /**
-     * 活動の様子のポリモーフィックリレーション
+     * 活動の様子の、画像に対するポリモーフィックリレーション
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
@@ -170,6 +185,7 @@ class Activity extends Model
             'title' => 'required',
             'date' => 'required',
             'place' => 'required',
+            'type' => 'required',
             'status' => 'required',
         ];
 
@@ -188,11 +204,11 @@ class Activity extends Model
      */
     public function saveAll(Request $request)
     {
-
         $this->title = ($request->title !== null) ? $request->title : null;
         $this->date = getStdDate($request->date); //必須項目
         $this->place = $request->place; //必須項目
         $this->detail = ($request->detail !== null) ? $request->detail : null;
+        $this->type = $request->type; //必須項目
         $this->status = $request->status; //必須項目
 
         $timetable = [];

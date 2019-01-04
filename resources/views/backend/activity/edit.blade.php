@@ -186,6 +186,20 @@
                                 </div>
                             </div>
 
+
+                            <hr>
+                            <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                                <label for="status" class="col-sm-3 control-label">記事タイプ <span class="text-danger">*</span></label>
+                                <div class="col-sm-6">
+                                    {!! Form::select('type', \App\Activity::$typeList, $activity->type,['class' => 'form-control']) !!}
+                                    @if($errors->has('type'))
+                                        <span class="help-block">
+							                <strong class="text-danger">{{ $errors->first('type') }}</strong>
+						                </span>
+                                    @endif
+                                </div>
+                            </div><!-- form-group -->
+
                             <hr>
 
                             <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">

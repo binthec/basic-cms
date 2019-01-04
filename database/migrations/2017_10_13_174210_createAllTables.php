@@ -40,6 +40,7 @@ class CreateAllTables extends Migration
             $table->string('place');
             $table->text('detail')->nullable();
             $table->binary('timetable')->nullable();
+            $table->tinyInteger('type')->default(1);
             $table->tinyInteger('status');
             $table->timestamps();
             $table->softDeletes();

@@ -40,6 +40,7 @@ class ActivityController extends Controller
             throw new NotFoundException('指定されたURLは無効です。URLを確認してください。');
         }
 
-        return view('frontend.activity.detail', compact('actSingle', 'activities'));
+        return view('frontend.activity.detail-' . Activity::$typePrefix[$activity->type], compact('actSingle', 'activities'));
+
     }
 }

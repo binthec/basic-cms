@@ -107,6 +107,7 @@ return [
         'date' => '日付',
         'place' => '開催場所',
         'pictures' => '画像',
+        'type' => 'タイプ',
         'status' => '公開ステータス',
 	],
 ];
