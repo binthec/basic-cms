@@ -89,7 +89,9 @@ class Picture extends Model
                 if (File::exists(public_path($model::$baseFilePath) . $request->actId . '/' . $request->fileName)) {
                     File::delete(public_path($model::$baseFilePath) . $request->actId . '/' . $request->fileName);
                     if (isset($model::$pictPrefix) && !empty($model::$pictPrefix)) {
-                        File::delete(public_path($model::$baseFilePath) . $request->actId . '/' . $model::$pictPrefix . $request->fileName);
+                        foreach($model::$pictPrefix as $prefix){
+                            File::delete(public_path($model::$baseFilePath) . $request->actId . '/' . $prefix . $request->fileName);
+                        }
                     }
                     Picture::find($request->pictId)->delete();
                     return response()->json(['code' => '200', 'msg' => '削除に成功しました。']);

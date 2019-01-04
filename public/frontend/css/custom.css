@@ -127,15 +127,29 @@
 }
 .grid {
     background: #FFF;
-    max-width: 1200px;
+    width: 940px;
+    padding: 10px 0 0 10px;
+    magin: 0 auto;
 }
 .grid:after {/* clearfix */
     content: '';
     display: block;
     clear: both;
 }
+@media (max-width:768px){
+    .grid {
+        max-width: 630px;
+    }
+}
+@media (max-width:999px){
+    .grid {
+        /*width: 630px;*/
+        max-width: 940px;
+    }
+}
 .grid-item {
     width: 300px;
+    margin-bottom: 10px;
     /*height: 120px;*/
     /*float: left;*/
     /*background: #D26;*/

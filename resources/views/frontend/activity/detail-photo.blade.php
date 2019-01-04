@@ -31,12 +31,9 @@
                     <div class="grid">
                         @foreach($actSingle->pictures as $pict)
                             <img class="grid-item"
-                                 src="{{ $pict->getPictPath('w300_') }}"
-                                 width="{{ $pict->getImgSize('w', 'w300_') }}"
-                                 height="{{ $pict->getImgSize('h', 'w300_') }}" >
-
-                            <div class="grid-item"></div>
-
+                                 src="{{ $pict->getPictPath(\App\Activity::$pictPrefix[\App\Activity::PHOTO_BASE]) }}"
+                                 width="{{ $pict->getImgSize('w', \App\Activity::$pictPrefix[\App\Activity::PHOTO_BASE]) }}"
+                                 height="{{ $pict->getImgSize('h', \App\Activity::$pictPrefix[\App\Activity::PHOTO_BASE]) }}">
                         @endforeach
                     </div>
                 </div><!-- /.col -->
@@ -59,7 +56,8 @@
     <script>
         $('.grid').masonry({
             itemSelector: '.grid-item',
-            columnWidth: 300
+            columnWidth: 300,
+            gutter: 10,
         });
     </script>
 @endsection

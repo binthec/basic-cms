@@ -58,11 +58,10 @@ class Activity extends Model
      *
      * @var string
      */
-//    static $pictPrefix = [
-//        self::PHOTO_BASE => '270x180_',
-//        self::TEXT_BASE => 'w300_',
-//    ];
-    static $pictPrefix = '270x180_';
+    static $pictPrefix = [
+        self::PHOTO_BASE => 'w300_',
+        self::TEXT_BASE => '270x180_',
+    ];
 
     /**
      * Dropzone.jsで上げた画像を一時的に保存するディレクトリの絶対パス
@@ -254,10 +253,10 @@ class Activity extends Model
                     //写真ベース用
                     Image::make($uploadDir . $pict)->resize(300, null, function ($constraint) {
                         $constraint->aspectRatio();
-                    })->save($uploadDir . 'w300_' . $pict);
+                    })->save($uploadDir . self::$pictPrefix[self::PHOTO_BASE] . $pict);
 
                     //テキストベース用
-                    Image::make($uploadDir . $pict)->fit(270, 180)->save($uploadDir . self::$pictPrefix . $pict);
+                    Image::make($uploadDir . $pict)->fit(270, 180)->save($uploadDir . self::$pictPrefix[self::TEXT_BASE] . $pict);
                 }
 
             }
@@ -274,7 +273,7 @@ class Activity extends Model
     {
 
         if ($this->pictures->count() > 0) {
-            return self::$baseFilePath . $this->id . '/' . self::$pictPrefix . $this->pictures->sortBy('order')->first()->name;
+            return self::$baseFilePath . $this->id . '/' . self::$pictPrefix[self::TEXT_BASE] . $this->pictures->sortBy('order')->first()->name;
         }
 
         return '';

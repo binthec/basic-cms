@@ -101,7 +101,7 @@
                                             @forelse($activity->pictures as $pict)
                                                 <div class="uploaded-preview">
                                                     <div class="uploaded-img">
-                                                        <img src="{{ $pict->getPictPath(\App\Activity::$pictPrefix) }}">
+                                                        <img src="{{ $pict->getPictPath(\App\Activity::$pictPrefix[\App\Activity::TEXT_BASE]) }}">
                                                     </div>
                                                     <a href="javascript: undefined;" class="remove" data-act-id={{ $activity->id }} data-pict-id="{{ $pict->id }}" data-pict-name="{{ $pict->name }}">削除</a>
 
