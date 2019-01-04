@@ -54,6 +54,17 @@ class Activity extends Model
     ];
 
     /**
+     * 詳細ページで使う画像のプレフィックス
+     *
+     * @var string
+     */
+//    static $pictPrefix = [
+//        self::PHOTO_BASE => '270x180_',
+//        self::TEXT_BASE => 'w300_',
+//    ];
+    static $pictPrefix = '270x180_';
+
+    /**
      * Dropzone.jsで上げた画像を一時的に保存するディレクトリの絶対パス
      *
      * @var string
@@ -87,13 +98,6 @@ class Activity extends Model
      * @var string
      */
     public static $paramName = 'file';
-
-    /**
-     * 詳細ページで使う画像のプレフィックス
-     *
-     * @var string
-     */
-    public static $pictPrefix = '270x180_';
 
     /**
      * バリデーションメッセージ
@@ -247,8 +251,13 @@ class Activity extends Model
                     /**
                      * リサイズ処理
                      */
-                    $image = Image::make($uploadDir . $pict);
-                    $image->fit(270, 180)->save($uploadDir . self::$pictPrefix . $pict);
+                    //写真ベース用
+                    Image::make($uploadDir . $pict)->resize(300, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->save($uploadDir . 'w300_' . $pict);
+
+                    //テキストベース用
+                    Image::make($uploadDir . $pict)->fit(270, 180)->save($uploadDir . self::$pictPrefix . $pict);
                 }
 
             }

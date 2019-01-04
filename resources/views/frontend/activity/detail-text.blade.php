@@ -19,7 +19,7 @@
 
                     <div class="act-picts">
                         @foreach($actSingle->pictures as $pict)
-                            <img src="{{ $pict->getPictPath(\App\Activity::class, \App\Activity::$pictPrefix) }}">
+                            <img src="{{ $pict->getPictPath(\App\Activity::$pictPrefix) }}">
                         @endforeach
                     </div>
 

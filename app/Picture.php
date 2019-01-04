@@ -88,7 +88,7 @@ class Picture extends Model
 
                 if (File::exists(public_path($model::$baseFilePath) . $request->actId . '/' . $request->fileName)) {
                     File::delete(public_path($model::$baseFilePath) . $request->actId . '/' . $request->fileName);
-                    if (isset($model::$pictPrefix) && $model::$pictPrefix !== '') {
+                    if (isset($model::$pictPrefix) && !empty($model::$pictPrefix)) {
                         File::delete(public_path($model::$baseFilePath) . $request->actId . '/' . $model::$pictPrefix . $request->fileName);
                     }
                     Picture::find($request->pictId)->delete();
@@ -104,17 +104,39 @@ class Picture extends Model
     /**
      * 画像単体のファイルパスを返すメソッド
      *
-     * @param $model
      * @param string $prefix
      * @return string
      */
-    public function getPictPath($model, $prefix = '')
+    public function getPictPath($prefix = '')
     {
+        $model = $this->target_type;
 
         //こっちでもうまくいくけどなぜか構文エラーでPHPStormに怒られる
 //        return $this->target_type::$baseFilePath . $this->target_id . '/' . $this->name;
 
         return $model::$baseFilePath . $this->target_id . '/' . $prefix . $this->name;
+    }
+
+    /**
+     * 画像サイズを返すメソッド
+     *
+     * @param string $type
+     * @param string $prefix
+     * @return mixed
+     */
+    public function getImgSize($type = 'h', $prefix = '')
+    {
+
+        list($width, $height) = getimagesize(public_path() . $this->getPictPath($prefix));
+
+        switch ($type){
+            default:
+            case 'w':
+                return $width;
+            case 'h':
+                return $height;
+        }
+
     }
 
 }

@@ -26,11 +26,17 @@
                 </div><!-- /.col -->
             </div><!-- /.row -->
 
-            <div class="row">
+            <div id="masonry-photo-base" class="row">
                 <div class="col-md-12">
                     <div class="grid">
                         @foreach($actSingle->pictures as $pict)
-                            <img class="grid-item" src="{{ $pict->getPictPath(\App\Activity::class, \App\Activity::$pictPrefix) }}">
+                            <img class="grid-item"
+                                 src="{{ $pict->getPictPath('w300_') }}"
+                                 width="{{ $pict->getImgSize('w', 'w300_') }}"
+                                 height="{{ $pict->getImgSize('h', 'w300_') }}" >
+
+                            <div class="grid-item"></div>
+
                         @endforeach
                     </div>
                 </div><!-- /.col -->
@@ -49,11 +55,11 @@
 @endsection
 
 @section('js')
-    <script src="/vendor/masonry.masonry.pkgd.js"></script>
+    <script src="/vendor/masonry/masonry.pkgd.js"></script>
     <script>
         $('.grid').masonry({
             itemSelector: '.grid-item',
-            columnWidth: 200
+            columnWidth: 300
         });
     </script>
 @endsection
